@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth.app')
 @section('title', 'Reset Password')
 @section('content')
     <main class="auth-cover-wrapper">
@@ -18,9 +18,20 @@
                     </div>
                     <h2 class="fs-20 fw-bolder mb-4">Reset Password</h2>
                     <p class="fs-12 fw-medium text-muted">Reset password Anda dengan mengikuti langkah-langkah berikut</p>
-                    <form action="auth-resetting-cover.html" class="w-100 mt-4 pt-2">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('password.email') }}">
+                        @csrf
                         <div class="mb-4">
-                            <input class="form-control" placeholder="Email" required>
+                            <input class="form-control  @error('email') is-invalid @enderror" placeholder="Email"
+                                type="email" id="email" name="email" value="{{ old('email') }}"
+                                autocomplete="email" autofocus>
+                            @error('email')
+                                <small class="text-danger errorPassword mt-2">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="mt-5">
                             <button type="submit" class="btn btn-lg btn-primary w-100">Reset</button>

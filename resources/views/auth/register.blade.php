@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth.app')
 @section('title', 'Register')
 @section('content')
     <main class="auth-cover-wrapper">

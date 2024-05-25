@@ -30,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -78,11 +78,11 @@ class LoginController extends Controller
             if ($user && Hash::check($credentials['password'], $user->password)) {
                 Auth::loginUsingId($user->id);
                 if ($user->type == 'Pemilik') {
-                    return response()->json(['redirect' => route('home')]);
+                    return response()->json(['redirect' => route('dashboard.index')]);
                 } elseif ($user->type == 'Administrator') {
-                    return response()->json(['redirect' => route('home')]);
+                    return response()->json(['redirect' => route('dashboard.index')]);
                 } elseif ($user->type == 'Pelanggan') {
-                    return response()->json(['redirect' => route('home')]);
+                    return response()->json(['redirect' => route('dashboard.index')]);
                 }
             } else {
                 return response()->json(['WrongPassword' => ['message' => 'Password salah.']]);
