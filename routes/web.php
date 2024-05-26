@@ -22,4 +22,10 @@ Auth::routes();
 
 Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Backend\DashboardController::class, 'index'])->name('dashboard.index');
+
+    Route::get('/katalog', [App\Http\Controllers\Backend\CatalogController::class, 'index'])->name('catalog.index');
+    Route::get('/katalog/tambah', [App\Http\Controllers\Backend\CatalogController::class, 'create'])->name('catalog.create');
+    Route::get('/katalog/{id}/edit', [App\Http\Controllers\Backend\CatalogController::class, 'edit'])->name('catalog.edit');
+    Route::post('/katalog', [App\Http\Controllers\Backend\CatalogController::class, 'store'])->name('catalog.store');
+    Route::delete('/katalog/{id}', [App\Http\Controllers\Backend\CatalogController::class, 'destroy'])->name('catalog.destroy');
 });

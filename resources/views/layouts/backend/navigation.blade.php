@@ -1,7 +1,7 @@
 <nav class="nxl-navigation">
     <div class="navbar-wrapper">
         <div class="m-header">
-            <a href="index.html" class="b-brand">
+            <a href="{{ route('dashboard.index') }}" class="b-brand">
                 <!-- ========   change your logo hear   ============ -->
                 <img src="{{ asset('backend/assets') }}/images/logo-full.png" alt="" class="logo logo-lg">
                 <img src="{{ asset('backend/assets') }}/images/logo-abbr.png" alt="" class="logo logo-sm">
@@ -12,23 +12,18 @@
                 <li class="nxl-item nxl-caption">
                     <label>Navigation</label>
                 </li>
-                <li class="nxl-item nxl-hasmenu">
-                <li class="nxl-item"><a class="nxl-link" href="index.html"> <span class="nxl-micon"><i
-                                class="feather-airplay"></i></span>Dashboard</a></li>
-                </li>
-                <li class="nxl-item nxl-hasmenu">
-                    <a href="javascript:void(0);" class="nxl-link">
-                        <span class="nxl-micon"><i class="feather-cast"></i></span>
-                        <span class="nxl-mtext">Reports</span><span class="nxl-arrow"><i
-                                class="feather-chevron-right"></i></span>
+                <li class="nxl-item {{ request()->routeIs(['dashboard.*']) ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-airplay"></i></span>
+                        <span class="nxl-mtext">Dashboards</span>
                     </a>
-                    <ul class="nxl-submenu">
-                        <li class="nxl-item"><a class="nxl-link" href="reports-sales.html">Sales Report</a></li>
-                        <li class="nxl-item"><a class="nxl-link" href="reports-leads.html">Leads Report</a></li>
-                        <li class="nxl-item"><a class="nxl-link" href="reports-project.html">Project Report</a></li>
-                        <li class="nxl-item"><a class="nxl-link" href="reports-timesheets.html">Timesheets
-                                Report</a></li>
-                    </ul>
+                </li>
+
+                <li class="nxl-item {{ request()->routeIs(['catalog.*']) ? 'active' : '' }}">
+                    <a href="{{ route('catalog.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-archive"></i></span>
+                        <span class="nxl-mtext">Katalog</span>
+                    </a>
                 </li>
             </ul>
         </div>

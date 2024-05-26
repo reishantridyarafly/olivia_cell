@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/jquery.time-to.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/dataTables.bs5.min.css">
     <!--! END: Vendors CSS-->
     <!--! BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/css/theme.min.css">
@@ -34,9 +35,9 @@
    <script src="https:oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
@@ -175,10 +176,13 @@
     <script src="{{ asset('backend/assets') }}/vendors/js/apexcharts.min.js"></script>
     <script src="{{ asset('backend/assets') }}/vendors/js/jquery.time-to.min.js "></script>
     <script src="{{ asset('backend/assets') }}/vendors/js/circle-progress.min.js"></script>
+    <script src="{{ asset('backend/assets') }}/vendors/js/dataTables.min.js"></script>
+    <script src="{{ asset('backend/assets') }}/vendors/js/dataTables.bs5.min.js"></script>
     <!--! END: Vendors JS !-->
     <!--! BEGIN: Apps Init  !-->
     <script src="{{ asset('backend/assets') }}/js/common-init.min.js"></script>
     <script src="{{ asset('backend/assets') }}/js/analytics-init.min.js"></script>
+    <script src="{{ asset('backend/assets') }}/js/payment-init.min.js"></script>
     <!--! END: Apps Init !-->
     <!--! BEGIN: Theme Customizer  !-->
     <script src="{{ asset('backend/assets') }}/js/theme-customizer-init.min.js"></script>
