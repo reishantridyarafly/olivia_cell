@@ -28,4 +28,12 @@ Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::get('/katalog/{id}/edit', [App\Http\Controllers\Backend\CatalogController::class, 'edit'])->name('catalog.edit');
     Route::post('/katalog', [App\Http\Controllers\Backend\CatalogController::class, 'store'])->name('catalog.store');
     Route::delete('/katalog/{id}', [App\Http\Controllers\Backend\CatalogController::class, 'destroy'])->name('catalog.destroy');
+
+    Route::get('/produk', [App\Http\Controllers\Backend\ProductController::class, 'index'])->name('product.index');
+    Route::get('/produk/tambah', [App\Http\Controllers\Backend\ProductController::class, 'create'])->name('product.create');
+    Route::post('/produk', [App\Http\Controllers\Backend\ProductController::class, 'store'])->name('product.store');
+    Route::post('/produk/updateStatus', [App\Http\Controllers\Backend\ProductController::class, 'updateStatus'])->name('product.updateStatus');
+    Route::get('/produk/{id}/edit', [App\Http\Controllers\Backend\ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/produk/{id}', [App\Http\Controllers\Backend\ProductController::class, 'update'])->name('product.update');
+    Route::delete('/produk/{id}', [App\Http\Controllers\Backend\ProductController::class, 'destroy'])->name('product.destroy');
 });

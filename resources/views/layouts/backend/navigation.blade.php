@@ -25,6 +25,13 @@
                         <span class="nxl-mtext">Katalog</span>
                     </a>
                 </li>
+
+                <li class="nxl-item {{ request()->routeIs(['product.*']) ? 'active' : '' }}">
+                    <a href="{{ route('product.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-package"></i></span>
+                        <span class="nxl-mtext">Produk</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
