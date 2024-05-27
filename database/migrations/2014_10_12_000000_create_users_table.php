@@ -38,11 +38,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('users');
     }
-
-    protected function type(): Attribute
-    {
-        return new Attribute(
-            get: fn ($value) =>  ["Pemilik", "Administrator", "Pelanggan"][$value],
-        );
-    }
 };

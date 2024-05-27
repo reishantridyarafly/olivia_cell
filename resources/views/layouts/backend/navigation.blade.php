@@ -32,6 +32,13 @@
                         <span class="nxl-mtext">Produk</span>
                     </a>
                 </li>
+
+                <li class="nxl-item {{ request()->routeIs(['account.*']) ? 'active' : '' }}">
+                    <a href="{{ route('account.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-credit-card"></i></span>
+                        <span class="nxl-mtext">Rekening Bank</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

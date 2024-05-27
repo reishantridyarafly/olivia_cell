@@ -73,7 +73,7 @@
                         <div class="dropdown-divider"></div>
                         <a href="javascript:void(0);" class="dropdown-item">
                             <i class="feather-user"></i>
-                            <span>Profile Details</span>
+                            <span>Profile</span>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="javascript:void(0);" id="logout-link" class="dropdown-item">

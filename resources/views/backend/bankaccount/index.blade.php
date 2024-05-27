@@ -1,5 +1,5 @@
 @extends('layouts.backend.main')
-@section('title', 'Katalog')
+@section('title', 'Rekening Bank')
 @section('content')
     <main class="nxl-container">
         <div class="nxl-content">
@@ -43,7 +43,8 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Nama</th>
-                                                <th>Slug</th>
+                                                <th>Nama Bank</th>
+                                                <th>No Rekening</th>
                                                 <th class="text-end">Aksi</th>
                                             </tr>
                                         </thead>
@@ -72,9 +73,20 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <input type="hidden" name="id" id="id">
-                            <label for="name" class="form-label">Nama Katalog <span class="text-danger">*</span></label>
+                            <label for="name" class="form-label">Nama <span class="text-danger">*</span></label>
                             <input type="text" id="name" name="name" class="form-control" autofocus>
                             <small class="text-danger errorName"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bank_name" class="form-label">Nama Bank <span class="text-danger">*</span></label>
+                            <input type="text" id="bank_name" name="bank_name" class="form-control">
+                            <small class="text-danger errorBankName"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="account_number" class="form-label">No Rekening <span
+                                    class="text-danger">*</span></label>
+                            <input type="number" id="account_number" name="account_number" class="form-control">
+                            <small class="text-danger errorAccountNumber"></small>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -99,7 +111,7 @@
             $('#datatable').DataTable({
                 processing: true,
                 serverside: true,
-                ajax: "{{ route('catalog.index') }}",
+                ajax: "{{ route('account.index') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -111,8 +123,12 @@
                         name: 'name'
                     },
                     {
-                        data: 'slug',
-                        name: 'slug'
+                        data: 'bank_name',
+                        name: 'bank_name'
+                    },
+                    {
+                        data: 'account_number',
+                        name: 'account_number'
                     },
                     {
                         data: 'action',
@@ -123,30 +139,44 @@
 
             $('#btnAdd').click(function() {
                 $('#id').val('');
-                $('#modalLabel').html("Tambah Katalog");
+                $('#modalLabel').html("Tambah Rekening Bank");
                 $('#modal').modal('show');
                 $('#form').trigger("reset");
 
                 $('#name').removeClass('is-invalid');
                 $('.errorName').html('');
+
+                $('#bank_name').removeClass('is-invalid');
+                $('.errorBankName').html('');
+
+                $('#account_number').removeClass('is-invalid');
+                $('.errorAccountNumber').html('');
             });
 
             $('body').on('click', '#btnEdit', function() {
                 let id = $(this).data('id');
                 $.ajax({
                     type: "GET",
-                    url: "katalog/" + id + "/edit",
+                    url: "rekening/" + id + "/edit",
                     dataType: "json",
                     success: function(response) {
-                        $('#modalLabel').html("Edit Katalog");
-                        $('#simpan').val("edit-katalog");
+                        $('#modalLabel').html("Edit Rekening Bank");
+                        $('#simpan').val("edit-rekening");
                         $('#modal').modal('show');
 
                         $('#name').removeClass('is-invalid');
                         $('.errorName').html('');
 
+                        $('#bank_name').removeClass('is-invalid');
+                        $('.errorBankName').html('');
+
+                        $('#account_number').removeClass('is-invalid');
+                        $('.errorAccountNumber').html('');
+
                         $('#id').val(response.id);
                         $('#name').val(response.name);
+                        $('#bank_name').val(response.bank_name);
+                        $('#account_number').val(response.account_number);
                     }
                 });
             })
@@ -155,7 +185,7 @@
                 e.preventDefault();
                 $.ajax({
                     data: $(this).serialize(),
-                    url: "{{ route('catalog.store') }}",
+                    url: "{{ route('account.store') }}",
                     type: "POST",
                     dataType: 'json',
                     beforeSend: function() {
@@ -174,6 +204,20 @@
                             } else {
                                 $('#name').removeClass('is-invalid');
                                 $('.errorName').html('');
+                            }
+                            if (response.errors.bank_name) {
+                                $('#bank_name').addClass('is-invalid');
+                                $('.errorBankName').html(response.errors.bank_name);
+                            } else {
+                                $('#bank_name').removeClass('is-invalid');
+                                $('.errorBankName').html('');
+                            }
+                            if (response.errors.account_number) {
+                                $('#account_number').addClass('is-invalid');
+                                $('.errorAccountNumber').html(response.errors.account_number);
+                            } else {
+                                $('#account_number').removeClass('is-invalid');
+                                $('.errorAccountNumber').html('');
                             }
                         } else {
                             $('#modal').modal('hide');
@@ -220,7 +264,7 @@
                     if (result.value) {
                         $.ajax({
                             type: "DELETE",
-                            url: "{{ url('katalog/"+id+"') }}",
+                            url: "{{ url('rekening/"+id+"') }}",
                             data: {
                                 id: id
                             },

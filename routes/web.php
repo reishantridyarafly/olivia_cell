@@ -36,4 +36,10 @@ Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::get('/produk/{id}/edit', [App\Http\Controllers\Backend\ProductController::class, 'edit'])->name('product.edit');
     Route::post('/produk/{id}', [App\Http\Controllers\Backend\ProductController::class, 'update'])->name('product.update');
     Route::delete('/produk/{id}', [App\Http\Controllers\Backend\ProductController::class, 'destroy'])->name('product.destroy');
+
+    Route::get('/rekening', [App\Http\Controllers\Backend\BankAccountController::class, 'index'])->name('account.index');
+    Route::get('/rekening/tambah', [App\Http\Controllers\Backend\BankAccountController::class, 'create'])->name('account.create');
+    Route::get('/rekening/{id}/edit', [App\Http\Controllers\Backend\BankAccountController::class, 'edit'])->name('account.edit');
+    Route::post('/rekening', [App\Http\Controllers\Backend\BankAccountController::class, 'store'])->name('account.store');
+    Route::delete('/rekening/{id}', [App\Http\Controllers\Backend\BankAccountController::class, 'destroy'])->name('account.destroy');
 });
