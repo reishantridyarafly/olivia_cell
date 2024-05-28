@@ -16,6 +16,12 @@
                 </div>
                 <div class="page-header-right ms-auto">
                     <div class="page-header-right-items">
+                        <div class="d-flex d-md-none">
+                            <a href="javascript:void(0)" class="page-header-right-close-toggle">
+                                <i class="feather-arrow-left me-2"></i>
+                                <span>Kembali</span>
+                            </a>
+                        </div>
                         <div class="d-flex align-items-center gap-2 page-header-right-items-wrapper">
                             <button class="btn btn-primary" id="btnAdd">
                                 <i class="feather-plus me-2"></i>

@@ -25,48 +25,49 @@ class ProductController extends Controller
                 ->addColumn('after_price', function ($data) {
                     return 'Ro ' . number_format($data->after_price, 0, ',', '.');
                 })
-
                 ->addColumn('status', function ($data) {
-                    $status = $data->status == 0 ? '<div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="status" name="status" data-id="' . $data->id . '" checked>
-                        <label class="form-check-label" for="status">Aktif</label>
-                    </div>' : '<div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="status" name="status" data-id="' . $data->id . '">
-                    <label class="form-check-label" for="status">Tidak Aktif</label>
-                    </div>';
-                    return $status;
+                    $checked = $data->status == 0 ? 'checked' : '';
+                    return '<div class="form-check form-switch">
+                                <input class="form-check-input status-toggle" type="checkbox" role="switch" data-id="' . $data->id . '" ' . $checked . '>
+                                <label class="form-check-label" for="status">' . ($data->status == 0 ? 'Aktif' : 'Tidak Aktif') . '</label>
+                            </div>';
+                })
+                ->addColumn('name', function ($data) {
+                    return '<span class="editable" data-id="' . $data->id . '">' . $data->name . '</span>';
                 })
                 ->addColumn('action', function ($data) {
-                    return '
-                        <div class="hstack gap-2 justify-content-end">
-                            <a href="invoice-view.html" class="avatar-text avatar-md">
-                                <i class="feather feather-eye"></i>
-                            </a>
-                            <div class="dropdown">
-                                <a href="javascript:void(0)" class="avatar-text avatar-md" data-bs-toggle="dropdown" data-bs-offset="0,21">
-                                    <i class="feather feather-more-horizontal"></i>
+                    return '<div class="hstack gap-2 justify-content-end">
+                                <a href="invoice-view.html" class="avatar-text avatar-md">
+                                    <i class="feather feather-eye"></i>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="' . route('product.edit', $data->id) . '" class="dropdown-item">
-                                            <i class="feather feather-edit-3 me-3"></i>
-                                            <span>Edit</span>
-                                        </a>
-                                    <li>
-                                        <button class="dropdown-item" id="btnDelete" data-id="' . $data->id . '">
-                                            <i class="feather feather-trash-2 me-3"></i>
-                                            <span>Hapus</span>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>';
+                                <div class="dropdown">
+                                    <a href="javascript:void(0)" class="avatar-text avatar-md" data-bs-toggle="dropdown" data-bs-offset="0,21">
+                                        <i class="feather feather-more-horizontal"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="' . route('product.edit', $data->id) . '" class="dropdown-item">
+                                                <i class="feather feather-edit-3 me-3"></i>
+                                                <span>Edit</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item btnDelete" data-id="' . $data->id . '">
+                                                <i class="feather feather-trash-2 me-3"></i>
+                                                <span>Hapus</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>';
                 })
-                ->rawColumns(['status', 'action'])
+                ->rawColumns(['status', 'name', 'action'])
                 ->make(true);
         }
         return view('backend.product.index');
     }
+
+
 
     public function create()
     {

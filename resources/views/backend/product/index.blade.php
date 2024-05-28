@@ -16,6 +16,12 @@
                 </div>
                 <div class="page-header-right ms-auto">
                     <div class="page-header-right-items">
+                        <div class="d-flex d-md-none">
+                            <a href="javascript:void(0)" class="page-header-right-close-toggle">
+                                <i class="feather-arrow-left me-2"></i>
+                                <span>Kembali</span>
+                            </a>
+                        </div>
                         <div class="d-flex align-items-center gap-2 page-header-right-items-wrapper">
                             <a href="{{ route('product.create') }}" class="btn btn-primary" id="btnAdd">
                                 <i class="feather-plus me-2"></i>
@@ -166,16 +172,16 @@
                 })
             })
 
-            $(document).on('change', '#status', function() {
-                var userId = $(this).data('id');
-                var isActive = $(this).prop('checked') ? 0 : 1;
+            $('body').on('change', '.status-toggle', function() {
+                let id = $(this).data('id');
+                let status = $(this).prop('checked') ? 0 : 1;
 
                 $.ajax({
                     url: "{{ route('product.updateStatus') }}",
                     method: 'POST',
                     data: {
-                        id: userId,
-                        status: isActive
+                        id: id,
+                        status: status
                     },
                     success: function(response) {
                         const Toast = Swal.mixin({
@@ -195,7 +201,7 @@
                             icon: "success",
                             title: "Data berhasil disimpan."
                         });
-                        $('#datatable').DataTable().ajax.reload()
+                        $('#datatable').DataTable().ajax.reload();
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         console.error(xhr.status + "\n" + xhr.responseText + "\n" +

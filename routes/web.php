@@ -42,4 +42,16 @@ Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::get('/rekening/{id}/edit', [App\Http\Controllers\Backend\BankAccountController::class, 'edit'])->name('account.edit');
     Route::post('/rekening', [App\Http\Controllers\Backend\BankAccountController::class, 'store'])->name('account.store');
     Route::delete('/rekening/{id}', [App\Http\Controllers\Backend\BankAccountController::class, 'destroy'])->name('account.destroy');
+
+    Route::get('/pelanggan', [App\Http\Controllers\Backend\CustomersController::class, 'index'])->name('customers.index');
+    Route::post('/pelanggan', [App\Http\Controllers\Backend\CustomersController::class, 'store'])->name('customers.store');
+    Route::post('/pelanggan/updateStatus', [App\Http\Controllers\Backend\CustomersController::class, 'updateStatus'])->name('customers.updateStatus');
+    Route::get('/pelanggan/{id}/edit', [App\Http\Controllers\Backend\CustomersController::class, 'edit'])->name('customers.edit');
+    Route::delete('/pelanggan/{id}', [App\Http\Controllers\Backend\CustomersController::class, 'destroy'])->name('customers.destroy');
+
+    Route::get('/pengguna', [App\Http\Controllers\Backend\UsersController::class, 'index'])->name('users.index');
+    Route::post('/pengguna', [App\Http\Controllers\Backend\UsersController::class, 'store'])->name('users.store');
+    Route::post('/pengguna/updateStatus', [App\Http\Controllers\Backend\UsersController::class, 'updateStatus'])->name('users.updateStatus');
+    Route::get('/pengguna/{id}/edit', [App\Http\Controllers\Backend\UsersController::class, 'edit'])->name('users.edit');
+    Route::delete('/pengguna/{id}', [App\Http\Controllers\Backend\UsersController::class, 'destroy'])->name('users.destroy');
 });

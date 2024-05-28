@@ -1,5 +1,5 @@
 @extends('layouts.backend.main')
-@section('title', 'Rekening Bank')
+@section('title', 'Pelanggan')
 @section('content')
     <main class="nxl-container">
         <div class="nxl-content">
@@ -49,8 +49,9 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Nama</th>
-                                                <th>Nama Bank</th>
-                                                <th>No Rekening</th>
+                                                <th>Email</th>
+                                                <th>No Telepon</th>
+                                                <th>Status</th>
                                                 <th class="text-end">Aksi</th>
                                             </tr>
                                         </thead>
@@ -69,7 +70,7 @@
 
     <!-- modal -->
     <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <form id="form">
                     <div class="modal-header">
@@ -77,22 +78,32 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <input type="hidden" name="id" id="id">
-                            <label for="name" class="form-label">Nama <span class="text-danger">*</span></label>
-                            <input type="text" id="name" name="name" class="form-control" autofocus>
-                            <small class="text-danger errorName"></small>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <input type="hidden" name="id" id="id">
+                                    <label for="first_name" class="form-label">Nama Depan</label>
+                                    <input type="text" id="first_name" name="first_name" class="form-control" autofocus>
+                                    <div class="invalid-feedback errorFirstName"></div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="last_name" class="form-label">Nama Belakang</label>
+                                    <input type="text" id="last_name" name="last_name" class="form-control">
+                                    <div class="invalid-feedback errorLastName"></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="bank_name" class="form-label">Nama Bank <span class="text-danger">*</span></label>
-                            <input type="text" id="bank_name" name="bank_name" class="form-control">
-                            <small class="text-danger errorBankName"></small>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-control">
+                            <div class="invalid-feedback errorEmail"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="account_number" class="form-label">No Rekening <span
-                                    class="text-danger">*</span></label>
-                            <input type="number" id="account_number" name="account_number" class="form-control">
-                            <small class="text-danger errorAccountNumber"></small>
+                            <label for="telephone" class="form-label">No Telepon</label>
+                            <input type="number" id="telephone" name="telephone" class="form-control">
+                            <div class="invalid-feedback errorTelephone"></div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -117,7 +128,7 @@
             $('#datatable').DataTable({
                 processing: true,
                 serverside: true,
-                ajax: "{{ route('account.index') }}",
+                ajax: "{{ route('customers.index') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -129,12 +140,16 @@
                         name: 'name'
                     },
                     {
-                        data: 'bank_name',
-                        name: 'bank_name'
+                        data: 'email',
+                        name: 'email'
                     },
                     {
-                        data: 'account_number',
-                        name: 'account_number'
+                        data: 'telephone',
+                        name: 'telephone'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
                     },
                     {
                         data: 'action',
@@ -145,44 +160,45 @@
 
             $('#btnAdd').click(function() {
                 $('#id').val('');
-                $('#modalLabel').html("Tambah Rekening Bank");
+                $('#modalLabel').html("Tambah Pelanggan");
                 $('#modal').modal('show');
                 $('#form').trigger("reset");
 
-                $('#name').removeClass('is-invalid');
-                $('.errorName').html('');
+                $('#first_name').removeClass('is-invalid');
+                $('.errorFirstName').html('');
 
-                $('#bank_name').removeClass('is-invalid');
-                $('.errorBankName').html('');
+                $('#email').removeClass('is-invalid');
+                $('.errorEmail').html('');
 
-                $('#account_number').removeClass('is-invalid');
-                $('.errorAccountNumber').html('');
+                $('#telephone').removeClass('is-invalid');
+                $('.errorTelephone').html('');
             });
 
             $('body').on('click', '#btnEdit', function() {
                 let id = $(this).data('id');
                 $.ajax({
                     type: "GET",
-                    url: "rekening/" + id + "/edit",
+                    url: "pelanggan/" + id + "/edit",
                     dataType: "json",
                     success: function(response) {
-                        $('#modalLabel').html("Edit Rekening Bank");
-                        $('#simpan').val("edit-rekening");
+                        $('#modalLabel').html("Edit Pelanggan");
+                        $('#simpan').val("edit-pelanggan");
                         $('#modal').modal('show');
 
-                        $('#name').removeClass('is-invalid');
-                        $('.errorName').html('');
+                        $('#first_name').removeClass('is-invalid');
+                        $('.errorFirstName').html('');
 
-                        $('#bank_name').removeClass('is-invalid');
-                        $('.errorBankName').html('');
+                        $('#email').removeClass('is-invalid');
+                        $('.errorEmail').html('');
 
-                        $('#account_number').removeClass('is-invalid');
-                        $('.errorAccountNumber').html('');
+                        $('#telephone').removeClass('is-invalid');
+                        $('.errorTelephone').html('');
 
                         $('#id').val(response.id);
-                        $('#name').val(response.name);
-                        $('#bank_name').val(response.bank_name);
-                        $('#account_number').val(response.account_number);
+                        $('#first_name').val(response.first_name);
+                        $('#last_name').val(response.last_name);
+                        $('#email').val(response.email);
+                        $('#telephone').val(response.telephone);
                     }
                 });
             })
@@ -191,7 +207,7 @@
                 e.preventDefault();
                 $.ajax({
                     data: $(this).serialize(),
-                    url: "{{ route('account.store') }}",
+                    url: "{{ route('customers.store') }}",
                     type: "POST",
                     dataType: 'json',
                     beforeSend: function() {
@@ -204,26 +220,36 @@
                     },
                     success: function(response) {
                         if (response.errors) {
-                            if (response.errors.name) {
-                                $('#name').addClass('is-invalid');
-                                $('.errorName').html(response.errors.name);
+                            if (response.errors.first_name) {
+                                $('#first_name').addClass('is-invalid');
+                                $('.errorFirstName').html(response.errors.first_name);
                             } else {
-                                $('#name').removeClass('is-invalid');
-                                $('.errorName').html('');
+                                $('#first_name').removeClass('is-invalid');
+                                $('.errorFirstName').html('');
                             }
-                            if (response.errors.bank_name) {
-                                $('#bank_name').addClass('is-invalid');
-                                $('.errorBankName').html(response.errors.bank_name);
+
+                            if (response.errors.last_name) {
+                                $('#last_name').addClass('is-invalid');
+                                $('.errorLastName').html(response.errors.last_name);
                             } else {
-                                $('#bank_name').removeClass('is-invalid');
-                                $('.errorBankName').html('');
+                                $('#last_name').removeClass('is-invalid');
+                                $('.errorLastName').html('');
                             }
-                            if (response.errors.account_number) {
-                                $('#account_number').addClass('is-invalid');
-                                $('.errorAccountNumber').html(response.errors.account_number);
+
+                            if (response.errors.email) {
+                                $('#email').addClass('is-invalid');
+                                $('.errorEmail').html(response.errors.email);
                             } else {
-                                $('#account_number').removeClass('is-invalid');
-                                $('.errorAccountNumber').html('');
+                                $('#email').removeClass('is-invalid');
+                                $('.errorEmail').html('');
+                            }
+
+                            if (response.errors.telephone) {
+                                $('#telephone').addClass('is-invalid');
+                                $('.errorTelephone').html(response.errors.telephone);
+                            } else {
+                                $('#telephone').removeClass('is-invalid');
+                                $('.errorTelephone').html('');
                             }
                         } else {
                             $('#modal').modal('hide');
@@ -270,7 +296,7 @@
                     if (result.value) {
                         $.ajax({
                             type: "DELETE",
-                            url: "{{ url('rekening/"+id+"') }}",
+                            url: "{{ url('pelanggan/"+id+"') }}",
                             data: {
                                 id: id
                             },
@@ -305,6 +331,44 @@
                     }
                 })
             })
+
+            $('body').on('change', '.status-toggle', function() {
+                let id = $(this).data('id');
+                let status = $(this).prop('checked') ? 0 : 1;
+
+                $.ajax({
+                    url: "{{ route('customers.updateStatus') }}",
+                    method: 'POST',
+                    data: {
+                        id: id,
+                        status: status
+                    },
+                    success: function(response) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal
+                                    .stopTimer;
+                                toast.onmouseleave = Swal
+                                    .resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: "success",
+                            title: "Data berhasil disimpan."
+                        });
+                        $('#datatable').DataTable().ajax.reload();
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        console.error(xhr.status + "\n" + xhr.responseText + "\n" +
+                            thrownError);
+                    }
+                });
+            });
 
         });
     </script>

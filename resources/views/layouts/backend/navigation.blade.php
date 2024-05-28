@@ -39,6 +39,34 @@
                         <span class="nxl-mtext">Rekening Bank</span>
                     </a>
                 </li>
+
+                <li class="nxl-item {{ request()->routeIs(['customers.*']) ? 'active' : '' }}">
+                    <a href="{{ route('customers.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-users"></i></span>
+                        <span class="nxl-mtext">Pelanggan</span>
+                    </a>
+                </li>
+
+                <li class="nxl-item {{ request()->routeIs(['account.*']) ? 'active' : '' }}">
+                    <a href="{{ route('account.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-user"></i></span>
+                        <span class="nxl-mtext">Pengguna</span>
+                    </a>
+                </li>
+
+                <li class="nxl-item {{ request()->routeIs(['account.*']) ? 'active' : '' }}">
+                    <a href="{{ route('account.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-settings"></i></span>
+                        <span class="nxl-mtext">Profile</span>
+                    </a>
+                </li>
+
+                <li class="nxl-item {{ request()->routeIs(['account.*']) ? 'active' : '' }}">
+                    <a href="{{ route('account.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-map-pin"></i></span>
+                        <span class="nxl-mtext">Alamat</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
