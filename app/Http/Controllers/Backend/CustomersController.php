@@ -107,7 +107,7 @@ class CustomersController extends Controller
 
             $user = User::updateOrCreate(['id' => $id], $userData);
 
-            return response()->json($user);
+            return response()->json(['user' => $user, 'message' => 'Data berhasil disimpan.']);
         }
     }
 
