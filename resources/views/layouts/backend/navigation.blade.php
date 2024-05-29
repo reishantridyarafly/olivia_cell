@@ -54,8 +54,8 @@
                     </a>
                 </li>
 
-                <li class="nxl-item {{ request()->routeIs(['account.*']) ? 'active' : '' }}">
-                    <a href="{{ route('account.index') }}" class="nxl-link">
+                <li class="nxl-item {{ request()->routeIs(['profile.*']) ? 'active' : '' }}">
+                    <a href="{{ route('profile.index') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-settings"></i></span>
                         <span class="nxl-mtext">Profile</span>
                     </a>
