@@ -13,8 +13,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-danger" type="submit" id="delete_account"><i
-                                class="ri-save-line me-1 fs-16 lh-1"></i> Hapus Akun</button>
+                        <button class="btn btn-danger" type="submit" id="delete_account">Hapus Akun</button>
                     </div>
                 </div>
             </form>

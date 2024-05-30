@@ -14,7 +14,7 @@
             <div class="auth-cover-card-wrapper">
                 <div class="auth-cover-card p-sm-5">
                     <div class="wd-50 mb-5">
-                        <img src="{{ asset('backend/assets') }}/images/logo-abbr.png" alt="" class="img-fluid">
+                        <img src="{{ asset('backend/assets') }}/images/logo.png" alt="" class="img-fluid">
                     </div>
                     <h2 class="fs-20 fw-bolder mb-4">Reset Password</h2>
                     <p class="fs-12 fw-medium text-muted">Masukkan email Anda dan tautan reset akan dikirimkan. </p>

@@ -28,8 +28,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-primary" type="submit" id="simpan_password"><i
-                                class="ri-save-line me-1 fs-16 lh-1"></i> Simpan</button>
+                        <button class="btn btn-primary" type="submit" id="simpan_password">Simpan</button>
                     </div>
                 </div>
             </form>

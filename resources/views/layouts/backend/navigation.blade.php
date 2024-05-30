@@ -3,8 +3,9 @@
         <div class="m-header">
             <a href="{{ route('dashboard.index') }}" class="b-brand">
                 <!-- ========   change your logo hear   ============ -->
-                <img src="{{ asset('backend/assets') }}/images/logo-full.png" alt="" class="logo logo-lg">
-                <img src="{{ asset('backend/assets') }}/images/logo-abbr.png" alt="" class="logo logo-sm">
+                <img src="{{ asset('backend/assets') }}/images/logo.png" alt="" class="logo logo-lg"
+                    style="width: 50px;">
+                <img src="{{ asset('backend/assets') }}/images/logo.png" alt="" class="logo logo-sm">
             </a>
         </div>
         <div class="navbar-content">

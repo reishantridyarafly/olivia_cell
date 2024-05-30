@@ -61,10 +61,10 @@
                                         </div>
                                         <div class="d-flex align-items-center gap-1">
                                             <a href="{{ route('address.edit', $row->id) }}" class="avatar-text avatar-md"><i
-                                                    class="feather-edit favourite-note"></i></a>
-                                            <button id="btnDelete" data-id="{{ $row->id }}"
+                                                    class="feather-edit-2 favourite-note"></i></a>
+                                            <span id="btnDelete" data-id="{{ $row->id }}"
                                                 class="avatar-text avatar-md"><i
-                                                    class="feather-trash-2 remove-note"></i></button>
+                                                    class="feather-trash-2 remove-note"></i></span>
                                             <div class="ms-auto">
                                                 @if ($row->default_address == 0)
                                                     <span class="badge bg-primary-subtle text-primary">Default</span>

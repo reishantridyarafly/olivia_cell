@@ -14,7 +14,7 @@
             <div class="auth-cover-card-wrapper">
                 <div class="auth-cover-card p-sm-5">
                     <div class="wd-50 mb-5">
-                        <img src="{{ asset('backend/assets') }}/images/logo-abbr.png" alt="" class="img-fluid">
+                        <img src="{{ asset('backend/assets') }}/images/logo.png" alt="" class="img-fluid">
                     </div>
                     <h2 class="fs-20 fw-bolder mb-4">@yield('title')</h2>
                     <h4 class="fs-13 fw-bold mb-2">Daftar Sekarang untuk Mengakses Fitur Lengkap</h4>
