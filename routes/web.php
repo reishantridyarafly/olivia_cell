@@ -60,4 +60,12 @@ Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::post('/profile/pengaturan/', [App\Http\Controllers\Backend\ProfileController::class, 'settingsProfile'])->name('profile.settings');
     Route::post('/profile/pengaturan/hapus-foto', [App\Http\Controllers\Backend\ProfileController::class, 'deletePhoto'])->name('profile.deletePhoto');
     Route::post('/profile/hapus/akun', [App\Http\Controllers\Backend\ProfileController::class, 'deleteAccount'])->name('profile.deleteAccount');
+
+    Route::post('/alamat/kota', [App\Http\Controllers\Backend\AddressController::class, 'getCity'])->name('address.get-city');
+    Route::get('/alamat', [App\Http\Controllers\Backend\AddressController::class, 'index'])->name('address.index');
+    Route::get('/alamat/tambah', [App\Http\Controllers\Backend\AddressController::class, 'create'])->name('address.create');
+    Route::post('/alamat', [App\Http\Controllers\Backend\AddressController::class, 'store'])->name('address.store');
+    Route::get('/alamat/{id}/edit', [App\Http\Controllers\Backend\AddressController::class, 'edit'])->name('address.edit');
+    Route::post('/alamat/{id}', [App\Http\Controllers\Backend\AddressController::class, 'update'])->name('address.update');
+    Route::delete('/alamat/{id}', [App\Http\Controllers\Backend\AddressController::class, 'destroy'])->name('address.destroy');
 });

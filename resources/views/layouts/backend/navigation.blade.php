@@ -61,8 +61,8 @@
                     </a>
                 </li>
 
-                <li class="nxl-item {{ request()->routeIs(['account.*']) ? 'active' : '' }}">
-                    <a href="{{ route('account.index') }}" class="nxl-link">
+                <li class="nxl-item {{ request()->routeIs(['address.*']) ? 'active' : '' }}">
+                    <a href="{{ route('address.index') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-map-pin"></i></span>
                         <span class="nxl-mtext">Alamat</span>
                     </a>
