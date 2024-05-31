@@ -63,11 +63,9 @@
                                     <label class="form-label" for="Password">Jenis Kelamin</label>
                                     <select name="gender" id="gender" class="form-control">
                                         <option value="">-- Pilih Jenis Kelamin --</option>
-                                        <option value="L"
-                                            {{ auth()->user()->gender == 'L' ? 'selected' : '' }}>
+                                        <option value="L" {{ auth()->user()->gender == 'L' ? 'selected' : '' }}>
                                             Laki-laki</option>
-                                        <option value="P"
-                                            {{ auth()->user()->gender == 'P' ? 'selected' : '' }}>
+                                        <option value="P" {{ auth()->user()->gender == 'P' ? 'selected' : '' }}>
                                             Perempuan</option>
                                     </select>
                                 </div>

@@ -14,8 +14,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password Baru</label>
-                                <input type="password" class="form-control password" id="password"
-                                    name="password">
+                                <input type="password" class="form-control password" id="password" name="password">
                                 <small class="text-danger errorPassword"></small>
                             </div>
                             <div class="mb-3">
