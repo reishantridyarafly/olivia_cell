@@ -12,7 +12,7 @@
 
                 <a class="main-logo" href="index.html">
 
-                    <img src="{{ asset('frontend/assets') }}/images/logo/logo-1.png" alt=""></a>
+                    <img src="{{ asset('frontend/assets') }}/images/logo.png" alt=""></a>
                 <!--====== End - Main Logo ======-->
 
 
@@ -176,69 +176,7 @@
 
                                     <span class="total-item-round" id="cart-count">0</span></a>
 
-                                <!--====== Dropdown ======-->
-
-                                <span class="js-menu-toggle"></span>
-                                <div class="mini-cart">
-
-                                    <!--====== Mini Product Container ======-->
-                                    <div class="mini-product-container gl-scroll u-s-m-b-15">
-
-                                        <!--====== Card for mini cart ======-->
-                                        <div class="card-mini-product">
-                                            <div class="mini-product">
-                                                <div class="mini-product__image-wrapper">
-
-                                                    <a class="mini-product__link" href="product-detail.html">
-
-                                                        <img class="u-img-fluid"
-                                                            src="{{ asset('frontend/assets') }}/images/product/electronic/product3.jpg"
-                                                            alt=""></a>
-                                                </div>
-                                                <div class="mini-product__info-wrapper">
-
-                                                    <span class="mini-product__category">
-
-                                                        <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                                    <span class="mini-product__name">
-
-                                                        <a href="product-detail.html">Yellow Wireless
-                                                            Headphone</a></span>
-
-                                                    <span class="mini-product__quantity">1 x</span>
-
-                                                    <span class="mini-product__price">$8</span>
-                                                </div>
-                                            </div>
-
-                                            <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                        </div>
-                                        <!--====== End - Card for mini cart ======-->
-
-                                    </div>
-                                    <!--====== End - Mini Product Container ======-->
-
-
-                                    <!--====== Mini Product Statistics ======-->
-                                    <div class="mini-product-stat">
-                                        <div class="mini-total">
-
-                                            <span class="subtotal-text">SUBTOTAL</span>
-
-                                            <span class="subtotal-value">$16</span>
-                                        </div>
-                                        <div class="mini-action">
-
-                                            <a class="mini-link btn--e-brand-b-2" href="checkout.html">PEMBAYARAN</a>
-
-                                            <a class="mini-link btn--e-transparent-secondary-b-2"
-                                                href="cart.html">KERANJANG</a>
-                                        </div>
-                                    </div>
-                                    <!--====== End - Mini Product Statistics ======-->
-                                </div>
-                                <!--====== End - Dropdown ======-->
+        
                             </li>
                         </ul>
                         <!--====== End - List ======-->
