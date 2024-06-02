@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function index()
+    {
+        return view('frontend.cart.index');
+    }
+
     public function addCart($id, Request $request)
     {
         $product = Product::findOrFail($id);

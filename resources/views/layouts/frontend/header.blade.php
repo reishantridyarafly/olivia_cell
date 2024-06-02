@@ -61,11 +61,13 @@
                                 <ul style="width:120px">
                                     @auth
                                         <li>
-                                            <a href="dashboard.html"><i class="fas fa-user-circle u-s-m-r-6"></i>
+                                            <a href="{{ route('product.index') }}"><i
+                                                    class="fas fa-user-circle u-s-m-r-6"></i>
                                                 <span>Akun</span></a>
                                         </li>
                                         <li>
-                                            <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i>
+                                            <a href="javascript:void(0);" id="logout-link"><i
+                                                    class="fas fa-lock-open u-s-m-r-6"></i>
                                                 <span>Keluar</span></a>
                                         </li>
                                     @endauth
@@ -171,12 +173,9 @@
                                 <a href="wishlist.html"><i class="far fa-heart"></i></a>
                             </li>
                             <li class="has-dropdown">
-
-                                <a class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
-
+                                <a href="@auth{{ route('cart.index', auth()->user()->id) }} @endauth"
+                                    class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
                                     <span class="total-item-round" id="cart-count">0</span></a>
-
-        
                             </li>
                         </ul>
                         <!--====== End - List ======-->
@@ -191,3 +190,7 @@
     <!--====== End - Nav 2 ======-->
 </header>
 <!--====== End - Main Header ======-->
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    @csrf
+</form>

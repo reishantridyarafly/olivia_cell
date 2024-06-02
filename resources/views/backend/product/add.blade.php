@@ -67,8 +67,7 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="before_price" class="form-label">Harga Sebelum Diskon <span
-                                                        class="text-danger">*</span></label>
+                                                <label for="before_price" class="form-label">Harga Sebelum Diskon </label>
                                                 <input type="text" class="form-control" id="before_price"
                                                     name="before_price">
                                                 <small class="text-danger errorBeforePrice mt-2"></small>

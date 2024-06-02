@@ -51,7 +51,7 @@
                 <li class="nxl-item {{ request()->routeIs(['users.*']) ? 'active' : '' }}">
                     <a href="{{ route('users.index') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-user"></i></span>
-                        <span class="nxl-mtext">Pengguna</span>
+                        <span class="nxl-mtext">Administrator</span>
                     </a>
                 </li>
 

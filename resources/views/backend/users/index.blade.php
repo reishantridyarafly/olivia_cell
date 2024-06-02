@@ -106,15 +106,6 @@
                             <input type="number" id="telephone" name="telephone" class="form-control">
                             <div class="invalid-feedback errorTelephone"></div>
                         </div>
-                        <div class="mb-3">
-                            <label for="type" class="form-label">Hak Akses</label>
-                            <select name="type" id="type" class="form-control">
-                                <option value="">-- Pilih Hak Akses --</option>
-                                <option value="0">Pemilik</option>
-                                <option value="1">Administrator</option>
-                            </select>
-                            <div class="invalid-feedback errorType"></div>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
@@ -187,8 +178,6 @@
                 $('#telephone').removeClass('is-invalid');
                 $('.errorTelephone').html('');
 
-                $('#type').removeClass('is-invalid');
-                $('.errorType').html('');
             });
 
             $('body').on('click', '#btnEdit', function() {
@@ -211,19 +200,11 @@
                         $('#telephone').removeClass('is-invalid');
                         $('.errorTelephone').html('');
 
-                        $('#type').removeClass('is-invalid');
-                        $('.errorType').html('');
-
                         $('#id').val(response.id);
                         $('#first_name').val(response.first_name);
                         $('#last_name').val(response.last_name);
                         $('#email').val(response.email);
                         $('#telephone').val(response.telephone);
-                        if (response.type == 'Pemilik') {
-                            $('#type').val('0').trigger('change');
-                        } else {
-                            $('#type').val('1').trigger('change');
-                        }
                     }
                 });
             })
@@ -275,14 +256,6 @@
                             } else {
                                 $('#telephone').removeClass('is-invalid');
                                 $('.errorTelephone').html('');
-                            }
-
-                            if (response.errors.type) {
-                                $('#type').addClass('is-invalid');
-                                $('.errorType').html(response.errors.type);
-                            } else {
-                                $('#type').removeClass('is-invalid');
-                                $('.errorType').html('');
                             }
                         } else {
                             $('#modal').modal('hide');
