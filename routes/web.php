@@ -18,9 +18,21 @@ Route::get('/', [App\Http\Controllers\Frontend\BerandaController::class, 'index'
 Route::get('/tentang', [App\Http\Controllers\Frontend\AboutController::class, 'index'])->name('about.index');
 Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index'])->name('faq.index');
 Route::get('/kontak', [App\Http\Controllers\Frontend\ContactController::class, 'index'])->name('contact.index');
+
 Route::get('/belanja', [App\Http\Controllers\Frontend\ShopController::class, 'index'])->name('shop.index');
+Route::get('/belanja/detail/{slug}', [App\Http\Controllers\Frontend\ShopController::class, 'detail'])->name('shop.detail');
+Route::get('/belanja/pencarian/', [App\Http\Controllers\Frontend\ShopController::class, 'search'])->name('shop.search');
+Route::get('/belanja/katalog/{slug}', [App\Http\Controllers\Frontend\ShopController::class, 'catalog'])->name('shop.catalog');
+Route::get('/belanja/detail/{slug}', [App\Http\Controllers\Frontend\ShopController::class, 'detail'])->name('shop.detail');
 
 Auth::routes();
+Route::middleware('auth')->group(function () {
+    Route::get('/keranjang/jumlah', [App\Http\Controllers\Frontend\CartController::class, 'getCartItemCount'])->name('cart.count');
+    Route::get('/keranjang/{id}', [App\Http\Controllers\Frontend\CartController::class, 'index'])->name('cart.index');
+    Route::post('/keranjang/tambah/{id}', [App\Http\Controllers\Frontend\CartController::class, 'addCart'])->name('cart.addCart');
+    Route::post('/keranjang/edit/{id}', [App\Http\Controllers\Frontend\CartController::class, 'updateCartItem'])->name('cart.updateCartItem');
+    Route::delete('/keranjang/hapus/{id}', [App\Http\Controllers\Frontend\CartController::class, 'deleteCartItem'])->name('cart.deleteCartItem');
+});
 
 Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Backend\DashboardController::class, 'index'])->name('dashboard.index');

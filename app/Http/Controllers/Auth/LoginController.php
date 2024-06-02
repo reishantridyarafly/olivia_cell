@@ -82,7 +82,7 @@ class LoginController extends Controller
                 } elseif ($user->type == 'Administrator') {
                     return response()->json(['redirect' => route('dashboard.index')]);
                 } elseif ($user->type == 'Pelanggan') {
-                    return response()->json(['redirect' => route('dashboard.index')]);
+                    return response()->json(['redirect' => route('beranda.index')]);
                 }
             } else {
                 return response()->json(['WrongPassword' => ['message' => 'Password salah.']]);

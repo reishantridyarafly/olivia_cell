@@ -6,7 +6,7 @@
     <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta content="{{ csrf_token() }}" name="csrf-token">
-    <link href="images/favicon.png" rel="shortcut icon">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/assets') }}/images/logo.png">
     <title>{{ config('app.name') }} | @yield('title')</title>
 
     <!--====== Google Font ======-->
@@ -20,6 +20,10 @@
 
     <!--====== App ======-->
     <link rel="stylesheet" href="{{ asset('frontend/assets') }}/css/app.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body class="config">
@@ -51,6 +55,24 @@
     <script src="{{ asset('frontend/assets') }}/js/app.js"></script>
 
     @yield('script')
+
+    <script>
+        function updateCartCount() {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('cart.count') }}",
+                dataType: 'json',
+                success: function(response) {
+                    $('#cart-count').text(response.count);
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.error(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                }
+            });
+        }
+
+        updateCartCount();
+    </script>
 </body>
 
 </html>

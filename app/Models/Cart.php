@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 
-class Catalog extends Model
+class Cart extends Model
 {
     use HasFactory;
 
-    protected $table = 'catalog';
+    protected $table = 'carts';
     protected $guarded = [];
 
     public $incrementing = false;
@@ -35,16 +35,13 @@ class Catalog extends Model
         return 'string';
     }
 
-    public function products()
+    public function items()
     {
-        return $this->hasMany(Product::class, 'catalog_id');
+        return $this->hasMany(CartItem::class, 'cart_id');
     }
 
-    public function activeProductsCount()
+    public function user()
     {
-        return $this->products()
-            ->where('status', 0)
-            ->where('stock', '>', 0)
-            ->count();
+        return $this->belongsTo(User::class);
     }
 }

@@ -11,70 +11,29 @@
                     <div class="col-lg-3 col-md-12">
                         <div class="shop-w-master">
                             <h1 class="shop-w-master__heading u-s-m-b-30"><i class="fas fa-filter u-s-m-r-8"></i>
-
                                 <span>FILTERS</span>
                             </h1>
+
                             <div class="shop-w-master__sidebar sidebar--bg-snow">
                                 <div class="u-s-m-b-30">
-                                    <div class="shop-w">
+                                    <div class="shop-w shop-w--style">
                                         <div class="shop-w__intro-wrap">
-                                            <h1 class="shop-w__h">Kategori</h1>
+                                            <h1 class="shop-w__h">KATALOG</h1>
 
-                                            <span class="fas fa-minus shop-w__toggle" data-target="#s-manufacturer"
+                                            <span class="fas fa-minus shop-w__toggle" data-target="#s-category"
                                                 data-toggle="collapse"></span>
                                         </div>
-                                        <div class="shop-w__wrap collapse show" id="s-manufacturer">
-                                            <ul class="shop-w__list-2">
-                                                <li>
-                                                    <div class="list__content">
-
-                                                        <input type="checkbox" checked>
-
-                                                        <span>Calvin Klein</span>
-                                                    </div>
-
-                                                    <span class="shop-w__total-text">(23)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="list__content">
-
-                                                        <input type="checkbox">
-
-                                                        <span>Diesel</span>
-                                                    </div>
-
-                                                    <span class="shop-w__total-text">(2)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="list__content">
-
-                                                        <input type="checkbox">
-
-                                                        <span>Polo</span>
-                                                    </div>
-
-                                                    <span class="shop-w__total-text">(2)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="list__content">
-
-                                                        <input type="checkbox">
-
-                                                        <span>Tommy Hilfiger</span>
-                                                    </div>
-
-                                                    <span class="shop-w__total-text">(9)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="list__content">
-
-                                                        <input type="checkbox">
-
-                                                        <span>Ndoge</span>
-                                                    </div>
-
-                                                    <span class="shop-w__total-text">(3)</span>
-                                                </li>
+                                        <div class="shop-w__wrap collapse show" id="s-category">
+                                            <ul class="shop-w__category-list gl-scroll">
+                                                @forelse ($catalogs as $catalog)
+                                                    <li>
+                                                        <a
+                                                            href="{{ route('shop.catalog', $catalog->slug) }}">{{ $catalog->name }}</a>
+                                                        <span
+                                                            class="category-list__text u-s-m-l-6">({{ $catalog->activeProductsCount() }})</span>
+                                                    </li>
+                                                @empty
+                                                @endforelse
                                             </ul>
                                         </div>
                                     </div>
@@ -85,20 +44,6 @@
                     <div class="col-lg-9 col-md-12">
                         <div class="shop-p">
                             <div class="shop-p__toolbar u-s-m-b-30">
-                                <div class="shop-p__meta-wrap u-s-m-b-60">
-
-                                    <span class="shop-p__meta-text-1">FOUND 18 RESULTS</span>
-                                    <div class="shop-p__meta-text-2">
-
-                                        <span>Related Searches:</span>
-
-                                        <a class="gl-tag btn--e-brand-shadow" href="#">men's clothing</a>
-
-                                        <a class="gl-tag btn--e-brand-shadow" href="#">mobiles & tablets</a>
-
-                                        <a class="gl-tag btn--e-brand-shadow" href="#">books & audible</a>
-                                    </div>
-                                </div>
                                 <div class="shop-p__tool-style">
                                     <div class="tool-style__group u-s-m-b-8">
 
@@ -128,722 +73,104 @@
                             </div>
                             <div class="shop-p__collection">
                                 <div class="row is-grid-active">
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product-m">
-                                            <div class="product-m__thumb">
+                                    @forelse ($products as $product)
+                                        <div class="col-lg-4 col-md-6 col-sm-6">
+                                            <div class="product-m">
+                                                <div class="product-m__thumb">
 
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
+                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block"
+                                                        href="{{ route('shop.detail', $product->slug) }}">
 
-                                                    <img class="aspect__img" src="{{ asset('frontend/assets') }}/images/product/men/product6.jpg"
-                                                        alt=""></a>
-                                                <div class="product-m__quick-look">
-
-                                                    <a class="fas fa-search" data-modal="modal"
-                                                        data-modal-id="#quick-look" data-tooltip="tooltip"
-                                                        data-placement="top" title="Quick Look"></a>
-                                                </div>
-                                                <div class="product-m__add-cart">
-
-                                                    <a class="btn--e-brand" data-modal="modal"
-                                                        data-modal-id="#add-to-cart">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="product-m__content">
-                                                <div class="product-m__category">
-
-                                                    <a href="shop-side-version-2.html">Men Clothing</a>
-                                                </div>
-                                                <div class="product-m__name">
-
-                                                    <a href="product-detail.html">New Fashion B Nice Elegant</a>
-                                                </div>
-                                                <div class="product-m__rating gl-rating-style"><i
-                                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                        class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
-                                                        class="far fa-star"></i>
-
-                                                    <span class="product-m__review">(23)</span>
-                                                </div>
-                                                <div class="product-m__price">$125.00</div>
-                                                <div class="product-m__hover">
-                                                    <div class="product-m__preview-description">
-
-                                                        <span>Lorem Ipsum is simply dummy text of the printing and
-                                                            typesetting industry. Lorem Ipsum has been the industry's
-                                                            standard dummy text ever since the 1500s, when an unknown
-                                                            printer took a galley of type and scrambled it to make a type
-                                                            specimen book.</span>
+                                                        <img class="aspect__img"
+                                                            src="{{ asset('storage/uploads/products/' . $product->photos->first()->photo_name) }}"
+                                                            alt=""></a>
+                                                    <div class="product-m__add-cart">
+                                                        <a class="btn--e-brand" id="addCart"
+                                                            data-id="{{ $product->id }}">Tambah Keranjang</a>
                                                     </div>
-                                                    <div class="product-m__wishlist">
+                                                    <input type="hidden" name="qty" id="qty" value="1">
+                                                </div>
+                                                <div class="product-m__content">
+                                                    <div class="product-m__category">
 
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip"
-                                                            data-placement="top" title="Add to Wishlist"></a>
+                                                        <a href="shop-side-version-2.html">{{ $product->catalog->name }}</a>
+                                                    </div>
+                                                    <div class="product-m__name">
+
+                                                        <a
+                                                            href="{{ route('shop.detail', $product->slug) }}">{{ $product->name }}</a>
+                                                    </div>
+                                                    <div class="product-m__rating gl-rating-style"><i
+                                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                                            class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
+                                                            class="far fa-star"></i>
+
+                                                        <span class="product-m__review">(23)</span>
+                                                    </div>
+                                                    <div class="product-m__price">
+                                                        {{ 'Rp ' . number_format($product->after_price, 0, ',', '.') }}
+
+                                                        <span
+                                                            class="product-m__discount">{{ 'Rp ' . number_format($product->before_price, 0, ',', '.') }}</span>
+                                                    </div>
+                                                    <div class="product-m__hover">
+                                                        <div class="product-m__preview-description">
+                                                            <span>{{ $product->short_description }}</span>
+                                                        </div>
+                                                        <div class="product-m__wishlist">
+
+                                                            <a class="far fa-heart" href="#" data-tooltip="tooltip"
+                                                                data-placement="top" title="Add to Wishlist"></a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product-m">
-                                            <div class="product-m__thumb">
+                                    @empty
+                                        <div class="col-lg-12">
+                                            <div class="empty">
+                                                <div class="empty__wrap">
 
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
+                                                    <span class="empty__big-text" style="font-size: 50px;">Tidak
+                                                        Tersedia</span>
 
-                                                    <img class="aspect__img" src="{{ asset('frontend/assets') }}/images/product/women/product5.jpg"
-                                                        alt=""></a>
-                                                <div class="product-m__quick-look">
+                                                    <span class="empty__text-1">Produk yang anda cari tidak tersedia</span>
 
-                                                    <a class="fas fa-search" data-modal="modal"
-                                                        data-modal-id="#quick-look" data-tooltip="tooltip"
-                                                        data-placement="top" title="Quick Look"></a>
-                                                </div>
-                                                <div class="product-m__add-cart">
-
-                                                    <a class="btn--e-brand" data-modal="modal"
-                                                        data-modal-id="#add-to-cart">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="product-m__content">
-                                                <div class="product-m__category">
-
-                                                    <a href="shop-side-version-2.html">Women Clothing</a>
-                                                </div>
-                                                <div class="product-m__name">
-
-                                                    <a href="product-detail.html">New Dress A Nice Elegant</a>
-                                                </div>
-                                                <div class="product-m__rating gl-rating-style"><i
-                                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                        class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
-                                                        class="far fa-star"></i>
-
-                                                    <span class="product-m__review">(23)</span>
-                                                </div>
-                                                <div class="product-m__price">$125.00</div>
-                                                <div class="product-m__hover">
-                                                    <div class="product-m__preview-description">
-
-                                                        <span>Lorem Ipsum is simply dummy text of the printing and
-                                                            typesetting industry. Lorem Ipsum has been the industry's
-                                                            standard dummy text ever since the 1500s, when an unknown
-                                                            printer took a galley of type and scrambled it to make a type
-                                                            specimen book.</span>
-                                                    </div>
-                                                    <div class="product-m__wishlist">
-
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip"
-                                                            data-placement="top" title="Add to Wishlist"></a>
-                                                    </div>
+                                                    <a class="empty__redirect-link btn--e-brand"
+                                                        href="{{ route('shop.index') }}">Lanjut Belanja</a>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product-m">
-                                            <div class="product-m__thumb">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="{{ asset('frontend/assets') }}/images/product/women/product6.jpg"
-                                                        alt=""></a>
-                                                <div class="product-m__quick-look">
-
-                                                    <a class="fas fa-search" data-modal="modal"
-                                                        data-modal-id="#quick-look" data-tooltip="tooltip"
-                                                        data-placement="top" title="Quick Look"></a>
-                                                </div>
-                                                <div class="product-m__add-cart">
-
-                                                    <a class="btn--e-brand" data-modal="modal"
-                                                        data-modal-id="#add-to-cart">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="product-m__content">
-                                                <div class="product-m__category">
-
-                                                    <a href="shop-side-version-2.html">Women Clothing</a>
-                                                </div>
-                                                <div class="product-m__name">
-
-                                                    <a href="product-detail.html">New Dress B Nice Elegant</a>
-                                                </div>
-                                                <div class="product-m__rating gl-rating-style"><i
-                                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                        class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
-                                                        class="far fa-star"></i>
-
-                                                    <span class="product-m__review">(23)</span>
-                                                </div>
-                                                <div class="product-m__price">$125.00</div>
-                                                <div class="product-m__hover">
-                                                    <div class="product-m__preview-description">
-
-                                                        <span>Lorem Ipsum is simply dummy text of the printing and
-                                                            typesetting industry. Lorem Ipsum has been the industry's
-                                                            standard dummy text ever since the 1500s, when an unknown
-                                                            printer took a galley of type and scrambled it to make a type
-                                                            specimen book.</span>
-                                                    </div>
-                                                    <div class="product-m__wishlist">
-
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip"
-                                                            data-placement="top" title="Add to Wishlist"></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product-m">
-                                            <div class="product-m__thumb">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="{{ asset('frontend/assets') }}/images/product/women/product7.jpg"
-                                                        alt=""></a>
-                                                <div class="product-m__quick-look">
-
-                                                    <a class="fas fa-search" data-modal="modal"
-                                                        data-modal-id="#quick-look" data-tooltip="tooltip"
-                                                        data-placement="top" title="Quick Look"></a>
-                                                </div>
-                                                <div class="product-m__add-cart">
-
-                                                    <a class="btn--e-brand" data-modal="modal"
-                                                        data-modal-id="#add-to-cart">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="product-m__content">
-                                                <div class="product-m__category">
-
-                                                    <a href="shop-side-version-2.html">Women Clothing</a>
-                                                </div>
-                                                <div class="product-m__name">
-
-                                                    <a href="product-detail.html">New Dress C Nice Elegant</a>
-                                                </div>
-                                                <div class="product-m__rating gl-rating-style"><i
-                                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                        class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
-                                                        class="far fa-star"></i>
-
-                                                    <span class="product-m__review">(23)</span>
-                                                </div>
-                                                <div class="product-m__price">$125.00</div>
-                                                <div class="product-m__hover">
-                                                    <div class="product-m__preview-description">
-
-                                                        <span>Lorem Ipsum is simply dummy text of the printing and
-                                                            typesetting industry. Lorem Ipsum has been the industry's
-                                                            standard dummy text ever since the 1500s, when an unknown
-                                                            printer took a galley of type and scrambled it to make a type
-                                                            specimen book.</span>
-                                                    </div>
-                                                    <div class="product-m__wishlist">
-
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip"
-                                                            data-placement="top" title="Add to Wishlist"></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product-m">
-                                            <div class="product-m__thumb">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="{{ asset('frontend/assets') }}/images/product/men/product9.jpg"
-                                                        alt=""></a>
-                                                <div class="product-m__quick-look">
-
-                                                    <a class="fas fa-search" data-modal="modal"
-                                                        data-modal-id="#quick-look" data-tooltip="tooltip"
-                                                        data-placement="top" title="Quick Look"></a>
-                                                </div>
-                                                <div class="product-m__add-cart">
-
-                                                    <a class="btn--e-brand" data-modal="modal"
-                                                        data-modal-id="#add-to-cart">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="product-m__content">
-                                                <div class="product-m__category">
-
-                                                    <a href="shop-side-version-2.html">Men Clothing</a>
-                                                </div>
-                                                <div class="product-m__name">
-
-                                                    <a href="product-detail.html">New Fashion E Nice Elegant</a>
-                                                </div>
-                                                <div class="product-m__rating gl-rating-style"><i
-                                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                        class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
-                                                        class="far fa-star"></i>
-
-                                                    <span class="product-m__review">(23)</span>
-                                                </div>
-                                                <div class="product-m__price">$125.00</div>
-                                                <div class="product-m__hover">
-                                                    <div class="product-m__preview-description">
-
-                                                        <span>Lorem Ipsum is simply dummy text of the printing and
-                                                            typesetting industry. Lorem Ipsum has been the industry's
-                                                            standard dummy text ever since the 1500s, when an unknown
-                                                            printer took a galley of type and scrambled it to make a type
-                                                            specimen book.</span>
-                                                    </div>
-                                                    <div class="product-m__wishlist">
-
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip"
-                                                            data-placement="top" title="Add to Wishlist"></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product-m">
-                                            <div class="product-m__thumb">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="{{ asset('frontend/assets') }}/images/product/men/product10.jpg"
-                                                        alt=""></a>
-                                                <div class="product-m__quick-look">
-
-                                                    <a class="fas fa-search" data-modal="modal"
-                                                        data-modal-id="#quick-look" data-tooltip="tooltip"
-                                                        data-placement="top" title="Quick Look"></a>
-                                                </div>
-                                                <div class="product-m__add-cart">
-
-                                                    <a class="btn--e-brand" data-modal="modal"
-                                                        data-modal-id="#add-to-cart">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="product-m__content">
-                                                <div class="product-m__category">
-
-                                                    <a href="shop-side-version-2.html">Men Clothing</a>
-                                                </div>
-                                                <div class="product-m__name">
-
-                                                    <a href="product-detail.html">New Fashion F Nice Elegant</a>
-                                                </div>
-                                                <div class="product-m__rating gl-rating-style"><i
-                                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                        class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
-                                                        class="far fa-star"></i>
-
-                                                    <span class="product-m__review">(23)</span>
-                                                </div>
-                                                <div class="product-m__price">$125.00</div>
-                                                <div class="product-m__hover">
-                                                    <div class="product-m__preview-description">
-
-                                                        <span>Lorem Ipsum is simply dummy text of the printing and
-                                                            typesetting industry. Lorem Ipsum has been the industry's
-                                                            standard dummy text ever since the 1500s, when an unknown
-                                                            printer took a galley of type and scrambled it to make a type
-                                                            specimen book.</span>
-                                                    </div>
-                                                    <div class="product-m__wishlist">
-
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip"
-                                                            data-placement="top" title="Add to Wishlist"></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product-m">
-                                            <div class="product-m__thumb">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="{{ asset('frontend/assets') }}/images/product/electronic/product2.jpg"
-                                                        alt=""></a>
-                                                <div class="product-m__quick-look">
-
-                                                    <a class="fas fa-search" data-modal="modal"
-                                                        data-modal-id="#quick-look" data-tooltip="tooltip"
-                                                        data-placement="top" title="Quick Look"></a>
-                                                </div>
-                                                <div class="product-m__add-cart">
-
-                                                    <a class="btn--e-brand" data-modal="modal"
-                                                        data-modal-id="#add-to-cart">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="product-m__content">
-                                                <div class="product-m__category">
-
-                                                    <a href="shop-side-version-2.html">Electronics</a>
-                                                </div>
-                                                <div class="product-m__name">
-
-                                                    <a href="product-detail.html">Red Wireless Headphone</a>
-                                                </div>
-                                                <div class="product-m__rating gl-rating-style"><i
-                                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                        class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
-                                                        class="far fa-star"></i>
-
-                                                    <span class="product-m__review">(23)</span>
-                                                </div>
-                                                <div class="product-m__price">$125.00</div>
-                                                <div class="product-m__hover">
-                                                    <div class="product-m__preview-description">
-
-                                                        <span>Lorem Ipsum is simply dummy text of the printing and
-                                                            typesetting industry. Lorem Ipsum has been the industry's
-                                                            standard dummy text ever since the 1500s, when an unknown
-                                                            printer took a galley of type and scrambled it to make a type
-                                                            specimen book.</span>
-                                                    </div>
-                                                    <div class="product-m__wishlist">
-
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip"
-                                                            data-placement="top" title="Add to Wishlist"></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product-m">
-                                            <div class="product-m__thumb">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="{{ asset('frontend/assets') }}/images/product/electronic/product3.jpg"
-                                                        alt=""></a>
-                                                <div class="product-m__quick-look">
-
-                                                    <a class="fas fa-search" data-modal="modal"
-                                                        data-modal-id="#quick-look" data-tooltip="tooltip"
-                                                        data-placement="top" title="Quick Look"></a>
-                                                </div>
-                                                <div class="product-m__add-cart">
-
-                                                    <a class="btn--e-brand" data-modal="modal"
-                                                        data-modal-id="#add-to-cart">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="product-m__content">
-                                                <div class="product-m__category">
-
-                                                    <a href="shop-side-version-2.html">Electronics</a>
-                                                </div>
-                                                <div class="product-m__name">
-
-                                                    <a href="product-detail.html">Yellow Wireless Headphone</a>
-                                                </div>
-                                                <div class="product-m__rating gl-rating-style"><i
-                                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                        class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
-                                                        class="far fa-star"></i>
-
-                                                    <span class="product-m__review">(23)</span>
-                                                </div>
-                                                <div class="product-m__price">$125.00
-
-                                                    <span class="product-m__discount">$22.00</span>
-                                                </div>
-                                                <div class="product-m__hover">
-                                                    <div class="product-m__preview-description">
-
-                                                        <span>Lorem Ipsum is simply dummy text of the printing and
-                                                            typesetting industry. Lorem Ipsum has been the industry's
-                                                            standard dummy text ever since the 1500s, when an unknown
-                                                            printer took a galley of type and scrambled it to make a type
-                                                            specimen book.</span>
-                                                    </div>
-                                                    <div class="product-m__wishlist">
-
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip"
-                                                            data-placement="top" title="Add to Wishlist"></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product-m">
-                                            <div class="product-m__thumb">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="{{ asset('frontend/assets') }}/images/product/electronic/product4.jpg"
-                                                        alt=""></a>
-                                                <div class="product-m__quick-look">
-
-                                                    <a class="fas fa-search" data-modal="modal"
-                                                        data-modal-id="#quick-look" data-tooltip="tooltip"
-                                                        data-placement="top" title="Quick Look"></a>
-                                                </div>
-                                                <div class="product-m__add-cart">
-
-                                                    <a class="btn--e-brand" data-modal="modal"
-                                                        data-modal-id="#add-to-cart">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="product-m__content">
-                                                <div class="product-m__category">
-
-                                                    <a href="shop-side-version-2.html">Electronics</a>
-                                                </div>
-                                                <div class="product-m__name">
-
-                                                    <a href="product-detail.html">Hover Skateboard Scooter</a>
-                                                </div>
-                                                <div class="product-m__rating gl-rating-style"><i
-                                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                        class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
-                                                        class="far fa-star"></i>
-
-                                                    <span class="product-m__review">(23)</span>
-                                                </div>
-                                                <div class="product-m__price">$125.00
-
-                                                    <span class="product-m__discount">$22.00</span>
-                                                </div>
-                                                <div class="product-m__hover">
-                                                    <div class="product-m__preview-description">
-
-                                                        <span>Lorem Ipsum is simply dummy text of the printing and
-                                                            typesetting industry. Lorem Ipsum has been the industry's
-                                                            standard dummy text ever since the 1500s, when an unknown
-                                                            printer took a galley of type and scrambled it to make a type
-                                                            specimen book.</span>
-                                                    </div>
-                                                    <div class="product-m__wishlist">
-
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip"
-                                                            data-placement="top" title="Add to Wishlist"></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product-m">
-                                            <div class="product-m__thumb">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="{{ asset('frontend/assets') }}/images/product/electronic/product5.jpg"
-                                                        alt=""></a>
-                                                <div class="product-m__quick-look">
-
-                                                    <a class="fas fa-search" data-modal="modal"
-                                                        data-modal-id="#quick-look" data-tooltip="tooltip"
-                                                        data-placement="top" title="Quick Look"></a>
-                                                </div>
-                                                <div class="product-m__add-cart">
-
-                                                    <a class="btn--e-brand" data-modal="modal"
-                                                        data-modal-id="#add-to-cart">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="product-m__content">
-                                                <div class="product-m__category">
-
-                                                    <a href="shop-side-version-2.html">Electronics</a>
-                                                </div>
-                                                <div class="product-m__name">
-
-                                                    <a href="product-detail.html">Hover Red Skateboard Scooter</a>
-                                                </div>
-                                                <div class="product-m__rating gl-rating-style"><i
-                                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                        class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
-                                                        class="far fa-star"></i>
-
-                                                    <span class="product-m__review">(23)</span>
-                                                </div>
-                                                <div class="product-m__price">$125.00
-
-                                                    <span class="product-m__discount">$22.00</span>
-                                                </div>
-                                                <div class="product-m__hover">
-                                                    <div class="product-m__preview-description">
-
-                                                        <span>Lorem Ipsum is simply dummy text of the printing and
-                                                            typesetting industry. Lorem Ipsum has been the industry's
-                                                            standard dummy text ever since the 1500s, when an unknown
-                                                            printer took a galley of type and scrambled it to make a type
-                                                            specimen book.</span>
-                                                    </div>
-                                                    <div class="product-m__wishlist">
-
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip"
-                                                            data-placement="top" title="Add to Wishlist"></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product-m">
-                                            <div class="product-m__thumb">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="{{ asset('frontend/assets') }}/images/product/electronic/product6.jpg"
-                                                        alt=""></a>
-                                                <div class="product-m__quick-look">
-
-                                                    <a class="fas fa-search" data-modal="modal"
-                                                        data-modal-id="#quick-look" data-tooltip="tooltip"
-                                                        data-placement="top" title="Quick Look"></a>
-                                                </div>
-                                                <div class="product-m__add-cart">
-
-                                                    <a class="btn--e-brand" data-modal="modal"
-                                                        data-modal-id="#add-to-cart">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="product-m__content">
-                                                <div class="product-m__category">
-
-                                                    <a href="shop-side-version-2.html">Electronics</a>
-                                                </div>
-                                                <div class="product-m__name">
-
-                                                    <a href="product-detail.html">Canon DSLR Camera 4k</a>
-                                                </div>
-                                                <div class="product-m__rating gl-rating-style"><i
-                                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                        class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
-                                                        class="far fa-star"></i>
-
-                                                    <span class="product-m__review">(23)</span>
-                                                </div>
-                                                <div class="product-m__price">$125.00
-
-                                                    <span class="product-m__discount">$22.00</span>
-                                                </div>
-                                                <div class="product-m__hover">
-                                                    <div class="product-m__preview-description">
-
-                                                        <span>Lorem Ipsum is simply dummy text of the printing and
-                                                            typesetting industry. Lorem Ipsum has been the industry's
-                                                            standard dummy text ever since the 1500s, when an unknown
-                                                            printer took a galley of type and scrambled it to make a type
-                                                            specimen book.</span>
-                                                    </div>
-                                                    <div class="product-m__wishlist">
-
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip"
-                                                            data-placement="top" title="Add to Wishlist"></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product-m">
-                                            <div class="product-m__thumb">
-
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
-                                                    href="product-detail.html">
-
-                                                    <img class="aspect__img" src="{{ asset('frontend/assets') }}/images/product/electronic/product7.jpg"
-                                                        alt=""></a>
-                                                <div class="product-m__quick-look">
-
-                                                    <a class="fas fa-search" data-modal="modal"
-                                                        data-modal-id="#quick-look" data-tooltip="tooltip"
-                                                        data-placement="top" title="Quick Look"></a>
-                                                </div>
-                                                <div class="product-m__add-cart">
-
-                                                    <a class="btn--e-brand" data-modal="modal"
-                                                        data-modal-id="#add-to-cart">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="product-m__content">
-                                                <div class="product-m__category">
-
-                                                    <a href="shop-side-version-2.html">Electronics</a>
-                                                </div>
-                                                <div class="product-m__name">
-
-                                                    <a href="product-detail.html">Nikon DSLR Camera 4k</a>
-                                                </div>
-                                                <div class="product-m__rating gl-rating-style"><i
-                                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                        class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
-                                                        class="far fa-star"></i>
-
-                                                    <span class="product-m__review">(23)</span>
-                                                </div>
-                                                <div class="product-m__price">$125.00
-
-                                                    <span class="product-m__discount">$22.00</span>
-                                                </div>
-                                                <div class="product-m__hover">
-                                                    <div class="product-m__preview-description">
-
-                                                        <span>Lorem Ipsum is simply dummy text of the printing and
-                                                            typesetting industry. Lorem Ipsum has been the industry's
-                                                            standard dummy text ever since the 1500s, when an unknown
-                                                            printer took a galley of type and scrambled it to make a type
-                                                            specimen book.</span>
-                                                    </div>
-                                                    <div class="product-m__wishlist">
-
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip"
-                                                            data-placement="top" title="Add to Wishlist"></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforelse
                                 </div>
                             </div>
+                            <!--====== Pagination ======-->
                             <div class="u-s-p-y-60">
-
-                                <!--====== Pagination ======-->
                                 <ul class="shop-p__pagination">
-                                    <li class="is-active">
+                                    <!-- Tombol Sebelumnya -->
+                                    @if (!$products->onFirstPage())
+                                        <li>
+                                            <a class="fas fa-angle-left" href="{{ $products->previousPageUrl() }}"></a>
+                                        </li>
+                                    @endif
 
-                                        <a href="shop-grid-left.html">1</a>
-                                    </li>
-                                    <li>
+                                    <!-- Nomor Halaman -->
+                                    @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                                        <li class="{{ $products->currentPage() == $page ? 'is-active' : '' }}">
+                                            <a href="{{ $url }}">{{ $page }}</a>
+                                        </li>
+                                    @endforeach
 
-                                        <a href="shop-grid-left.html">2</a>
-                                    </li>
-                                    <li>
-
-                                        <a href="shop-grid-left.html">3</a>
-                                    </li>
-                                    <li>
-
-                                        <a href="shop-grid-left.html">4</a>
-                                    </li>
-                                    <li>
-
-                                        <a class="fas fa-angle-right" href="shop-grid-left.html"></a>
-                                    </li>
+                                    <!-- Tombol Selanjutnya -->
+                                    @if ($products->hasMorePages())
+                                        <li>
+                                            <a class="fas fa-angle-right" href="{{ $products->nextPageUrl() }}"></a>
+                                        </li>
+                                    @endif
                                 </ul>
-                                <!--====== End - Pagination ======-->
                             </div>
+                            <!--====== End - Pagination ======-->
+
                         </div>
                     </div>
                 </div>
@@ -852,4 +179,52 @@
         <!--====== End - Section 1 ======-->
     </div>
     <!--====== End - App Content ======-->
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('body').on('click', '#addCart', function() {
+                let id = $(this).data('id');
+                let qty = $('#qty').val();
+                $.ajax({
+                    type: "POST",
+                    url: "/keranjang/tambah/" + id,
+                    data: {
+                        id: id,
+                        qty:qty,
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: "success",
+                            title: response.message
+                        });
+                        updateCartCount();
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        console.error(xhr.status + "\n" + xhr.responseText + "\n" +
+                            thrownError);
+                    }
+                });
+            });
+        })
+    </script>
 @endsection
