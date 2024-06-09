@@ -111,7 +111,7 @@
                                                         {{ 'Rp ' . number_format($product->after_price, 0, ',', '.') }}
 
                                                         <span
-                                                            class="product-m__discount">{{ 'Rp ' . number_format($product->before_price, 0, ',', '.') }}</span>
+                                                            class="product-m__discount">{{ $product->before_price ? 'Rp ' . number_format($product->before_price, 0, ',', '.') : '' }}</span>
                                                     </div>
                                                     <div class="product-m__hover">
                                                         <div class="product-m__preview-description">
@@ -198,7 +198,7 @@
                     url: "/keranjang/tambah/" + id,
                     data: {
                         id: id,
-                        qty:qty,
+                        qty: qty,
                     },
                     dataType: 'json',
                     success: function(response) {

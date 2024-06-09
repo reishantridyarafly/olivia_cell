@@ -53,21 +53,20 @@
                                             <div class="form-group mb-3">
                                                 <label for="imei1" class="form-label">Imei 1 <span
                                                         class="text-danger">*</span></label>
-                                                <input type="number" class="form-control" id="imei1"
-                                                    name="imei1">
+                                                <input type="number" class="form-control" id="imei1" name="imei1">
                                                 <small class="text-danger errorImei1 mt-2"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
                                                 <label for="imei2" class="form-label">Imei 2</label>
-                                                <input type="text" class="form-control" id="imei2"
-                                                    name="imei2">
+                                                <input type="text" class="form-control" id="imei2" name="imei2">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="before_price" class="form-label">Harga Sebelum Diskon </label>
+                                                <label for="before_price" class="form-label">Harga Sebelum (Harga
+                                                    Diskon)</label>
                                                 <input type="text" class="form-control" id="before_price"
                                                     name="before_price">
                                                 <small class="text-danger errorBeforePrice mt-2"></small>
@@ -75,7 +74,8 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="after_price" class="form-label">Harga Sesudah Diskon</label>
+                                                <label for="after_price" class="form-label">Harga Sesudah (Harga yang akan
+                                                    ditampilkan)</label>
                                                 <input type="text" class="form-control" id="after_price"
                                                     name="after_price">
                                                 <small class="text-danger errorAfterPrice mt-2"></small>
@@ -94,7 +94,76 @@
                                                 <label for="weight" class="form-label">Berat (Gram) <span
                                                         class="text-danger">*</span></label>
                                                 <input type="number" class="form-control" id="weight" name="weight">
-                                                <small class="text-danger errorWeight mt-2"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="network" class="form-label">Jaringan</label>
+                                                <input type="text" class="form-control" id="network"
+                                                    name="network">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="launch" class="form-label">Peluncuran</label>
+                                                <input type="date" class="form-control" id="launch"
+                                                    name="launch">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="dimension" class="form-label">Dimensi</label>
+                                                <input type="text" class="form-control" id="dimension"
+                                                    name="dimension">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="sim" class="form-label">SIM</label>
+                                                <input type="text" class="form-control" id="sim"
+                                                    name="sim">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="type_display" class="form-label">Tipe Layar</label>
+                                                <input type="text" class="form-control" id="type_display"
+                                                    name="type_display">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="resolution_display" class="form-label">Resolusi Layar</label>
+                                                <input type="text" class="form-control" id="resolution_display"
+                                                    name="resolution_display">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="chipset" class="form-label">Chipset</label>
+                                                <input type="text" class="form-control" id="chipset"
+                                                    name="chipset">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="memory" class="form-label">Memori</label>
+                                                <input type="text" class="form-control" id="memory"
+                                                    name="memory">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="battery" class="form-label">Baterai</label>
+                                                <input type="text" class="form-control" id="battery"
+                                                    name="battery">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="colors" class="form-label">Warna</label>
+                                                <input type="text" class="form-control" id="colors"
+                                                    name="colors">
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-6">

@@ -20,6 +20,22 @@
                     </a>
                 </li>
 
+                <li
+                    class="nxl-item nxl-hasmenu {{ request()->routeIs(['transaction.*']) ? 'active nxl-trigger' : '' }}">
+                    <a href="javascript:void(0);" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-dollar-sign"></i></span>
+                        <span class="nxl-mtext">Transaksi</span><span class="nxl-arrow"><i
+                                class="feather-chevron-right"></i></span>
+                    </a>
+                    <ul class="nxl-submenu">
+                        <li class="nxl-item  {{ request()->routeIs(['transaction.index']) ? 'active' : '' }}"><a
+                                class="nxl-link" href="{{ route('transaction.index') }}">Transaksi</a></li>
+                        <li class="nxl-item {{ request()->routeIs(['transaction.create']) ? 'active' : '' }}"><a
+                                class="nxl-link" href="{{ route('transaction.create') }}">Tambah Transaksi</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="nxl-item {{ request()->routeIs(['catalog.*']) ? 'active' : '' }}">
                     <a href="{{ route('catalog.index') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-archive"></i></span>
@@ -53,6 +69,19 @@
                         <span class="nxl-micon"><i class="feather-user"></i></span>
                         <span class="nxl-mtext">Administrator</span>
                     </a>
+                </li>
+
+                <li class="nxl-item nxl-hasmenu">
+                    <a href="javascript:void(0);" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-file-text"></i></span>
+                        <span class="nxl-mtext">Laporan</span><span class="nxl-arrow"><i
+                                class="feather-chevron-right"></i></span>
+                    </a>
+                    <ul class="nxl-submenu">
+                        <li class="nxl-item"><a class="nxl-link" href="payment.html">Harian</a></li>
+                        <li class="nxl-item"><a class="nxl-link" href="invoice-view.html">Bulanan</a></li>
+                        <li class="nxl-item"><a class="nxl-link" href="invoice-create.html">Tahunan</a></li>
+                    </ul>
                 </li>
 
                 <li class="nxl-item {{ request()->routeIs(['profile.*']) ? 'active' : '' }}">

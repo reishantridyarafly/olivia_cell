@@ -37,6 +37,13 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Backend\DashboardController::class, 'index'])->name('dashboard.index');
 
+    Route::get('/transaksi', [App\Http\Controllers\Backend\TransactionController::class, 'index'])->name('transaction.index');
+    Route::get('/transaksi/detail/{id}', [App\Http\Controllers\Backend\TransactionController::class, 'detail'])->name('transaction.detail');
+    Route::get('/transaksi/tambah', [App\Http\Controllers\Backend\TransactionController::class, 'create'])->name('transaction.create');
+    Route::get('/transaksi/{id}/edit', [App\Http\Controllers\Backend\TransactionController::class, 'edit'])->name('transaction.edit');
+    Route::post('/transaksi', [App\Http\Controllers\Backend\TransactionController::class, 'store'])->name('transaction.store');
+    Route::delete('/transaksi/{id}', [App\Http\Controllers\Backend\TransactionController::class, 'destroy'])->name('transaction.destroy');
+
     Route::get('/katalog', [App\Http\Controllers\Backend\CatalogController::class, 'index'])->name('catalog.index');
     Route::get('/katalog/tambah', [App\Http\Controllers\Backend\CatalogController::class, 'create'])->name('catalog.create');
     Route::get('/katalog/{id}/edit', [App\Http\Controllers\Backend\CatalogController::class, 'edit'])->name('catalog.edit');

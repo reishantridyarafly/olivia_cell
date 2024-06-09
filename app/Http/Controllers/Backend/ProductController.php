@@ -37,7 +37,7 @@ class ProductController extends Controller
                 })
                 ->addColumn('action', function ($data) {
                     return '<div class="hstack gap-2 justify-content-end">
-                                <a href="invoice-view.html" class="avatar-text avatar-md">
+                                <a href="' . route('shop.detail', $data->slug) . '" target="_blank" class="avatar-text avatar-md">
                                     <i class="feather feather-eye"></i>
                                 </a>
                                 <div class="dropdown">
@@ -52,7 +52,7 @@ class ProductController extends Controller
                                             </a>
                                         </li>
                                         <li>
-                                            <button class="dropdown-item btnDelete" data-id="' . $data->id . '">
+                                            <button class="dropdown-item" id="btnDelete" data-id="' . $data->id . '">
                                                 <i class="feather feather-trash-2 me-3"></i>
                                                 <span>Hapus</span>
                                             </button>
@@ -101,7 +101,7 @@ class ProductController extends Controller
                 'short_description.required' => 'Silakan isi deskripsi singkat terlebih dahulu.',
                 'short_description.string' => 'Deskripsi singkat harus berupa teks.',
                 'short_description.string' => 'Deskripsi singkat harus berupa teks.',
-                'after_price.required' => 'Silakan isi harga jual terlebih dahulu.',
+                'after_price.required' => 'Silakan isi harga terlebih dahulu.',
                 'stock.required' => 'Silakan isi stok terlebih dahulu.',
                 'stock.string' => 'Stok harus berupa teks.',
                 'weight.required' => 'Silakan isi berat terlebih dahulu.',
@@ -126,10 +126,20 @@ class ProductController extends Controller
             $product->imei2 = $request->imei2;
             $product->description = $request->description;
             $product->short_description = $request->short_description;
-            $product->before_price = str_replace(['Rp', ' ', '.'], '', $request->before_price);
+            $product->before_price = $request->before_price ? str_replace(['Rp', ' ', '.'], '', $request->before_price) : null;
             $product->after_price = str_replace(['Rp', ' ', '.'], '', $request->after_price);
             $product->stock = $request->stock;
             $product->weight = $request->weight;
+            $product->network = $request->network;
+            $product->launch = $request->launch;
+            $product->dimension = $request->dimension;
+            $product->sim = $request->sim;
+            $product->type_display = $request->type_display;
+            $product->resolution_display = $request->resolution_display;
+            $product->chipset = $request->chipset;
+            $product->memory = $request->memory;
+            $product->battery = $request->battery;
+            $product->colors = $request->colors;
             $product->catalog_id = $request->catalog;
             $product->save();
 
@@ -162,7 +172,6 @@ class ProductController extends Controller
                 'imei1' => 'required',
                 'description' => 'required|string',
                 'short_description' => 'required|string',
-                'before_price' => 'required',
                 'after_price' => 'required',
                 'stock' => 'required|string',
                 'weight' => 'required',
@@ -180,8 +189,7 @@ class ProductController extends Controller
                 'short_description.required' => 'Silakan isi deskripsi singkat terlebih dahulu.',
                 'short_description.string' => 'Deskripsi singkat harus berupa teks.',
                 'short_description.string' => 'Deskripsi singkat harus berupa teks.',
-                'before_price.required' => 'Silakan isi harga terlebih dahulu.',
-                'after_price.required' => 'Silakan isi harga jual terlebih dahulu.',
+                'after_price.required' => 'Silakan isi harga terlebih dahulu.',
                 'stock.required' => 'Silakan isi stok terlebih dahulu.',
                 'stock.string' => 'Stok harus berupa teks.',
                 'weight.required' => 'Silakan isi berat terlebih dahulu.',
@@ -206,10 +214,20 @@ class ProductController extends Controller
             $product->imei2 = $request->imei2;
             $product->description = $request->description;
             $product->short_description = $request->short_description;
-            $product->before_price = str_replace(['Rp', ' ', '.'], '', $request->before_price);
+            $product->before_price = $request->before_price ? str_replace(['Rp', ' ', '.'], '', $request->before_price) : null;
             $product->after_price = str_replace(['Rp', ' ', '.'], '', $request->after_price);
             $product->stock = $request->stock;
             $product->weight = $request->weight;
+            $product->network = $request->network;
+            $product->launch = $request->launch;
+            $product->dimension = $request->dimension;
+            $product->sim = $request->sim;
+            $product->type_display = $request->type_display;
+            $product->resolution_display = $request->resolution_display;
+            $product->chipset = $request->chipset;
+            $product->memory = $request->memory;
+            $product->battery = $request->battery;
+            $product->colors = $request->colors;
             $product->catalog_id = $request->catalog;
             $product->save();
 

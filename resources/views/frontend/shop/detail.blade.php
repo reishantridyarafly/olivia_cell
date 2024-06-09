@@ -71,10 +71,11 @@
                             <div>
                                 <div class="pd-detail__inline">
 
-                                    <span class="pd-detail__price">{{ 'Rp ' . number_format($product->after_price, 0, ',', '.') }}</span>
+                                    <span
+                                        class="pd-detail__price">{{ 'Rp ' . number_format($product->after_price, 0, ',', '.') }}</span>
 
                                     <span class="pd-detail__discount"></span><del
-                                        class="pd-detail__del">{{ 'Rp ' . number_format($product->before_price, 0, ',', '.') }}</del>
+                                        class="pd-detail__del">{{ $product->before_price ? 'Rp ' . number_format($product->before_price, 0, ',', '.') : '' }}</del>
                                 </div>
                             </div>
                             <div class="u-s-m-b-15">
@@ -172,9 +173,9 @@
                                 <div class="tab-pane fade show active" id="pd-desc">
                                     <div class="pd-tab__desc">
                                         <div class="u-s-m-b-15">
-                                            <p>{!!  $product->description !!}</p>
+                                            <p>{!! $product->description !!}</p>
                                         </div>
-                                      
+
                                         <div class="u-s-m-b-15">
                                             <h4>PRODUCT INFORMATION</h4>
                                         </div>

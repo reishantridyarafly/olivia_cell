@@ -1,5 +1,5 @@
 @extends('layouts.backend.main')
-@section('title', 'Pengguna')
+@section('title', 'Administrator')
 @section('content')
     <main class="nxl-container">
         <div class="nxl-content">
