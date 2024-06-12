@@ -87,6 +87,7 @@ class TransactionController extends Controller
         $transaction->transaction_date = $request->transaction_date;
         $transaction->customer_name = $request->customers;
         $transaction->type_payment = $request->type_payment;
+        $transaction->type_transaction = 'offline';
         $transaction->discount = $request->discount;
         $subtotal_price = floatval(str_replace(['Rp', ' ', '.', "\xc2\xa0"], '', $request->subtotal));
         $discount_percentage = $request->discount;

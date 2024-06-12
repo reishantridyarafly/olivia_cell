@@ -109,36 +109,20 @@
                                                 <span class="input-counter__minus fas fa-minus"></span>
 
                                                 <input class="input-counter__text input-counter--text-primary-style"
-                                                    type="text" value="1" data-min="1" data-max="1000">
+                                                    id="qty" name="qty" value="1" type="text"
+                                                    data-min="1" data-max="1000">
 
                                                 <span class="input-counter__plus fas fa-plus"></span>
                                             </div>
                                             <!--====== End - Input Counter ======-->
                                         </div>
                                         <div class="u-s-m-b-15">
-
-                                            <button class="btn btn--e-brand-b-2" type="submit">Tambah Keranjang</button>
+                                            <button class="btn btn--e-brand-b-2" id="addCart" type="button"
+                                                data-id="{{ $product->id }}">Tambah Keranjang</button>
+                                            <button class="btn btn--e-brand-b-2" type="submit">Belanja Sekarang</button>
                                         </div>
                                     </div>
                                 </form>
-                            </div>
-                            <div class="u-s-m-b-15">
-
-                                <span class="pd-detail__label u-s-m-b-8">Product Policy:</span>
-                                <ul class="pd-detail__policy-list">
-                                    <li><i class="fas fa-check-circle u-s-m-r-8"></i>
-
-                                        <span>Buyer Protection.</span>
-                                    </li>
-                                    <li><i class="fas fa-check-circle u-s-m-r-8"></i>
-
-                                        <span>Full Refund if you don't receive your order.</span>
-                                    </li>
-                                    <li><i class="fas fa-check-circle u-s-m-r-8"></i>
-
-                                        <span>Returns accepted if product not as described.</span>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                         <!--====== End - Product Right Side Details ======-->
@@ -177,47 +161,52 @@
                                         </div>
 
                                         <div class="u-s-m-b-15">
-                                            <h4>PRODUCT INFORMATION</h4>
+                                            <h4>INFORMASI PRODUK</h4>
                                         </div>
                                         <div class="u-s-m-b-15">
                                             <div class="pd-table gl-scroll">
                                                 <table>
                                                     <tbody>
                                                         <tr>
-                                                            <td>Main Material</td>
-                                                            <td>Cotton</td>
+                                                            <td>Berat</td>
+                                                            <td>{{ $product->weight }} Gram</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Color</td>
-                                                            <td>Green, Blue, Red</td>
+                                                            <td>Jaringan</td>
+                                                            <td>{{ $product->network }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Sleeves</td>
-                                                            <td>Long Sleeve</td>
+                                                            <td>Peluncuran</td>
+                                                            <td>{{ \Carbon\Carbon::parse($product->launch)->translatedFormat('d F Y') }}
+                                                            </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Top Fit</td>
-                                                            <td>Regular</td>
+                                                            <td>Dimensi</td>
+                                                            <td>{{ $product->dimension }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Print</td>
-                                                            <td>Not Printed</td>
+                                                            <td>SIM</td>
+                                                            <td>{{ $product->sim }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Neck</td>
-                                                            <td>Round Neck</td>
+                                                            <td>Tipe Layar</td>
+                                                            <td>{{ $product->type_display }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Pieces Count</td>
-                                                            <td>1 Piece</td>
+                                                            <td>Resolusi Layar</td>
+                                                            <td>{{ $product->resolution_display }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Occasion</td>
-                                                            <td>Casual</td>
+                                                            <td>Memori</td>
+                                                            <td>{{ $product->memory }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Shipping Weight (kg)</td>
-                                                            <td>0.5</td>
+                                                            <td>Baterai</td>
+                                                            <td>{{ $product->battery }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Warna</td>
+                                                            <td>{{ $product->colors }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -991,4 +980,60 @@
         <!--====== End - Section 1 ======-->
     </div>
     <!--====== End - App Content ======-->
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('body').on('click', '#addCart', function() {
+                let id = $(this).data('id');
+                let qty = $('#qty').val();
+                $.ajax({
+                    type: "POST",
+                    url: "/keranjang/tambah/" + id,
+                    data: {
+                        id: id,
+                        qty: qty,
+                    },
+                    dataType: 'json',
+                    beforeSend: function() {
+                        $('#addCart').attr('disable', 'disabled');
+                        $('#addCart').text('Proses...');
+                    },
+                    complete: function() {
+                        $('#addCart').removeAttr('disable');
+                        $('#addCart').text('Tambah Keranjang');
+                    },
+                    success: function(response) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: "success",
+                            title: response.message
+                        });
+                        updateCartCount();
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        console.error(xhr.status + "\n" + xhr.responseText + "\n" +
+                            thrownError);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('code');
             $table->dateTime('transaction_date')->index();
             $table->string('customer_name', 100);
+            $table->enum('type_transaction', ['online', 'offline']);
             $table->string('type_payment', 100);
             $table->decimal('discount', 15, 2);
             $table->decimal('total_price', 15, 2);

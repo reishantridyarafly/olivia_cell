@@ -61,7 +61,7 @@
                                 <ul style="width:120px">
                                     @auth
                                         <li>
-                                            <a href="{{ route('product.index') }}"><i
+                                            <a href="{{ route('profile.index') }}"><i
                                                     class="fas fa-user-circle u-s-m-r-6"></i>
                                                 <span>Akun</span></a>
                                         </li>
