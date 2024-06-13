@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\BankAccount;
+use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
@@ -180,5 +182,114 @@ class CheckoutController extends Controller
         $nextCode = str_pad(intval($lastCode) + 1, 4, '0', STR_PAD_LEFT);
 
         return $prefix . $date . $nextCode;
+    }
+
+    public function cartCheckout()
+    {
+        $userId = auth()->id();
+        $cart = Cart::where('user_id', $userId)->first();
+
+        if ($cart) {
+            $items = $cart->items()->with('product')->get();
+        } else {
+            $items = collect();
+        }
+
+        $address = DB::table('address')
+            ->join('provinces', 'address.province_id', '=', 'provinces.id')
+            ->join('cities', 'address.city_id', '=', 'cities.id')
+            ->select('address.*', 'provinces.name as province_name', 'cities.name as city_name', 'cities.postal_code as kode_pos')
+            ->where('user_id', auth()->user()->id)
+            ->get();
+
+        $rekening = BankAccount::all();
+
+        $subtotal = $items->sum(function ($row) {
+            return $row->quantity * $row->product->after_price;
+        });
+
+        return view('frontend.checkout.cart', compact(['items', 'address', 'rekening', 'subtotal']));
+    }
+
+    public function storeCart(Request $request)
+    {
+        $validated = Validator::make(
+            $request->all(),
+            [
+                'address' => 'required',
+                'courier' => 'required|string',
+                'shipping_cost' => 'required|string',
+                'transfer_proof' => 'required|max:5120|image|mimes:jpg,png,jpeg,webp,svg|file',
+            ],
+            [
+                'address.required' => 'Silakan pilih alamat terlebih dahulu.',
+                'courier.required' => 'Silakan pilih kurir terlebih dahulu.',
+                'shipping_cost.required' => 'Silakan pilih ongkos kirim terlebih dahulu.',
+                'transfer_proof.required' => 'Silakan isi bukti pembayaran terlebih dahulu.',
+                'transfer_proof.image' => 'File harus berupa gambar.',
+                'transfer_proof.mimes' => 'Ekstensi file harus berupa: jpg, png, jpeg, webp, atau svg.',
+                'transfer_proof.file' => 'File harus berupa gambar.',
+                'transfer_proof.max' => 'Ukuran file tidak boleh lebih dari 5 MB.',
+            ]
+        );
+
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()]);
+        } else {
+            if ($request->hasFile('transfer_proof')) {
+                $file = $request->file('transfer_proof');
+                $randomFileName = uniqid() . '.' . $file->getClientOriginalExtension();
+                $request->file('transfer_proof')->storeAs('bukti_pembayaran/', $randomFileName, 'public');
+
+                if ($file->isValid()) {
+                    $transaction = new Transaction();
+                    $transaction->code = $this->generateTransactionCode();
+                    $transaction->transaction_date = now();
+                    $transaction->customer_name = auth()->user()->first_name . ' ' .  auth()->user()->last_name;
+                    $transaction->address_id  = $request->address;
+                    $transaction->note  = $request->note;
+                    $transaction->shipping_cost  = $request->shipping_cost;
+                    $transaction->status = 'pending';
+                    $transaction->type_transaction = 'online';
+                    $transaction->type_payment = 'transfer';
+                    $transaction->transfer_proof = $randomFileName;
+                    $transaction->courier = $request->courier;
+                    $transaction->discount = $request->discount;
+                    $subtotal_price = $request->subtotal;
+                    $discount_percentage = $request->discount;
+                    $discount_amount = $subtotal_price * ($discount_percentage / 100);
+                    $transaction->discount = $discount_amount;
+                    $transaction->total_price = $request->total;
+                    $transaction->save();
+
+                    if (is_array($request->product_id)) {
+                        foreach ($request->product_id as $key => $product_id) {
+                            $transaction_detail = new TransactionDetail();
+                            $transaction_detail->transaction_id = $transaction->id;
+                            $transaction_detail->product_id = $product_id;
+                            $transaction_detail->quantity = $request->qty[$key];
+                            $transaction_detail->unit_price = $request->price[$key];
+                            $transaction_detail->total_price = $request->price[$key] * $request->qty[$key];
+                            $transaction_detail->save();
+
+                            $product = Product::find($product_id);
+                            $product->stock -= $request->qty[$key];
+                            $product->save();
+                        }
+                    } else {
+                        return response()->json(['errors' => ['product_id' => 'Invalid product data']], 422);
+                    }
+
+                    $userCart = Cart::where('user_id', auth()->id())->first();
+
+                    if ($userCart) {
+                        CartItem::where('cart_id', $userCart->id)->delete();
+                        $userCart->delete();
+                    }
+
+                    return response()->json(['message' => 'Transaksi berhasil ditambahkan']);
+                }
+            }
+        }
     }
 }

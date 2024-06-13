@@ -134,7 +134,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
-                            <form class="f-cart">
+                            <form class="f-cart" method="post" action="{{ route('checkout.cartCheckout') }}">
+                                @csrf
                                 <div class="row justify-content-end">
                                     <div class="col-lg-8 col-md-8"></div>
                                     <div class="col-lg-4 col-md-4 u-s-m-b-30">
@@ -144,18 +145,13 @@
                                                     <tbody>
                                                         <tr>
                                                             <td>Total</td>
-                                                            <td>
-                                                                {{ 'Rp ' . number_format($item->quantity * $item->product->after_price, 0, ',', '.') }}
-                                                            </td>
+                                                            <td></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div>
-                                                <form action="" method="post">
-                                                    @csrf
-                                                    <button class="btn btn--e-brand-b-2" type="submit">PEMBAYARAN</button>
-                                                </form>
+                                                <button class="btn btn--e-brand-b-2" type="submit">PEMBAYARAN</button>
                                             </div>
                                         </div>
                                     </div>
@@ -174,6 +170,8 @@
 
 @section('script')
     <script>
+        updateCartTotals();
+
         function formatRupiah(angka, prefix) {
             var number_string = angka.toString().replace(/[^0-9.-]+/g, ""),
                 split = number_string.split(','),

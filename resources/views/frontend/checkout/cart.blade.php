@@ -20,7 +20,7 @@
                                     <a href="{{ route('shop.index') }}">Belanja</a>
                                 </li>
                                 <li class="is-marked">
-                                    <a href="{{ route('shop.detail', $product->slug) }}">{{ $product->name }}</a>
+                                    <a href="javascript:(0);">Pembayaran</a>
                                 </li>
                             </ul>
                         </div>
@@ -120,8 +120,6 @@
                                             <!--====== Select Box ======-->
                                             <label class="gl-label" for="city">KOTA *</label>
                                             <input type="hidden" name="city_id" id="city_id" disabled>
-                                            <input type="hidden" name="weight" id="weight" value="{{ $weight }}"
-                                                disabled>
                                             <input class="input-text input-text--primary-style" type="text"
                                                 id="city" name="city" disabled>
                                             <!--====== End - Select Box ======-->
@@ -170,35 +168,44 @@
                                     <div class="o-summary">
                                         <div class="o-summary__section u-s-m-b-30">
                                             <div class="o-summary__item-wrap gl-scroll">
-                                                <div class="o-card">
-                                                    <div class="o-card__flex">
-                                                        <div class="o-card__img-wrap">
-
-                                                            <img class="u-img-fluid"
-                                                                src="{{ asset('storage/uploads/products/' . $product->photos->first()->photo_name) }}"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="o-card__info-wrap">
-
-                                                            <span class="o-card__name">
-
-                                                                <a
-                                                                    href="{{ route('shop.detail', $product->slug) }}">{{ $product->name }}</a></span>
-
-                                                            <input type="hidden" name="product_id" id="product_id"
-                                                                value="{{ $product->id }}">
-                                                            <input type="hidden" name="qty" id="qty"
-                                                                value="{{ $qty }}">
-                                                            <input type="hidden" name="unit_price" id="unit_price"
-                                                                value="{{ $product->after_price }}">
-                                                            <span class="o-card__quantity">Quantity x
-                                                                {{ $qty }}</span>
-
-                                                            <span
-                                                                class="o-card__price">{{ 'Rp ' . number_format($product->after_price * $qty, 0, ',', '.') }}</span>
+                                                @php
+                                                    $total_weight = 0;
+                                                @endphp
+                                                @foreach ($items as $item)
+                                                    <div class="o-card">
+                                                        <div class="o-card__flex">
+                                                            <div class="o-card__img-wrap">
+                                                                <img class="u-img-fluid"
+                                                                    src="{{ asset('storage/uploads/products/' . $item->product->photos->first()->photo_name) }}"
+                                                                    alt="">
+                                                            </div>
+                                                            <div class="o-card__info-wrap">
+                                                                <span class="o-card__name">
+                                                                    <a
+                                                                        href="{{ route('shop.detail', $item->product->slug) }}">{{ $item->product->name }}</a></span>
+                                                                <input type="hidden" name="product_id[]" id="product_id"
+                                                                    value="{{ $item->product->id }}">
+                                                                <input type="hidden" name="unit_price" id="unit_price"
+                                                                    value="{{ $item->product->after_price }}">
+                                                                <input type="hidden" name="price[]" id="price"
+                                                                    value="{{ $item->product->after_price }}">
+                                                                <input type="hidden" name="qty[]" id="qty"
+                                                                    value="{{ $item->quantity }}">
+                                                                <span class="o-card__quantity">Quantity x
+                                                                    {{ $item->quantity }}</span>
+                                                                @php
+                                                                    $item_weight =
+                                                                        $item->product->weight * $item->quantity;
+                                                                    $total_weight += $item_weight;
+                                                                @endphp
+                                                                <span
+                                                                    class="o-card__price">{{ 'Rp ' . number_format($item->product->after_price * $item->quantity, 0, ',', '.') }}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                @endforeach
+                                                <input type="hidden" name="weight" id="weight"
+                                                    value="{{ $total_weight }}">
                                             </div>
                                         </div>
                                         <div class="o-summary__section u-s-m-b-30">
@@ -343,15 +350,24 @@
                 });
             });
 
+            let subtotal = 0;
+            $('input[name="unit_price"]').each(function() {
+                let price = parseFloat($(this).val());
+                let quantity = parseInt($(this).closest('.o-card__info-wrap').find('.o-card__quantity')
+                    .text().split('x')[1].trim());
+                subtotal += price * quantity;
+            });
+
             $('#shipping_cost').on('change', function() {
                 let shipping_cost = parseFloat($(this).val());
-                let subtotal = parseFloat('{{ $product->after_price * $qty }}');
                 let total = subtotal + shipping_cost;
 
                 $('#total_ongkir_text').text(formatCurrency(shipping_cost));
                 $('#total_ongkir').val(shipping_cost);
+
                 $('#subtotal_text').text(formatCurrency(subtotal));
                 $('#subtotal').val(subtotal);
+
                 $('#total_keseluruhan_text').text(formatCurrency(total));
                 $('#total').val(total);
             });
@@ -360,7 +376,7 @@
                 e.preventDefault();
                 $.ajax({
                     data: new FormData(this),
-                    url: "{{ route('checkout.store') }}",
+                    url: "{{ route('checkout.storeCart') }}",
                     type: "POST",
                     dataType: 'json',
                     processData: false,
