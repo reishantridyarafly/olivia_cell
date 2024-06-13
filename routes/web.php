@@ -33,6 +33,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/keranjang/edit/{id}', [App\Http\Controllers\Frontend\CartController::class, 'updateCartItem'])->name('cart.updateCartItem');
     Route::delete('/keranjang/hapus/{id}', [App\Http\Controllers\Frontend\CartController::class, 'deleteCartItem'])->name('cart.deleteCartItem');
 
+    Route::post('/pembayaran', [App\Http\Controllers\Frontend\CheckoutController::class, 'directCheckout'])->name('checkout.directCheckout');
+    Route::post('/pembayaran/get-address-details/{id}', [App\Http\Controllers\Frontend\CheckoutController::class, 'getAddressDetails'])->name('checkout.get-address-details');
+    Route::post('/pembayaran/check-ongkir', [App\Http\Controllers\Frontend\CheckoutController::class, 'checkOngkir'])->name('checkout.check-ongkir');
+    Route::post('/pembayaran/store', [App\Http\Controllers\Frontend\CheckoutController::class, 'store'])->name('checkout.store');
+    Route::post('/pembayaran/store/keranjang', [App\Http\Controllers\Frontend\CheckoutController::class, 'storeCart'])->name('checkout.storeCart');
+    Route::post('/pembayaran/keranjang', [App\Http\Controllers\Frontend\CheckoutController::class, 'cartCheckout'])->name('checkout.cartCheckout');
+
     Route::get('/profile', [App\Http\Controllers\Backend\ProfileController::class, 'index'])->name('profile.index');
     Route::post('/profile/ubah/password', [App\Http\Controllers\Backend\ProfileController::class, 'changePassword'])->name('profile.changePassword');
     Route::post('/profile/pengaturan/', [App\Http\Controllers\Backend\ProfileController::class, 'settingsProfile'])->name('profile.settings');

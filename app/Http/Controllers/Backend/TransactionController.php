@@ -76,7 +76,7 @@ class TransactionController extends Controller
     public function create()
     {
         $users = User::where('type', 2)->orderBy('first_name', 'asc')->get();
-        $products = Product::orderBy('name', 'asc')->get();
+        $products = Product::orderBy('name', 'asc')->where('stock', '>', 0)->get();
         return view('backend.transaction.add', compact(['users', 'products']));
     }
 
@@ -88,6 +88,7 @@ class TransactionController extends Controller
         $transaction->customer_name = $request->customers;
         $transaction->type_payment = $request->type_payment;
         $transaction->type_transaction = 'offline';
+        $transaction->status = 'completed';
         $transaction->discount = $request->discount;
         $subtotal_price = floatval(str_replace(['Rp', ' ', '.', "\xc2\xa0"], '', $request->subtotal));
         $discount_percentage = $request->discount;

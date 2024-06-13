@@ -99,7 +99,11 @@
                                 <span class="pd-detail__preview-desc">{{ $product->short_description }}</span>
                             </div>
                             <div class="u-s-m-b-15">
-                                <form class="pd-detail__form">
+                                <form class="pd-detail__form" method="POST"
+                                    action="{{ route('checkout.directCheckout') }}">
+                                    @csrf
+                                    <input type="hidden" name="id" id="id" value="{{ $product->id }}">
+                                    <input type="hidden" name="weight" id="weight" value="{{ $product->weight }}">
                                     <div class="pd-detail-inline-2">
                                         <div class="u-s-m-b-15">
 
@@ -119,7 +123,8 @@
                                         <div class="u-s-m-b-15">
                                             <button class="btn btn--e-brand-b-2" id="addCart" type="button"
                                                 data-id="{{ $product->id }}">Tambah Keranjang</button>
-                                            <button class="btn btn--e-brand-b-2" type="submit">Belanja Sekarang</button>
+                                            <button class="btn btn--e-brand-b-2" type="submit">Belanja
+                                                Sekarang</button>
                                         </div>
                                     </div>
                                 </form>
