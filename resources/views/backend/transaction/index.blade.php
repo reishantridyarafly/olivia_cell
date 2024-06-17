@@ -39,6 +39,8 @@
                                                 <th>Tanggal</th>
                                                 <th>Pelanggan</th>
                                                 <th>Pembayaran</th>
+                                                <th>Transaksi</th>
+                                                <th>Status</th>
                                                 <th>Total</th>
                                                 <th class="text-end">Aksi</th>
                                             </tr>
@@ -91,6 +93,14 @@
                     {
                         data: 'type_payment',
                         name: 'type_payment'
+                    },
+                    {
+                        data: 'type_transaction',
+                        name: 'type_transaction'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
                     },
                     {
                         data: 'total_price',

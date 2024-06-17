@@ -57,7 +57,8 @@
                                             <p class="text-muted note-inner-content text-truncate-3-line">
                                                 {{ $row->detail_address }}</p>
                                             <p class="text-muted note-inner-content text-truncate-3-line">
-                                                {{ $row->city_name }}, {{ $row->province_name }}, {{ $row->kode_pos }}</p>
+                                                {{ $row->city_name }}, {{ $row->province_name }}, {{ $row->postal_code }}
+                                            </p>
                                         </div>
                                         <div class="d-flex align-items-center gap-1">
                                             <a href="{{ route('address.edit', $row->id) }}" class="avatar-text avatar-md"><i

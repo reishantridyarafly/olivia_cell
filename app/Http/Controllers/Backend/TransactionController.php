@@ -9,6 +9,7 @@ use App\Models\TransactionDetail;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
 class TransactionController extends Controller
@@ -42,6 +43,22 @@ class TransactionController extends Controller
                 ->addColumn('type_payment', function ($data) {
                     return $data->type_payment == 'cash' ? 'Tunai' : 'Transfer';
                 })
+                ->addColumn('type_transaction', function ($data) {
+                    return $data->type_transaction == 'online' ? '<span class="badge rounded-pill text-bg-success text-light">Online</span>' : '<span class="badge rounded-pill text-bg-danger text-light">Offline</span>';
+                })
+                ->addColumn('status', function ($data) {
+                    $status = '';
+                    if ($data->status == 'pending') {
+                        $status = '<span class="fw-bold text-warning">Pending</span>';
+                    } elseif ($data->status == 'process') {
+                        $status = '<span class="fw-bold text-warning">Proses</span>';
+                    } elseif ($data->status == 'completed') {
+                        $status = '<span class="fw-bold text-success">Selesai</span>';
+                    } else {
+                        $status = '<span class="fw-bold text-danger">Gagal</span>';
+                    }
+                    return $status;
+                })
                 ->addColumn('total_price', function ($data) {
                     return  'Rp ' . number_format($data->total_price, 0, ',', '.');
                 })
@@ -68,7 +85,7 @@ class TransactionController extends Controller
                             </div>
                         </div>';
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action', 'type_transaction', 'status'])
                 ->make(true);
         }
         return view('backend.transaction.index');
@@ -131,7 +148,11 @@ class TransactionController extends Controller
 
     public function detail($id)
     {
-        $transaction = Transaction::with('details')->find($id);
+        $transaction = Transaction::with(['details', 'address' => function ($query) {
+            $query->join('provinces', 'address.province_id', '=', 'provinces.id')
+                ->join('cities', 'address.city_id', '=', 'cities.id')
+                ->select('address.*', 'provinces.name as province_name', 'cities.name as city_name', 'cities.postal_code as postal_code');
+        }])->find($id);
 
         $months = [
             'January' => 'Januari',
@@ -155,5 +176,53 @@ class TransactionController extends Controller
         $subtotal = $transaction->details->sum('total_price');
 
         return view('backend.transaction.detail', compact(['transaction', 'subtotal']));
+    }
+
+    public function failed(Request $request)
+    {
+        $checkout = Transaction::find($request->id);
+        $checkout->status = 'failed';
+        $checkout->save();
+        return response()->json(['message' => 'Data berhasil di simpan.']);
+    }
+
+    public function process(Request $request)
+    {
+        $checkout = Transaction::find($request->id);
+        $checkout->status = 'process';
+        $checkout->save();
+        return response()->json(['message' => 'Data berhasil di simpan.']);
+    }
+
+    public function completed(Request $request)
+    {
+        $checkout = Transaction::find($request->id);
+        $checkout->status = 'completed';
+        $checkout->save();
+        return response()->json(['message' => 'Data berhasil di simpan.']);
+    }
+
+    public function updateResi(Request $request)
+    {
+        $id = $request->id;
+        $validated = Validator::make(
+            $request->all(),
+            [
+                'no_resi' => 'required|unique:transactions,resi,' . $id,
+            ],
+            [
+                'no_resi.required' => 'Silakan isi no resi terlebih dahulu.',
+                'no_resi.unique' => 'No resi sudah tersedia.'
+            ]
+        );
+
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()]);
+        } else {
+            $checkout = Transaction::find($id);
+            $checkout->resi = $request->no_resi;
+            $checkout->save();
+            return response()->json(['message' => 'Data berhasil di simpan.']);
+        }
     }
 }

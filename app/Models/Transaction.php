@@ -39,4 +39,9 @@ class Transaction extends Model
     {
         return $this->hasMany(TransactionDetail::class, 'transaction_id');
     }
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
 }

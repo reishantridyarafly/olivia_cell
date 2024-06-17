@@ -64,6 +64,10 @@ Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::get('/transaksi/{id}/edit', [App\Http\Controllers\Backend\TransactionController::class, 'edit'])->name('transaction.edit');
     Route::post('/transaksi', [App\Http\Controllers\Backend\TransactionController::class, 'store'])->name('transaction.store');
     Route::delete('/transaksi/{id}', [App\Http\Controllers\Backend\TransactionController::class, 'destroy'])->name('transaction.destroy');
+    Route::post('/transaksi/tolak', [App\Http\Controllers\Backend\TransactionController::class, 'failed'])->name('transaction.failed');
+    Route::post('/transaksi/proses', [App\Http\Controllers\Backend\TransactionController::class, 'process'])->name('transaction.process');
+    Route::post('/transaksi/selesai', [App\Http\Controllers\Backend\TransactionController::class, 'completed'])->name('transaction.completed');
+    Route::post('/transaksi/update/resi', [App\Http\Controllers\Backend\TransactionController::class, 'updateResi'])->name('transaction.updateResi');
 
     Route::get('/katalog', [App\Http\Controllers\Backend\CatalogController::class, 'index'])->name('catalog.index');
     Route::get('/katalog/tambah', [App\Http\Controllers\Backend\CatalogController::class, 'create'])->name('catalog.create');
