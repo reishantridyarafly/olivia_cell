@@ -37,7 +37,10 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="g-map">
-                                <div id="map"></div>
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.2856503602125!2d108.25545111749452!3d-6.734964286802522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6ed9b4bfb70333%3A0x568a484f3f82ba04!2sOlivia%20Cell%20Merah!5e0!3m2!1sid!2sid!4v1718695186887!5m2!1sid!2sid"
+                                    style="width: 100%; height:500px" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                     </div>
@@ -60,11 +63,11 @@
                                 <div class="contact-o__wrap">
                                     <div class="contact-o__icon"><i class="fas fa-phone-volume"></i></div>
 
-                                    <span class="contact-o__info-text-1">LET'S HAVE A CALL</span>
+                                    <span class="contact-o__info-text-1">TELEPON</span>
 
-                                    <span class="contact-o__info-text-2">(+0) 900 901 904</span>
-
-                                    <span class="contact-o__info-text-2">(+0) 900 901 902</span>
+                                    <span class="contact-o__info-text-2"><a href="https://wa.me/6285315922275">(+62)
+                                            853-1592-2275</a>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -73,11 +76,12 @@
                                 <div class="contact-o__wrap">
                                     <div class="contact-o__icon"><i class="fas fa-map-marker-alt"></i></div>
 
-                                    <span class="contact-o__info-text-1">OUR LOCATION</span>
+                                    <span class="contact-o__info-text-1">LOKASI</span>
 
-                                    <span class="contact-o__info-text-2">4247 Ashford Drive VA-20006</span>
+                                    <span class="contact-o__info-text-2">Dusun Pahing RT.002 RW. 013</span>
 
-                                    <span class="contact-o__info-text-2">Virginia US</span>
+                                    <span class="contact-o__info-text-2">Desa Mekarsari, Kec.Jatiwangi Kab. Majalengka
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -86,11 +90,11 @@
                                 <div class="contact-o__wrap">
                                     <div class="contact-o__icon"><i class="far fa-clock"></i></div>
 
-                                    <span class="contact-o__info-text-1">WORK TIME</span>
+                                    <span class="contact-o__info-text-1">JAM KERJA</span>
 
-                                    <span class="contact-o__info-text-2">5 Days a Week</span>
+                                    <span class="contact-o__info-text-2">Setiap Hari</span>
 
-                                    <span class="contact-o__info-text-2">From 9 AM to 7 PM</span>
+                                    <span class="contact-o__info-text-2">Dari 08:00 - 21:00 WIB</span>
                                 </div>
                             </div>
                         </div>
@@ -111,19 +115,23 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="contact-area u-h-100">
+                                @if (session('success'))
+                                    <strong style="color: #DB4540">{{ session('success') }}</strong>
+                                @endif
                                 <div class="contact-area__heading">
-                                    <h2>Get In Touch</h2>
+                                    <h2>Hubungi</h2>
                                 </div>
-                                <form class="contact-f" method="post" action="index.html">
+                                <form class="contact-f" method="post" action="{{ route('contact.store') }}">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 u-h-100">
                                             <div class="u-s-m-b-30">
 
                                                 <label for="c-name"></label>
-
                                                 <input
                                                     class="input-text input-text--border-radius input-text--primary-style"
-                                                    type="text" id="c-name" placeholder="Name (Required)" required>
+                                                    type="text" id="c-name" name="name"
+                                                    placeholder="Nama (Wajib diisi)" required>
                                             </div>
                                             <div class="u-s-m-b-30">
 
@@ -131,28 +139,19 @@
 
                                                 <input
                                                     class="input-text input-text--border-radius input-text--primary-style"
-                                                    type="text" id="c-email" placeholder="Email (Required)" required>
-                                            </div>
-                                            <div class="u-s-m-b-30">
-
-                                                <label for="c-subject"></label>
-
-                                                <input
-                                                    class="input-text input-text--border-radius input-text--primary-style"
-                                                    type="text" id="c-subject" placeholder="Subject (Required)" required>
+                                                    type="text" id="c-email" name="email"
+                                                    placeholder="Email (Wajib diisi)" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 u-h-100">
                                             <div class="u-s-m-b-30">
-
                                                 <label for="c-message"></label>
-                                                <textarea class="text-area text-area--border-radius text-area--primary-style" id="c-message"
-                                                    placeholder="Compose a Message (Required)" required></textarea>
+                                                <textarea class="text-area text-area--border-radius text-area--primary-style" id="c-message" name="message"
+                                                    placeholder="Pesan (Wajib diisi)" required></textarea>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
-
-                                            <button class="btn btn--e-brand-b-2" type="submit">Send Message</button>
+                                            <button class="btn btn--e-brand-b-2" type="submit">Kirim Pesan</button>
                                         </div>
                                     </div>
                                 </form>
@@ -170,8 +169,6 @@
 @endsection
 
 @section('script')
-    <!--====== Google Map ======-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-MO9uPLS-ApTqYs0FpYdVG8cFwdq6apw"></script>
     <!--====== Google Map Init ======-->
     <script src="{{ asset('frontend/assets') }}/js/map-init.js"></script>
 

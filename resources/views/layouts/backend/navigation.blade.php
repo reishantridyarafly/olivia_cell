@@ -57,6 +57,13 @@
                     </a>
                 </li>
 
+                <li class="nxl-item {{ request()->routeIs(['contact.*']) ? 'active' : '' }}">
+                    <a href="{{ route('contact.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-book"></i></span>
+                        <span class="nxl-mtext">Pesan Kontak</span>
+                    </a>
+                </li>
+
                 <li class="nxl-item {{ request()->routeIs(['customers.*']) ? 'active' : '' }}">
                     <a href="{{ route('customers.index') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-users"></i></span>

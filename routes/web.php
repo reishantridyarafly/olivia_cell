@@ -19,6 +19,8 @@ Route::get('/tentang', [App\Http\Controllers\Frontend\AboutController::class, 'i
 Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index'])->name('faq.index');
 Route::get('/kontak', [App\Http\Controllers\Frontend\ContactController::class, 'index'])->name('contact.index');
 
+Route::post('/kontak/store', [App\Http\Controllers\Frontend\ContactController::class, 'store'])->name('contact.store');
+
 Route::get('/belanja', [App\Http\Controllers\Frontend\ShopController::class, 'index'])->name('shop.index');
 Route::get('/belanja/detail/{slug}', [App\Http\Controllers\Frontend\ShopController::class, 'detail'])->name('shop.detail');
 Route::get('/belanja/pencarian/', [App\Http\Controllers\Frontend\ShopController::class, 'search'])->name('shop.search');
@@ -74,6 +76,11 @@ Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::get('/katalog/{id}/edit', [App\Http\Controllers\Backend\CatalogController::class, 'edit'])->name('catalog.edit');
     Route::post('/katalog', [App\Http\Controllers\Backend\CatalogController::class, 'store'])->name('catalog.store');
     Route::delete('/katalog/{id}', [App\Http\Controllers\Backend\CatalogController::class, 'destroy'])->name('catalog.destroy');
+
+    Route::get('/pesan-kontak', [App\Http\Controllers\Backend\ContactController::class, 'index'])->name('contact.index');
+    Route::get('/pesan-kontak/{id}/detail', [App\Http\Controllers\Backend\ContactController::class, 'detail'])->name('contact.detail');
+    Route::post('/pesan-kontak', [App\Http\Controllers\Backend\ContactController::class, 'store'])->name('contact.store');
+    Route::delete('/pesan-kontak/{id}', [App\Http\Controllers\Backend\ContactController::class, 'destroy'])->name('contact.destroy');
 
     Route::get('/produk', [App\Http\Controllers\Backend\ProductController::class, 'index'])->name('product.index');
     Route::get('/produk/tambah', [App\Http\Controllers\Backend\ProductController::class, 'create'])->name('product.create');
