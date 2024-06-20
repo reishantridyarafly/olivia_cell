@@ -113,7 +113,8 @@
                                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item">
                                             <div class="product-o product-o--hover-on product-o--radius">
                                                 <div class="product-o__wrap">
-                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block"
+                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block product-view"
+                                                        data-id="{{ $row->id }}"
                                                         href="{{ route('shop.detail', $row->slug) }}">
                                                         <img class="aspect__img"
                                                             src="{{ asset('storage/uploads/products/' . $row->photo_name) }}"
@@ -122,7 +123,7 @@
                                                         <ul class="product-o__action-list">
                                                             <li>
                                                                 <a href="javascript:(0);" id="addCart"
-                                                                    data-id="{{ $row->id }}"
+                                                                    class="product-view" data-id="{{ $row->id }}"
                                                                     title="Tambah Keranjang"><i
                                                                         class="fas fa-plus-circle"></i></a>
                                                                 <input type="hidden" name="qty" id="qty"
@@ -132,13 +133,14 @@
                                                     </div>
                                                 </div>
 
-                                                <span class="product-o__category">
+                                                <span class="product-o__category product-view"
+                                                    data-id="{{ $row->id }}">
                                                     <a
-                                                        href="{{ route('shop.catalog', $row->catalog_slug) }}">{{ $row->catalog_name }}</a></span>
-                                                <span class="product-o__name">
-
-                                                    <a
-                                                        href="{{ route('shop.detail', $row->slug) }}">{{ $row->name }}</a></span>
+                                                        href="{{ route('shop.catalog', $row->catalog_slug) }}">{{ $row->catalog_name }}</a>
+                                                </span>
+                                                <span class="product-o__name product-view" data-id="{{ $row->id }}">
+                                                    <a href="{{ route('shop.detail', $row->slug) }}">{{ $row->name }}</a>
+                                                </span>
                                                 <div class="product-o__rating gl-rating-style">
                                                     @for ($i = 1; $i <= 5; $i++)
                                                         @if ($i <= $row->average_rating)
@@ -167,7 +169,8 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="load-more">
-                                <button class="btn btn--e-brand" type="button">Memuat lebih banyak</button>
+                                <button onclick="window.location.href='{{ route('shop.index') }}'" class="btn btn--e-brand"
+                                    type="button">Memuat lebih banyak</button>
                             </div>
                         </div>
                     </div>
@@ -176,10 +179,6 @@
             <!--====== End - Section Content ======-->
         </div>
         <!--====== End - Section 2 ======-->
-
-
-
-
 
         <!--====== Section 4 ======-->
         <div class="u-s-p-b-60">
@@ -208,7 +207,8 @@
                                 <div class="u-s-m-b-30">
                                     <div class="product-o product-o--hover-on">
                                         <div class="product-o__wrap">
-                                            <a class="aspect aspect--bg-grey aspect--square u-d-block"
+                                            <a class="aspect aspect--bg-grey aspect--square u-d-block product-view"
+                                                data-id="{{ $row->id }}"
                                                 href="{{ route('shop.detail', $new_product->slug) }}">
                                                 <img class="aspect__img"
                                                     src="{{ asset('storage/uploads/products/' . $new_product->photos->first()->photo_name) }}"
@@ -225,10 +225,10 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <span class="product-o__category">
+                                        <span class="product-o__category product-view" data-id="{{ $row->id }}">
                                             <a
                                                 href="{{ route('shop.catalog', $new_product->catalog->slug) }}">{{ $new_product->catalog->name }}</a></span>
-                                        <span class="product-o__name">
+                                        <span class="product-o__name product-view" data-id="{{ $row->id }}">
                                             <a
                                                 href="{{ route('shop.detail', $new_product->slug) }}">{{ $new_product->name }}</a></span>
                                         <div class="product-o__rating gl-rating-style">
@@ -433,6 +433,24 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
+            });
+
+            $('body').on('click', '.product-view', function() {
+                let productId = $(this).data('id');
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('productViews.store') }}",
+                    data: {
+                        product_id: productId
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response.message);
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.status + ": " + xhr.responseText);
+                    }
+                });
             });
 
             $('body').on('click', '#addCart', function() {

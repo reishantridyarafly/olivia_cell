@@ -57,7 +57,25 @@ class ShopController extends Controller
 
         $rating_reviews = Rating::with('user')->where('product_id', $product->id)->orderBy('created_at', 'desc')->get();
 
-        return view('frontend.shop.detail', compact(['product', 'hasPurchased', 'hasRated', 'rating_reviews']));
+        $popularProductViews = DB::table('product_views')
+            ->select('product_id', DB::raw('COUNT(*) as views'))
+            ->where('product_id', '!=', $product->id)
+            ->groupBy('product_id')
+            ->orderByDesc('views')
+            ->take(10)
+            ->get();
+
+        $recommendedProducts = [];
+        foreach ($popularProductViews as $popularProductView) {
+            $recommendedProduct = Product::with('ratings')->find($popularProductView->product_id);
+            if ($recommendedProduct) {
+                $recommendedProduct->average_rating = $recommendedProduct->ratings->avg('rating') ?? 0;
+                $recommendedProduct->ratings_count = $recommendedProduct->ratings->count();
+                $recommendedProducts[] = $recommendedProduct;
+            }
+        }
+        
+        return view('frontend.shop.detail', compact(['product', 'hasPurchased', 'hasRated', 'rating_reviews', 'recommendedProduct']));
     }
 
     public function catalog($slug)

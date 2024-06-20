@@ -27,6 +27,8 @@ Route::get('/belanja/pencarian/', [App\Http\Controllers\Frontend\ShopController:
 Route::get('/belanja/katalog/{slug}', [App\Http\Controllers\Frontend\ShopController::class, 'catalog'])->name('shop.catalog');
 Route::get('/belanja/detail/{slug}', [App\Http\Controllers\Frontend\ShopController::class, 'detail'])->name('shop.detail');
 
+Route::post('/product-views', [App\Http\Controllers\Frontend\ProductViewController::class, 'store'])->name('productViews.store');
+
 Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('/keranjang/jumlah', [App\Http\Controllers\Frontend\CartController::class, 'getCartItemCount'])->name('cart.count');

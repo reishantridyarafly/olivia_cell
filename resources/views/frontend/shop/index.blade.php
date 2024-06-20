@@ -51,24 +51,6 @@
 
                                         <span class="js-shop-list-target">List</span>
                                     </div>
-                                    <form>
-                                        <div class="tool-style__form-wrap">
-                                            <div class="u-s-m-b-8"><select class="select-box select-box--transparent-b-2">
-                                                    <option>Show: 8</option>
-                                                    <option selected>Show: 12</option>
-                                                    <option>Show: 16</option>
-                                                    <option>Show: 28</option>
-                                                </select></div>
-                                            <div class="u-s-m-b-8"><select class="select-box select-box--transparent-b-2">
-                                                    <option selected>Sort By: Newest Items</option>
-                                                    <option>Sort By: Latest Items</option>
-                                                    <option>Sort By: Best Selling</option>
-                                                    <option>Sort By: Best Rating</option>
-                                                    <option>Sort By: Lowest Price</option>
-                                                    <option>Sort By: Highest Price</option>
-                                                </select></div>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
                             <div class="shop-p__collection">
@@ -78,24 +60,28 @@
                                             <div class="product-m">
                                                 <div class="product-m__thumb">
 
-                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block"
+                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block product-view"
+                                                        data-id="{{ $product->id }}"
                                                         href="{{ route('shop.detail', $product->slug) }}">
 
                                                         <img class="aspect__img"
                                                             src="{{ asset('storage/uploads/products/' . $product->photos->first()->photo_name) }}"
                                                             alt=""></a>
-                                                    <div class="product-m__add-cart">
+                                                    <div class="product-m__add-cart product-view"
+                                                        data-id="{{ $product->id }}">
                                                         <a class="btn--e-brand" id="addCart"
                                                             data-id="{{ $product->id }}">Tambah Keranjang</a>
                                                     </div>
                                                     <input type="hidden" name="qty" id="qty" value="1">
                                                 </div>
                                                 <div class="product-m__content">
-                                                    <div class="product-m__category">
-
-                                                        <a href="shop-side-version-2.html">{{ $product->catalog->name }}</a>
+                                                    <div class="product-m__category product-view"
+                                                        data-id="{{ $product->id }}">
+                                                        <a
+                                                            href="{{ route('shop.catalog', $product->catalog->slug) }}">{{ $product->catalog->name }}</a>
                                                     </div>
-                                                    <div class="product-m__name">
+                                                    <div class="product-m__name product-view"
+                                                        data-id="{{ $product->id }}">
 
                                                         <a
                                                             href="{{ route('shop.detail', $product->slug) }}">{{ $product->name }}</a>
@@ -110,7 +96,8 @@
                                                                 <i class="far fa-star"></i>
                                                             @endif
                                                         @endfor
-                                                        <span class="product-o__review">({{ $product->ratings_count }})</span>
+                                                        <span
+                                                            class="product-o__review">({{ $product->ratings_count }})</span>
                                                     </div>
                                                     <div class="product-m__price">
                                                         {{ 'Rp ' . number_format($product->after_price, 0, ',', '.') }}
@@ -227,6 +214,24 @@
                     error: function(xhr, ajaxOptions, thrownError) {
                         console.error(xhr.status + "\n" + xhr.responseText + "\n" +
                             thrownError);
+                    }
+                });
+            });
+
+            $('body').on('click', '.product-view', function() {
+                let productId = $(this).data('id');
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('productViews.store') }}",
+                    data: {
+                        product_id: productId
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response.message);
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.status + ": " + xhr.responseText);
                     }
                 });
             });
