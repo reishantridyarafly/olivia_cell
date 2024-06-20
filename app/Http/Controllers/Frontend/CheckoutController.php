@@ -9,7 +9,6 @@ use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -133,6 +132,7 @@ class CheckoutController extends Controller
                     $transaction = new Transaction();
                     $transaction->code = $this->generateTransactionCode();
                     $transaction->transaction_date = now();
+                    $transaction->user_id = auth()->user()->id;
                     $transaction->customer_name = auth()->user()->first_name . ' ' .  auth()->user()->last_name;
                     $transaction->address_id  = $request->address;
                     $transaction->note  = $request->note;
@@ -245,6 +245,7 @@ class CheckoutController extends Controller
                     $transaction = new Transaction();
                     $transaction->code = $this->generateTransactionCode();
                     $transaction->transaction_date = now();
+                    $transaction->user_id = auth()->user()->id;
                     $transaction->customer_name = auth()->user()->first_name . ' ' .  auth()->user()->last_name;
                     $transaction->address_id  = $request->address;
                     $transaction->note  = $request->note;

@@ -19,7 +19,7 @@ Route::get('/tentang', [App\Http\Controllers\Frontend\AboutController::class, 'i
 Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index'])->name('faq.index');
 Route::get('/kontak', [App\Http\Controllers\Frontend\ContactController::class, 'index'])->name('contact.index');
 
-Route::post('/kontak/store', [App\Http\Controllers\Frontend\ContactController::class, 'store'])->name('contact.store');
+Route::post('/kontak', [App\Http\Controllers\Frontend\ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/belanja', [App\Http\Controllers\Frontend\ShopController::class, 'index'])->name('shop.index');
 Route::get('/belanja/detail/{slug}', [App\Http\Controllers\Frontend\ShopController::class, 'detail'])->name('shop.detail');
@@ -55,6 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/alamat/{id}/edit', [App\Http\Controllers\Backend\AddressController::class, 'edit'])->name('address.edit');
     Route::post('/alamat/{id}', [App\Http\Controllers\Backend\AddressController::class, 'update'])->name('address.update');
     Route::delete('/alamat/{id}', [App\Http\Controllers\Backend\AddressController::class, 'destroy'])->name('address.destroy');
+
+    Route::post('/penilaian', [App\Http\Controllers\Frontend\RatingController::class, 'store'])->name('ratings.store');
 });
 
 Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
@@ -107,4 +109,7 @@ Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::post('/pengguna/updateStatus', [App\Http\Controllers\Backend\UsersController::class, 'updateStatus'])->name('users.updateStatus');
     Route::get('/pengguna/{id}/edit', [App\Http\Controllers\Backend\UsersController::class, 'edit'])->name('users.edit');
     Route::delete('/pengguna/{id}', [App\Http\Controllers\Backend\UsersController::class, 'destroy'])->name('users.destroy');
+
+    Route::get('/penilaian', [App\Http\Controllers\Backend\RatingController::class, 'index'])->name('rating.index');
+    Route::delete('/penilaian/{id}', [App\Http\Controllers\Backend\RatingController::class, 'destroy'])->name('rating.destroy');
 });

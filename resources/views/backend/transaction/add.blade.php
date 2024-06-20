@@ -48,12 +48,15 @@
                                         <div class="col-9">
                                             <select class="form-control" data-select2-selector="icon" name="customers"
                                                 id="customers" required>
-                                                <option value="Umum" data-icon="feather-user" selected>Umum</option>
+                                                <option value="0" data-customer-name="Umum" data-icon="feather-user" selected>Umum</option>
                                                 @foreach ($users as $user)
-                                                    <option value="{{ $user->first_name . ' ' . $user->last_name }}"
+                                                    <option value="{{ $user->id }}"
+                                                        data-customer-name="{{ $user->first_name . ' ' . $user->last_name }}"
                                                         data-icon="feather-user">
-                                                        {{ $user->first_name . ' ' . $user->last_name }}</option>
+                                                        {{ $user->first_name . ' ' . $user->last_name }}
+                                                    </option>
                                                 @endforeach
+                                                <input type="hidden" name="customer_name" id="customer_name" value="Umum">
                                             </select>
                                         </div>
                                     </div>
@@ -96,8 +99,8 @@
                                                                 readonly></td>
                                                         <td><input type="number" name="qty[]" class="form-control qty"
                                                                 step="1" min="1" value="1" required></td>
-                                                        <td><input type="text" name="total_items[]" class="form-control total"
-                                                                readonly></td>
+                                                        <td><input type="text" name="total_items[]"
+                                                                class="form-control total" readonly></td>
                                                     </tr>
                                                     <tr id="addr1"></tr>
                                                 </tbody>
@@ -209,6 +212,19 @@
 
 @section('script')
     <script>
+        $(document).ready(function() {
+            $('#customers').select2({
+                theme: 'bootstrap4'
+            });
+
+            $('#customers').on('change', function() {
+                var selectedOption = $(this).find('option:selected');
+                var customerName = selectedOption.data('customer-name');
+                $('#customer_name').val(customerName);
+            });
+        });
+
+
         $(document).on('input', '#cash', function() {
             var cashValue = unformatRupiah($(this).val());
             $(this).val(formatRupiah(cashValue));

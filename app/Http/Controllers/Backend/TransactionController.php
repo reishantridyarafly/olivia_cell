@@ -102,7 +102,8 @@ class TransactionController extends Controller
         $transaction = new Transaction();
         $transaction->code = $this->generateTransactionCode();
         $transaction->transaction_date = $request->transaction_date;
-        $transaction->customer_name = $request->customers;
+        $transaction->user_id = $request->customers;
+        $transaction->customer_name = $request->customer_name;
         $transaction->type_payment = $request->type_payment;
         $transaction->type_transaction = 'offline';
         $transaction->status = 'completed';

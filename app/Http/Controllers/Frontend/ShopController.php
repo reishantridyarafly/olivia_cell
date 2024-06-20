@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Catalog;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
 {
@@ -27,7 +28,23 @@ class ShopController extends Controller
     public function detail($slug)
     {
         $product = Product::with('catalog')->where('slug', $slug)->first();
-        return view('frontend.shop.detail', compact('product'));
+
+        $userId = auth()->user()->id;
+
+        $hasPurchased = DB::table('transaction_details')
+            ->join('transactions', 'transaction_details.transaction_id', '=', 'transactions.id')
+            ->where('transaction_details.product_id', $product->id)
+            ->where('transactions.user_id', $userId)
+            ->where('transactions.status', 'completed')
+            ->exists();
+
+        $hasRated = DB::table('ratings')
+            ->where('product_id', $product->id)
+            ->where('user_id', $userId)
+            ->exists();
+
+
+        return view('frontend.shop.detail', compact(['product', 'hasPurchased', 'hasRated']));
     }
 
     public function catalog($slug)

@@ -64,13 +64,20 @@
                     </a>
                 </li>
 
+                <li class="nxl-item {{ request()->routeIs(['rating.*']) ? 'active' : '' }}">
+                    <a href="{{ route('rating.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-star"></i></span>
+                        <span class="nxl-mtext">Penilaian</span>
+                    </a>
+                </li>
+
                 <li class="nxl-item {{ request()->routeIs(['customers.*']) ? 'active' : '' }}">
                     <a href="{{ route('customers.index') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-users"></i></span>
                         <span class="nxl-mtext">Pelanggan</span>
                     </a>
                 </li>
-
+             
                 <li class="nxl-item {{ request()->routeIs(['users.*']) ? 'active' : '' }}">
                     <a href="{{ route('users.index') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-user"></i></span>
