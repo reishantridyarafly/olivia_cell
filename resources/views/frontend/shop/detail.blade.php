@@ -79,14 +79,22 @@
                                 </div>
                             </div>
                             <div class="u-s-m-b-15">
-                                <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star-half-alt"></i>
-
+                                <div class="pd-detail__rating gl-rating-style">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $product->average_rating)
+                                            <i class="fas fa-star"></i>
+                                        @elseif ($i - $product->average_rating <= 0.5)
+                                            <i class="fas fa-star-half-alt"></i>
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor
                                     <span class="pd-detail__review u-s-m-l-4">
 
-                                        <a data-click-scroll="#view-review">23 Reviews</a></span>
+                                        <a data-click-scroll="#view-review">{{ $product->ratings_count }}
+                                            Ulasan</a></span>
                                 </div>
+
                             </div>
                             <div class="u-s-m-b-15">
                                 <div class="pd-detail__inline">
@@ -152,7 +160,7 @@
 
                                         <a class="nav-link" id="view-review" data-toggle="tab" href="#pd-rev">ULASAN
 
-                                            <span>(23)</span></a>
+                                            <span>({{ $product->ratings_count }})</span></a>
                                     </li>
                                 </ul>
                             </div>
@@ -221,100 +229,58 @@
                                 </div>
                                 <!--====== End - Tab 1 ======-->
 
-                                <!--====== Tab 3 ======-->
+                                <!--====== Tab 2 ======-->
                                 <div class="tab-pane" id="pd-rev">
                                     <div class="pd-tab__rev">
                                         <div class="u-s-m-b-30">
                                             <div class="pd-tab__rev-score">
                                                 <div class="u-s-m-b-8">
-                                                    <h2>23 Reviews - 4.6 (Overall)</h2>
+                                                    <h2>{{ $product->ratings_count }} Ulasan -
+                                                        {{ $product->average_rating }} (Keseluruhan)</h2>
                                                 </div>
-                                                <div class="gl-rating-style-2 u-s-m-b-8"><i class="fas fa-star"></i><i
-                                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                        class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-                                                <div class="u-s-m-b-8">
-                                                    <h4>We want to hear from you!</h4>
+                                                <div class="gl-rating-style-2 u-s-m-b-8">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $product->average_rating)
+                                                            <i class="fas fa-star"></i>
+                                                        @elseif ($i - $product->average_rating <= 0.5)
+                                                            <i class="fas fa-star-half-alt"></i>
+                                                        @else
+                                                            <i class="far fa-star"></i>
+                                                        @endif
+                                                    @endfor
+                                                    <h4>Kami ingin mendengar pendapat Anda!</h4>
                                                 </div>
 
-                                                <span class="gl-text">Tell us what you think about this item</span>
+                                                <span class="gl-text">Beri tahu kami pendapat Anda tentang item ini</span>
                                             </div>
                                         </div>
                                         <div class="u-s-m-b-30">
                                             <form class="pd-tab__rev-f1">
-                                                <div class="rev-f1__group">
-                                                    <div class="u-s-m-b-15">
-                                                        <h2>23 Review(s) for Man Ruched Floral Applique Tee</h2>
-                                                    </div>
-                                                    <div class="u-s-m-b-15">
-
-                                                        <label for="sort-review"></label><select
-                                                            class="select-box select-box--primary-style" id="sort-review">
-                                                            <option selected>Sort by: Best Rating</option>
-                                                            <option>Sort by: Worst Rating</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
                                                 <div class="rev-f1__review">
-                                                    <div class="review-o u-s-m-b-15">
-                                                        <div class="review-o__info u-s-m-b-8">
+                                                    @foreach ($rating_reviews as $row)
+                                                        <div class="review-o u-s-m-b-15">
+                                                            <div class="review-o__info u-s-m-b-8">
 
-                                                            <span class="review-o__name">John Doe</span>
+                                                                <span
+                                                                    class="review-o__name">{{ $row->user->first_name . ' ' . $row->user->last_name }}</span>
 
-                                                            <span class="review-o__date">27 Feb 2018 10:57:43</span>
+                                                                <span class="review-o__date">27 Feb 2018 10:57:43</span>
+                                                            </div>
+                                                            <div class="review-o__rating gl-rating-style u-s-m-b-8">
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($i <= $row->rating)
+                                                                        <i class="fas fa-star"></i>
+                                                                    @elseif ($i - $row->rating <= 0.5)
+                                                                        <i class="fas fa-star-half-alt"></i>
+                                                                    @else
+                                                                        <i class="far fa-star"></i>
+                                                                    @endif
+                                                                @endfor
+                                                                <span>({{ $row->rating }})</span>
+                                                            </div>
+                                                            <p class="review-o__text">{{ $row->comment }}</p>
                                                         </div>
-                                                        <div class="review-o__rating gl-rating-style u-s-m-b-8"><i
-                                                                class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                                class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                                class="far fa-star"></i>
-
-                                                            <span>(4)</span>
-                                                        </div>
-                                                        <p class="review-o__text">Lorem Ipsum is simply dummy text of the
-                                                            printing and typesetting industry. Lorem Ipsum has been the
-                                                            industry's standard dummy text ever since the 1500s, when an
-                                                            unknown printer took a galley of type and scrambled it to make a
-                                                            type specimen book.</p>
-                                                    </div>
-                                                    <div class="review-o u-s-m-b-15">
-                                                        <div class="review-o__info u-s-m-b-8">
-
-                                                            <span class="review-o__name">John Doe</span>
-
-                                                            <span class="review-o__date">27 Feb 2018 10:57:43</span>
-                                                        </div>
-                                                        <div class="review-o__rating gl-rating-style u-s-m-b-8"><i
-                                                                class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                                class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                                class="far fa-star"></i>
-
-                                                            <span>(4)</span>
-                                                        </div>
-                                                        <p class="review-o__text">Lorem Ipsum is simply dummy text of the
-                                                            printing and typesetting industry. Lorem Ipsum has been the
-                                                            industry's standard dummy text ever since the 1500s, when an
-                                                            unknown printer took a galley of type and scrambled it to make a
-                                                            type specimen book.</p>
-                                                    </div>
-                                                    <div class="review-o u-s-m-b-15">
-                                                        <div class="review-o__info u-s-m-b-8">
-
-                                                            <span class="review-o__name">John Doe</span>
-
-                                                            <span class="review-o__date">27 Feb 2018 10:57:43</span>
-                                                        </div>
-                                                        <div class="review-o__rating gl-rating-style u-s-m-b-8"><i
-                                                                class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                                class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                                class="far fa-star"></i>
-
-                                                            <span>(4)</span>
-                                                        </div>
-                                                        <p class="review-o__text">Lorem Ipsum is simply dummy text of the
-                                                            printing and typesetting industry. Lorem Ipsum has been the
-                                                            industry's standard dummy text ever since the 1500s, when an
-                                                            unknown printer took a galley of type and scrambled it to make a
-                                                            type specimen book.</p>
-                                                    </div>
+                                                    @endforeach
                                                 </div>
                                             </form>
                                         </div>

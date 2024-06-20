@@ -100,12 +100,17 @@
                                                         <a
                                                             href="{{ route('shop.detail', $product->slug) }}">{{ $product->name }}</a>
                                                     </div>
-                                                    <div class="product-m__rating gl-rating-style"><i
-                                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                            class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i
-                                                            class="far fa-star"></i>
-
-                                                        <span class="product-m__review">(23)</span>
+                                                    <div class="product-m__rating gl-rating-style">
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $product->average_rating)
+                                                                <i class="fas fa-star"></i>
+                                                            @elseif ($i - $product->average_rating <= 0.5)
+                                                                <i class="fas fa-star-half-alt"></i>
+                                                            @else
+                                                                <i class="far fa-star"></i>
+                                                            @endif
+                                                        @endfor
+                                                        <span class="product-o__review">({{ $product->ratings_count }})</span>
                                                     </div>
                                                     <div class="product-m__price">
                                                         {{ 'Rp ' . number_format($product->after_price, 0, ',', '.') }}

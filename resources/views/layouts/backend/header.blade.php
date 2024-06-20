@@ -10,8 +10,6 @@
                     </div>
                 </div>
             </a>
-            <!--! [Start] nxl-head-mobile-toggler !-->
-            <!--! [Start] nxl-navigation-toggle !-->
             <div class="nxl-navigation-toggle">
                 <a href="javascript:void(0);" id="menu-mini-button">
                     <i class="feather-align-left"></i>
@@ -19,22 +17,17 @@
                 <a href="javascript:void(0);" id="menu-expend-button" style="display: none">
                     <i class="feather-arrow-right"></i>
                 </a>
-            </div>
-            <!--! [End] nxl-navigation-toggle !-->
-            <!--! [Start] nxl-lavel-mega-menu-toggle !-->
+            </div>>
             <div class="nxl-lavel-mega-menu-toggle d-flex d-lg-none">
                 <a href="javascript:void(0);" id="nxl-lavel-mega-menu-open">
                     <i class="feather-align-left"></i>
                 </a>
             </div>
-            <!--! [End] nxl-lavel-mega-menu-toggle !-->
-
         </div>
         <!--! [End] Header Left !-->
         <!--! [Start] Header Right !-->
         <div class="header-right ms-auto">
             <div class="d-flex align-items-center">
-
                 <div class="nxl-h-item d-none d-sm-flex">
                     <div class="full-screen-switcher">
                         <a href="javascript:void(0);" class="nxl-head-link me-0"

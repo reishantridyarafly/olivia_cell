@@ -57,20 +57,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('/alamat/{id}', [App\Http\Controllers\Backend\AddressController::class, 'destroy'])->name('address.destroy');
 
     Route::post('/penilaian', [App\Http\Controllers\Frontend\RatingController::class, 'store'])->name('ratings.store');
+
+    Route::get('/transaksi', [App\Http\Controllers\Backend\TransactionController::class, 'index'])->name('transaction.index');
+    Route::get('/transaksi/detail/{id}', [App\Http\Controllers\Backend\TransactionController::class, 'detail'])->name('transaction.detail');
+    Route::post('/transaksi/selesai', [App\Http\Controllers\Backend\TransactionController::class, 'completed'])->name('transaction.completed');
 });
 
 Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Backend\DashboardController::class, 'index'])->name('dashboard.index');
 
-    Route::get('/transaksi', [App\Http\Controllers\Backend\TransactionController::class, 'index'])->name('transaction.index');
-    Route::get('/transaksi/detail/{id}', [App\Http\Controllers\Backend\TransactionController::class, 'detail'])->name('transaction.detail');
     Route::get('/transaksi/tambah', [App\Http\Controllers\Backend\TransactionController::class, 'create'])->name('transaction.create');
     Route::get('/transaksi/{id}/edit', [App\Http\Controllers\Backend\TransactionController::class, 'edit'])->name('transaction.edit');
     Route::post('/transaksi', [App\Http\Controllers\Backend\TransactionController::class, 'store'])->name('transaction.store');
     Route::delete('/transaksi/{id}', [App\Http\Controllers\Backend\TransactionController::class, 'destroy'])->name('transaction.destroy');
     Route::post('/transaksi/tolak', [App\Http\Controllers\Backend\TransactionController::class, 'failed'])->name('transaction.failed');
     Route::post('/transaksi/proses', [App\Http\Controllers\Backend\TransactionController::class, 'process'])->name('transaction.process');
-    Route::post('/transaksi/selesai', [App\Http\Controllers\Backend\TransactionController::class, 'completed'])->name('transaction.completed');
     Route::post('/transaksi/update/resi', [App\Http\Controllers\Backend\TransactionController::class, 'updateResi'])->name('transaction.updateResi');
 
     Route::get('/katalog', [App\Http\Controllers\Backend\CatalogController::class, 'index'])->name('catalog.index');

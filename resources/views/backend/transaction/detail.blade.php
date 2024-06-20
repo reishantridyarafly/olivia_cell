@@ -39,26 +39,29 @@
                                         <div class="avatar-text avatar-md" data-bs-toggle="tooltip" data-bs-trigger="hover"
                                             title="Print Invoice"><i class="feather feather-printer"></i></div>
                                     </a>
-                                    @if ($transaction->status == 'pending')
-                                        <a href="javascript:void(0)" class="d-flex me-1">
-                                            <div class="avatar-text avatar-md" data-bs-toggle="tooltip"
-                                                data-bs-trigger="hover" id="btnFailed" data-id="{{ $transaction->id }}"
-                                                title="Tolak"><i class="feather feather-x"></i>
-                                            </div>
-                                        </a>
+                                    @if (auth()->user()->type == 'Administrator')
+                                        @if ($transaction->status == 'pending')
+                                            <a href="javascript:void(0)" class="d-flex me-1">
+                                                <div class="avatar-text avatar-md" data-bs-toggle="tooltip"
+                                                    data-bs-trigger="hover" id="btnFailed" data-id="{{ $transaction->id }}"
+                                                    title="Tolak"><i class="feather feather-x"></i>
+                                                </div>
+                                            </a>
 
-                                        <a href="javascript:void(0)" class="d-flex me-1">
-                                            <div class="avatar-text avatar-md" data-bs-toggle="tooltip"
-                                                data-bs-trigger="hover" id="btnProcess" data-id="{{ $transaction->id }}"
-                                                title="Proses"><i class="feather feather-repeat"></i></div>
-                                        </a>
-                                    @endif
-                                    @if ($transaction->status == 'process' && $transaction->resi == null)
-                                        <a href="javascript:void(0)" class="d-flex me-1">
-                                            <div class="avatar-text avatar-md" data-bs-toggle="tooltip"
-                                                data-bs-trigger="hover" id="btnUpdateResi" data-id="{{ $transaction->id }}"
-                                                title="Update Resi"><i class="feather feather-clipboard"></i></div>
-                                        </a>
+                                            <a href="javascript:void(0)" class="d-flex me-1">
+                                                <div class="avatar-text avatar-md" data-bs-toggle="tooltip"
+                                                    data-bs-trigger="hover" id="btnProcess" data-id="{{ $transaction->id }}"
+                                                    title="Proses"><i class="feather feather-repeat"></i></div>
+                                            </a>
+                                        @endif
+                                        @if ($transaction->status == 'process' && $transaction->resi == null)
+                                            <a href="javascript:void(0)" class="d-flex me-1">
+                                                <div class="avatar-text avatar-md" data-bs-toggle="tooltip"
+                                                    data-bs-trigger="hover" id="btnUpdateResi"
+                                                    data-id="{{ $transaction->id }}" title="Update Resi"><i
+                                                        class="feather feather-clipboard"></i></div>
+                                            </a>
+                                        @endif
                                     @endif
                                     @if ($transaction->status == 'process' && $transaction->resi != null)
                                         <a href="javascript:void(0)" class="d-flex me-1">
@@ -100,14 +103,14 @@
                                     <div class="d-sm-flex gap-4 justify-content-center">
                                         <div class="text-sm-end">
                                             <h2 class="fs-16 fw-bold text-dark mb-3">Alamat Pengiriman:</h2>
-                                            <address class="text-muted lh-lg">
+                                            <address class="text-muted lh-lg" style="width: 200px">
                                                 @if ($transaction->address != null)
                                                     {{ $transaction->address->name }}<br>
                                                     {{ $transaction->address->telephone }}<br>
                                                     {{ $transaction->address->detail_address }}<br>
-                                                    {{ optional($transaction->address)->city_name }},
-                                                    {{ optional($transaction->address)->province_name }},
-                                                    {{ optional($transaction->address)->postal_code }}
+                                                    <strong>{{ optional($transaction->address)->city_name }}</strong>,
+                                                    <strong>{{ optional($transaction->address)->province_name }}</strong>,
+                                                    <strong>{{ optional($transaction->address)->postal_code }}</strong>
                                                 @else
                                                     Tidak dikirim
                                                 @endif

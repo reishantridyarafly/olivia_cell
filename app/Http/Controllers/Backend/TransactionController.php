@@ -17,7 +17,11 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $transaction = Transaction::orderBy('transaction_date', 'desc')->get();
+            if (auth()->user()->type == 'Administrator') {
+                $transaction = Transaction::orderBy('transaction_date', 'desc')->get();
+            } else {
+                $transaction = Transaction::where('user_id', auth()->user()->id)->orderBy('transaction_date', 'desc')->get();
+            }
             return DataTables::of($transaction)
                 ->addIndexColumn()
                 ->addColumn('transaction_date', function ($data) {
@@ -63,14 +67,9 @@ class TransactionController extends Controller
                     return  'Rp ' . number_format($data->total_price, 0, ',', '.');
                 })
                 ->addColumn('action', function ($data) {
-                    return '
-                        <div class="hstack gap-2 justify-content-end">
-                            <div class="dropdown">
-                                <a href="javascript:void(0)" class="avatar-text avatar-md" data-bs-toggle="dropdown" data-bs-offset="0,21">
-                                    <i class="feather feather-more-horizontal"></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
+                    $action = '';
+                    if (auth()->user()->type == 'Administrator') {
+                        $action = '<li>
                                         <a href="' . route('transaction.detail', $data->id) . '" class="dropdown-item">
                                             <i class="feather feather-eye me-3"></i>
                                             <span>Lihat</span>
@@ -80,7 +79,22 @@ class TransactionController extends Controller
                                             <i class="feather feather-trash-2 me-3"></i>
                                             <span>Hapus</span>
                                         </button>
-                                    </li>
+                                    </li>';
+                    } else {
+                        $action = '<li>
+                        <a href="' . route('transaction.detail', $data->id) . '" class="dropdown-item">
+                            <i class="feather feather-eye me-3"></i>
+                            <span>Lihat</span>
+                        </a>';
+                    }
+                    return '
+                        <div class="hstack gap-2 justify-content-end">
+                            <div class="dropdown">
+                                <a href="javascript:void(0)" class="avatar-text avatar-md" data-bs-toggle="dropdown" data-bs-offset="0,21">
+                                    <i class="feather feather-more-horizontal"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                ' . $action . '
                                 </ul>
                             </div>
                         </div>';

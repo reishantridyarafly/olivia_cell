@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Catalog;
 use App\Models\Product;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +18,12 @@ class ShopController extends Controller
             ->orderBy('created_at', 'asc')
             ->paginate(12);
 
+        $products->transform(function ($product) {
+            $product->average_rating = $product->ratings->avg('rating') ?? 0;
+            $product->ratings_count = $product->ratings->count();
+            return $product;
+        });
+
         $catalogs = Catalog::whereHas('products', function ($query) {
             $query->where('status', 0)
                 ->where('stock', '>', 0);
@@ -28,6 +35,11 @@ class ShopController extends Controller
     public function detail($slug)
     {
         $product = Product::with('catalog')->where('slug', $slug)->first();
+
+        if ($product) {
+            $product->average_rating = $product->ratings->avg('rating') ?? 0;
+            $product->ratings_count = $product->ratings->count();
+        }
 
         $userId = auth()->user()->id;
 
@@ -43,8 +55,9 @@ class ShopController extends Controller
             ->where('user_id', $userId)
             ->exists();
 
+        $rating_reviews = Rating::with('user')->where('product_id', $product->id)->orderBy('created_at', 'desc')->get();
 
-        return view('frontend.shop.detail', compact(['product', 'hasPurchased', 'hasRated']));
+        return view('frontend.shop.detail', compact(['product', 'hasPurchased', 'hasRated', 'rating_reviews']));
     }
 
     public function catalog($slug)
@@ -58,6 +71,25 @@ class ShopController extends Controller
 
         $products = Product::with('catalog')
             ->where('catalog_id', $catalogId)
+            ->where('status', 0)
+            ->where('stock', '>', 0)
+            ->orderBy('created_at', 'asc')
+            ->paginate(12);
+
+        return view('frontend.shop.index', compact(['catalogs', 'products']));
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('search');
+
+        $catalogs = Catalog::whereHas('products', function ($query) {
+            $query->where('status', 0)
+                ->where('stock', '>', 0);
+        })->orderBy('name', 'asc')->get();
+
+        $products = Product::with('catalog')
+            ->where('name', 'LIKE', "%{$keyword}%")
             ->where('status', 0)
             ->where('stock', '>', 0)
             ->orderBy('created_at', 'asc')
