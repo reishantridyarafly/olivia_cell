@@ -17,12 +17,11 @@
 
 
                 <!--====== Search Form ======-->
-                <form class="main-form">
-
+                <form class="main-form" action="{{ route('shop.search') }}" method="GET">
+                    @csrf
                     <label for="main-search"></label>
-
                     <input class="input-text input-text--border-radius input-text--style-1" type="text"
-                        id="main-search" placeholder="Search">
+                        id="main-search" name="search" placeholder="Search">
 
                     <button class="btn btn--icon fas fa-search main-search-button" type="submit"></button>
                 </form>
@@ -43,13 +42,9 @@
                         <!--====== List ======-->
                         <ul class="ah-list ah-list--design1 ah-list--link-color-secondary">
 
-                            <li data-tooltip="tooltip" data-placement="left" title="Contact">
-
-                                <a href="tel:+0900901904"><i class="fas fa-phone-volume"></i></a>
-                            </li>
-                            <li data-tooltip="tooltip" data-placement="left" title="Mail">
-
-                                <a href="mailto:contact@domain.com"><i class="far fa-envelope"></i></a>
+                            <li data-tooltip="tooltip" data-placement="left" title="Whatsapp">
+                                <a href="https://wa.me/6285315922275" target="_blank"><i
+                                        class="fas fa-phone-volume"></i></a>
                             </li>
                             <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title="Akun">
 
@@ -61,11 +56,13 @@
                                 <ul style="width:120px">
                                     @auth
                                         <li>
-                                            <a href="dashboard.html"><i class="fas fa-user-circle u-s-m-r-6"></i>
+                                            <a href="{{ route('transaction.index') }}"><i
+                                                    class="fas fa-user-circle u-s-m-r-6"></i>
                                                 <span>Akun</span></a>
                                         </li>
                                         <li>
-                                            <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i>
+                                            <a href="javascript:void(0);" id="logout-link"><i
+                                                    class="fas fa-lock-open u-s-m-r-6"></i>
                                                 <span>Keluar</span></a>
                                         </li>
                                     @endauth
@@ -163,20 +160,12 @@
                         <!--====== List ======-->
                         <ul class="ah-list ah-list--design1 ah-list--link-color-secondary">
                             <li>
-
-                                <a href="index.html"><i class="fas fa-home u-c-brand"></i></a>
-                            </li>
-                            <li>
-
-                                <a href="wishlist.html"><i class="far fa-heart"></i></a>
+                                <a href="{{ route('beranda.index') }}"><i class="fas fa-home u-c-brand"></i></a>
                             </li>
                             <li class="has-dropdown">
-
-                                <a class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
-
+                                <a href="@auth{{ route('cart.index', auth()->user()->id) }} @endauth"
+                                    class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
                                     <span class="total-item-round" id="cart-count">0</span></a>
-
-        
                             </li>
                         </ul>
                         <!--====== End - List ======-->
@@ -191,3 +180,7 @@
     <!--====== End - Nav 2 ======-->
 </header>
 <!--====== End - Main Header ======-->
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    @csrf
+</form>

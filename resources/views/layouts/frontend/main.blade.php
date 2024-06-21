@@ -72,6 +72,38 @@
         }
 
         updateCartCount();
+
+        $('body').on('click', '#logout-link', function() {
+            Swal.fire({
+                title: 'Keluar',
+                text: "Apakah kamu yakin?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, keluar!',
+                cancelButtonText: 'Batal',
+            }).then((willLogout) => {
+                if (willLogout.isConfirmed) {
+                    logoutUser();
+                }
+            });
+        })
+
+        function logoutUser() {
+            $.ajax({
+                url: "{{ route('logout') }}",
+                type: 'POST',
+                data: $('#logout-form').serialize(),
+                success: function(response) {
+                    window.location.href = "{{ route('login') }}";
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.responseText + "\n" +
+                        thrownError);
+                }
+            });
+        }
     </script>
 </body>
 

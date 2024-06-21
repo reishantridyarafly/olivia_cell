@@ -15,7 +15,7 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $users = User::where('id', '!=', auth()->user()->id)->where('type', '!=', '2')->orderBy('first_name', 'asc')->get();
+            $users = User::where('id', '!=', auth()->user()->id)->where('type', '=', '1')->orderBy('first_name', 'asc')->get();
             return DataTables::of($users)
                 ->addIndexColumn()
                 ->addColumn('name', function ($data) {
@@ -78,7 +78,6 @@ class UsersController extends Controller
                 'first_name' => 'required',
                 'email' => 'required|unique:users,email,' . $id,
                 'telephone' => 'required|min:11|max:13|unique:users,telephone,' . $id,
-                'type' => 'required',
             ],
             [
                 'first_name.required' => 'Silakan isi nama depan terlebih dahulu',
@@ -88,7 +87,6 @@ class UsersController extends Controller
                 'telephone.min' => 'No telepon :min karakter',
                 'telephone.max' => 'No telepon :max karakter',
                 'telephone.unique' => 'No telepon sudah digunakan',
-                'type.required' => 'Silakan pilih tipe terlebih dahulu'
             ]
         );
 
@@ -100,7 +98,7 @@ class UsersController extends Controller
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'telephone' => $request->telephone,
-                'type' => $request->type,
+                'type' => 1,
             ];
 
             if (!$id) {

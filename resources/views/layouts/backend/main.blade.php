@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/dataTables.bs5.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/select2-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/datepicker.min.css">
     <!--! END: Vendors CSS-->
     <!--! BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/css/theme.min.css">
@@ -182,12 +183,14 @@
     <script src="{{ asset('backend/assets') }}/vendors/js/dataTables.bs5.min.js"></script>
     <script src="{{ asset('backend/assets') }}/vendors/js/select2.min.js"></script>
     <script src="{{ asset('backend/assets') }}/vendors/js/select2-active.min.js"></script>
+    <script src="{{ asset('backend/assets') }}//vendors/js/datepicker.min.js"></script>
     <!--! END: Vendors JS !-->
     <!--! BEGIN: Apps Init  !-->
     <script src="{{ asset('backend/assets') }}/js/common-init.min.js"></script>
     <script src="{{ asset('backend/assets') }}/js/analytics-init.min.js"></script>
     <script src="{{ asset('backend/assets') }}/js/payment-init.min.js"></script>
     <script src="{{ asset('backend/assets') }}/js/customers-init.min.js"></script>
+    <script src="{{ asset('backend/assets') }}//js/invoice-create-init.min.js"></script>
     <!--! END: Apps Init !-->
     <!--! BEGIN: Theme Customizer  !-->
     <script src="{{ asset('backend/assets') }}/js/theme-customizer-init.min.js"></script>

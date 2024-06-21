@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 
-class Product extends Model
+class TransactionDetail extends Model
 {
     use HasFactory;
 
-    protected $table = 'products';
     protected $guarded = [];
+    protected $table = 'transaction_details';
 
     public $incrementing = false;
     protected $keyType = 'string';
@@ -35,23 +35,13 @@ class Product extends Model
         return 'string';
     }
 
-    public function photos()
+    public function transaction()
     {
-        return $this->hasMany(ProductPhoto::class);
+        return $this->belongsTo(Transaction::class, 'transaction_id');
     }
 
-    public function catalog()
+    public function product()
     {
-        return $this->belongsTo(Catalog::class, 'catalog_id');
-    }
-
-    public function transactions()
-    {
-        return $this->hasMany(Transaction::class, 'product_id');
-    }
-
-    public function ratings()
-    {
-        return $this->hasMany(Rating::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }

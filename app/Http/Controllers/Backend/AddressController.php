@@ -17,7 +17,7 @@ class AddressController extends Controller
         $address = DB::table('address')
             ->join('provinces', 'address.province_id', '=', 'provinces.id')
             ->join('cities', 'address.city_id', '=', 'cities.id')
-            ->select('address.*', 'provinces.name as province_name', 'cities.name as city_name', 'cities.postal_code as kode_pos')
+            ->select('address.*', 'provinces.name as province_name', 'cities.name as city_name', 'cities.postal_code as postal_code')
             ->where('user_id', auth()->user()->id)
             ->get();
         return view('backend.address.index', compact('address'));

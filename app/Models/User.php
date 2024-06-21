@@ -82,4 +82,9 @@ class User extends Authenticatable
             get: fn ($value) =>  ["Pemilik", "Administrator", "Pelanggan"][$value],
         );
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
 }
