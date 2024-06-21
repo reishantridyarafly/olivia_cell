@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('slug');
             $table->string('imei1', 100)->nullable();
             $table->string('imei2', 100)->nullable();
-            $table->text('description');
-            $table->text('short_description');
+            $table->text('description')->nullable();
+            $table->text('short_description')->nullable();
             $table->decimal('before_price', 15, 2)->nullable();
             $table->decimal('after_price', 15, 2)->nullable();
             $table->integer('stock');

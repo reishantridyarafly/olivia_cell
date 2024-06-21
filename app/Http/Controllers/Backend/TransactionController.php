@@ -17,10 +17,10 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            if (auth()->user()->type == 'Administrator') {
-                $transaction = Transaction::orderBy('transaction_date', 'desc')->get();
-            } else {
+            if (auth()->user()->type == 'Pelanggan') {
                 $transaction = Transaction::where('user_id', auth()->user()->id)->orderBy('transaction_date', 'desc')->get();
+            } else {
+                $transaction = Transaction::orderBy('transaction_date', 'desc')->get();
             }
             return DataTables::of($transaction)
                 ->addIndexColumn()

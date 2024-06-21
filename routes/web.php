@@ -65,9 +65,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/transaksi/selesai', [App\Http\Controllers\Backend\TransactionController::class, 'completed'])->name('transaction.completed');
 });
 
-Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
+Route::middleware(['auth', 'user-access:Pemilik,Administrator'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Backend\DashboardController::class, 'index'])->name('dashboard.index');
+});
 
+Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::get('/transaksi/tambah', [App\Http\Controllers\Backend\TransactionController::class, 'create'])->name('transaction.create');
     Route::get('/transaksi/{id}/edit', [App\Http\Controllers\Backend\TransactionController::class, 'edit'])->name('transaction.edit');
     Route::post('/transaksi', [App\Http\Controllers\Backend\TransactionController::class, 'store'])->name('transaction.store');

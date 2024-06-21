@@ -13,7 +13,7 @@
                 <li class="nxl-item nxl-caption">
                     <label>Navigation</label>
                 </li>
-                @if (auth()->user()->type == 'Administrator')
+                @if (auth()->user()->type != 'Pelanggan')
                     <li class="nxl-item {{ request()->routeIs(['dashboard.*']) ? 'active' : '' }}">
                         <a href="{{ route('dashboard.index') }}" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-airplay"></i></span>

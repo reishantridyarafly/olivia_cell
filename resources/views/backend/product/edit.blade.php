@@ -70,20 +70,20 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
+                                                <label for="after_price" class="form-label">Harga Sesudah (Harga yang akan
+                                                    ditampilkan) <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="after_price"
+                                                    name="after_price" value="{{ $product->after_price }}">
+                                                <small class="text-danger errorAfterPrice mt-2"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
                                                 <label for="before_price" class="form-label">Harga Sebelum (Harga
                                                     Diskon)<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="before_price"
                                                     name="before_price" value="{{ $product->before_price }}">
                                                 <small class="text-danger errorBeforePrice mt-2"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="after_price" class="form-label">Harga Sesudah (Harga yang akan
-                                                    ditampilkan)</label>
-                                                <input type="text" class="form-control" id="after_price"
-                                                    name="after_price" value="{{ $product->after_price }}">
-                                                <small class="text-danger errorAfterPrice mt-2"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
@@ -194,10 +194,8 @@
                                         </div>
                                         <div class="col-lg-12 col-md-6">
                                             <div class="form-group mb-3">
-                                                <label class="form-label">Deskripsi <span
-                                                        class="text-danger">*</span></label>
+                                                <label class="form-label">Deskripsi</label>
                                                 <textarea name="description" id="description" rows="5" class="form-control">{{ $product->description }}</textarea>
-                                                <small class="text-danger errorDescription mt-2"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-6">
@@ -205,7 +203,6 @@
                                                 <label class="form-label">Deskripsi Singkat <span
                                                         class="text-danger">*</span></label>
                                                 <textarea name="short_description" id="short_description" rows="3" class="form-control">{{ $product->short_description }}</textarea>
-                                                <small class="text-danger errorShortDescription mt-2"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-6">
@@ -514,23 +511,6 @@
                             } else {
                                 $('#weight').removeClass('is-invalid');
                                 $('.errorWeight').html('');
-                            }
-
-                            if (response.errors.description) {
-                                $('#description').addClass('is-invalid');
-                                $('.errorDescription').html(response.errors.description);
-                            } else {
-                                $('#description').removeClass('is-invalid');
-                                $('.errorDescription').html('');
-                            }
-
-                            if (response.errors.short_description) {
-                                $('#short_description').addClass('is-invalid');
-                                $('.errorShortDescription').html(response.errors
-                                    .short_description);
-                            } else {
-                                $('#short_description').removeClass('is-invalid');
-                                $('.errorShortDescription').html('');
                             }
                         } else {
                             Swal.fire({

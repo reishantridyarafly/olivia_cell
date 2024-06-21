@@ -74,7 +74,7 @@ class ShopController extends Controller
                 $recommendedProducts[] = $recommendedProduct;
             }
         }
-        
+
         return view('frontend.shop.detail', compact(['product', 'hasPurchased', 'hasRated', 'rating_reviews', 'recommendedProduct']));
     }
 
