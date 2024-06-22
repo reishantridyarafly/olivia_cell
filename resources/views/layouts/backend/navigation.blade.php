@@ -30,7 +30,7 @@
                                 class="feather-chevron-right"></i></span>
                     </a>
                     <ul class="nxl-submenu">
-                        <li class="nxl-item  {{ request()->routeIs(['transaction.index']) ? 'active' : '' }}"><a
+                        <li class="nxl-item {{ request()->routeIs(['transaction.index']) ? 'active' : '' }}"><a
                                 class="nxl-link" href="{{ route('transaction.index') }}">Transaksi</a></li>
                         @if (auth()->user()->type == 'Administrator')
                             <li class="nxl-item {{ request()->routeIs(['transaction.create']) ? 'active' : '' }}"><a
@@ -92,16 +92,20 @@
                 @endif
 
                 @if (auth()->user()->type == 'Pemilik')
-                    <li class="nxl-item nxl-hasmenu">
+                    <li
+                        class="nxl-item nxl-hasmenu {{ request()->routeIs(['daily-report.*', 'monthly-report.*', 'yearly-report.*']) ? 'active nxl-trigger' : '' }}">
                         <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-file-text"></i></span>
                             <span class="nxl-mtext">Laporan</span><span class="nxl-arrow"><i
                                     class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="payment.html">Harian</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="invoice-view.html">Bulanan</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="invoice-create.html">Tahunan</a></li>
+                            <li class="nxl-item {{ request()->routeIs(['daily-report.index']) ? 'active' : '' }}"><a
+                                    class="nxl-link" href="{{ route('daily-report.index') }}">Harian</a></li>
+                            <li class="nxl-item {{ request()->routeIs(['monthly-report.index']) ? 'active' : '' }}"><a
+                                    class="nxl-link" href="{{ route('monthly-report.index') }}">Bulanan</a></li>
+                            <li class="nxl-item {{ request()->routeIs(['yearly-report.index']) ? 'active' : '' }}"><a
+                                    class="nxl-link" href="{{ route('yearly-report.index') }}">Tahunan</a></li>
                         </ul>
                     </li>
                 @endif

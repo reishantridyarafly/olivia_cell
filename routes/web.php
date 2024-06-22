@@ -118,3 +118,14 @@ Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::get('/penilaian', [App\Http\Controllers\Backend\RatingController::class, 'index'])->name('rating.index');
     Route::delete('/penilaian/{id}', [App\Http\Controllers\Backend\RatingController::class, 'destroy'])->name('rating.destroy');
 });
+
+Route::middleware(['auth', 'user-access:Pemilik'])->group(function () {
+    Route::get('/cetak-laporan/harian', [App\Http\Controllers\Report\DailyReportController::class, 'index'])->name('daily-report.index');
+    Route::post('/cetak-laporan/harian/print', [App\Http\Controllers\Report\DailyReportController::class, 'print'])->name('daily-report.print');
+
+    Route::get('/cetak-laporan/bulanan', [App\Http\Controllers\Report\MonthlyReportController::class, 'index'])->name('monthly-report.index');
+    Route::post('/cetak-laporan/bulanan/print', [App\Http\Controllers\Report\MonthlyReportController::class, 'print'])->name('monthly-report.print');
+
+    Route::get('/cetak-laporan/tahunan', [App\Http\Controllers\Report\YearlyReportController::class, 'index'])->name('yearly-report.index');
+    Route::post('/cetak-laporan/tahunan/print', [App\Http\Controllers\Report\YearlyReportController::class, 'print'])->name('yearly-report.print');
+});
