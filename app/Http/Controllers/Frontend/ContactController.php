@@ -21,6 +21,6 @@ class ContactController extends Controller
         $contacts->message = $request->message;
         $contacts->save();
 
-        return redirect()->route('contact.index')->with('success', 'Pesan berhasil dikirim.');
+        return redirect()->route('contact-message.index')->with('success', 'Pesan berhasil dikirim.');
     }
 }

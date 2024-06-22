@@ -133,7 +133,7 @@
                                 <a href="{{ route('faq.index') }}">FAQ</a>
                             </li>
                             <li>
-                                <a href="{{ route('contact.index') }}">Kontak</a>
+                                <a href="{{ route('contact-message.index') }}">Kontak</a>
                             </li>
                         </ul>
                         <!--====== End - List ======-->

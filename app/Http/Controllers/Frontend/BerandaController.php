@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Catalog;
 use App\Models\Product;
 use App\Models\Rating;
 use Illuminate\Http\Request;
@@ -58,13 +59,21 @@ class BerandaController extends Controller
         $ratings = Rating::whereIn('product_id', $productIds)->get()->groupBy('product_id');
 
         $most_purchased_products->transform(function ($product) use ($ratings) {
-            $product->average_rating = $ratings[$product->id]->avg('rating') ?? 0;
-            $product->ratings_count = $ratings[$product->id]->count();
+            if (isset($ratings[$product->id])) {
+                $product->average_rating = $ratings[$product->id]->avg('rating') ?? 0;
+                $product->ratings_count = $ratings[$product->id]->count();
+            } else {
+                $product->average_rating = 0;
+                $product->ratings_count = 0;
+            }
             return $product;
         });
 
+
         $testimoni = Rating::with('user')->where('rating', '>', '3.50')->orderBy('created_at', 'desc')->get();
 
-        return view('frontend.beranda.index', compact(['new_products', 'most_purchased_products', 'testimoni']));
+        $catalog = Catalog::all();
+
+        return view('frontend.beranda.index', compact(['new_products', 'most_purchased_products', 'testimoni', 'catalog']));
     }
 }

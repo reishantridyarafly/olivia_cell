@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\Frontend\BerandaController::class, 'index'])->name('beranda.index');
 Route::get('/tentang', [App\Http\Controllers\Frontend\AboutController::class, 'index'])->name('about.index');
 Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index'])->name('faq.index');
-Route::get('/kontak', [App\Http\Controllers\Frontend\ContactController::class, 'index'])->name('contact.index');
 
-Route::post('/kontak', [App\Http\Controllers\Frontend\ContactController::class, 'store'])->name('contact.store');
+Route::get('/kontak', [App\Http\Controllers\Frontend\ContactController::class, 'index'])->name('contact-message.index');
+Route::post('/kontak', [App\Http\Controllers\Frontend\ContactController::class, 'store'])->name('contact-message.store');
 
 Route::get('/belanja', [App\Http\Controllers\Frontend\ShopController::class, 'index'])->name('shop.index');
 Route::get('/belanja/detail/{slug}', [App\Http\Controllers\Frontend\ShopController::class, 'detail'])->name('shop.detail');

@@ -30,8 +30,7 @@
             <div class="d-flex align-items-center">
                 <div class="nxl-h-item d-none d-sm-flex">
                     <div class="full-screen-switcher">
-                        <a href="javascript:void(0);" class="nxl-head-link me-0"
-                            onclick="$('body').fullScreenHelper('toggle');">
+                        <a href="javascript:void(0);" class="nxl-head-link me-0" onclick="$('body').fullScreenHelper('toggle');">
                             <i class="feather-maximize maximize"></i>
                             <i class="feather-minimize minimize"></i>
                         </a>
@@ -49,17 +48,16 @@
 
                 <div class="dropdown nxl-h-item">
                     <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" data-bs-auto-close="outside">
-                        <img src="{{ auth()->user()->avatar == '' ? 'https://ui-avatars.com/api/?background=random&name=' . auth()->user()->first_name . ' ' . auth()->user()->last_name : asset('storage/avatar/' . auth()->user()->avatar) }}"
-                            alt="user-image" class="img-fluid user-avtar me-0">
+                        <img src="{{ auth()->user()->avatar == '' ? 'https://ui-avatars.com/api/?background=random&name=' . auth()->user()->first_name . ' ' . auth()->user()->last_name : asset('storage/avatar/' . auth()->user()->avatar) }}" alt="user-image" class="img-fluid user-avtar me-0">
                     </a>
                     <div class="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-user-dropdown">
                         <div class="dropdown-header">
                             <div class="d-flex align-items-center">
-                                <img src="{{ auth()->user()->avatar == '' ? 'https://ui-avatars.com/api/?background=random&name=' . auth()->user()->first_name . ' ' . auth()->user()->last_name : asset('storage/avatar/' . auth()->user()->avatar) }}"
-                                    alt="user-image" class="img-fluid user-avtar">
+                                <img src="{{ auth()->user()->avatar == '' ? 'https://ui-avatars.com/api/?background=random&name=' . auth()->user()->first_name . ' ' . auth()->user()->last_name : asset('storage/avatar/' . auth()->user()->avatar) }}" alt="user-image" class="img-fluid user-avtar">
                                 <div>
                                     <h6 class="text-dark mb-0">
-                                        {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}</h6>
+                                        {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
+                                    </h6>
                                 </div>
                             </div>
                         </div>
@@ -87,19 +85,35 @@
 <script>
     $(document).ready(function() {
         $('body').on('click', '#logout-link', function() {
+            Swal.fire({
+                title: 'Keluar',
+                text: "Apakah kamu yakin?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, keluar!',
+                cancelButtonText: 'Batal',
+            }).then((willLogout) => {
+                if (willLogout.value) {
+                    logoutUser();
+                }
+            });
+        })
+
+        function logoutUser() {
             $.ajax({
                 url: "{{ route('logout') }}",
                 type: 'POST',
                 data: $('#logout-form').serialize(),
                 success: function(response) {
-
                     window.location.href = "{{ route('login') }}";
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     alert(xhr.status + "\n" + xhr.responseText + "\n" +
                         thrownError);
                 }
-            })
-        });
+            });
+        }
     })
 </script>

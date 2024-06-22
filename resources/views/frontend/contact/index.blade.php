@@ -121,7 +121,7 @@
                                 <div class="contact-area__heading">
                                     <h2>Hubungi</h2>
                                 </div>
-                                <form class="contact-f" method="post" action="{{ route('contact.store') }}">
+                                <form class="contact-f" method="post" action="{{ route('contact-message.store') }}">
                                     @csrf
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 u-h-100">

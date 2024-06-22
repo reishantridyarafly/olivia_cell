@@ -41,19 +41,25 @@ class ShopController extends Controller
             $product->ratings_count = $product->ratings->count();
         }
 
-        $userId = auth()->user()->id;
+        $user = auth()->user();
+        $userId = $user ? $user->id : null;
 
-        $hasPurchased = DB::table('transaction_details')
-            ->join('transactions', 'transaction_details.transaction_id', '=', 'transactions.id')
-            ->where('transaction_details.product_id', $product->id)
-            ->where('transactions.user_id', $userId)
-            ->where('transactions.status', 'completed')
-            ->exists();
+        $hasPurchased = false;
+        $hasRated = false;
 
-        $hasRated = DB::table('ratings')
-            ->where('product_id', $product->id)
-            ->where('user_id', $userId)
-            ->exists();
+        if ($userId) {
+            $hasPurchased = DB::table('transaction_details')
+                ->join('transactions', 'transaction_details.transaction_id', '=', 'transactions.id')
+                ->where('transaction_details.product_id', $product->id)
+                ->where('transactions.user_id', $userId)
+                ->where('transactions.status', 'completed')
+                ->exists();
+
+            $hasRated = DB::table('ratings')
+                ->where('product_id', $product->id)
+                ->where('user_id', $userId)
+                ->exists();
+        }
 
         $rating_reviews = Rating::with('user')->where('product_id', $product->id)->orderBy('created_at', 'desc')->get();
 
@@ -75,8 +81,10 @@ class ShopController extends Controller
             }
         }
 
-        return view('frontend.shop.detail', compact(['product', 'hasPurchased', 'hasRated', 'rating_reviews', 'recommendedProduct']));
+        return view('frontend.shop.detail', compact(['product', 'hasPurchased', 'hasRated', 'rating_reviews', 'recommendedProducts']));
     }
+
+
 
     public function catalog($slug)
     {
