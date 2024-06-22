@@ -132,6 +132,7 @@ class ProductController extends Controller
             $product->chipset = $request->chipset;
             $product->memory = $request->memory;
             $product->battery = $request->battery;
+            $product->camera = $request->camera;
             $product->colors = $request->colors;
             $product->catalog_id = $request->catalog;
             $product->save();
@@ -213,6 +214,7 @@ class ProductController extends Controller
             $product->chipset = $request->chipset;
             $product->memory = $request->memory;
             $product->battery = $request->battery;
+            $product->camera = $request->camera;
             $product->colors = $request->colors;
             $product->catalog_id = $request->catalog;
             $product->save();

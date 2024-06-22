@@ -166,7 +166,14 @@
                                                     name="colors">
                                             </div>
                                         </div>
-                                        <div class="col-lg-12 col-md-6">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="camera" class="form-label">Kamera</label>
+                                                <input type="text" class="form-control" id="camera"
+                                                    name="camera">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
                                                 <label class="form-label">Katalog <span
                                                         class="text-danger">*</span></label>

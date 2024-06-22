@@ -189,6 +189,10 @@
                                                             <td>{{ $product->network }}</td>
                                                         </tr>
                                                         <tr>
+                                                            <td>Kamera</td>
+                                                            <td>{{ $product->camera }}</td>
+                                                        </tr>
+                                                        <tr>
                                                             <td>Peluncuran</td>
                                                             <td>{{ \Carbon\Carbon::parse($product->launch)->translatedFormat('d F Y') }}
                                                             </td>
