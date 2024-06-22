@@ -72,7 +72,10 @@ class BerandaController extends Controller
 
         $testimoni = Rating::with('user')->where('rating', '>', '3.50')->orderBy('created_at', 'desc')->get();
 
-        $catalog = Catalog::all();
+        $catalog = Catalog::whereHas('products', function ($query) {
+            $query->where('status', 0)
+                ->where('stock', '>', 0);
+        })->orderBy('name', 'asc')->get();
 
         return view('frontend.beranda.index', compact(['new_products', 'most_purchased_products', 'testimoni', 'catalog']));
     }

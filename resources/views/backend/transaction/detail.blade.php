@@ -157,6 +157,17 @@
                                                             {{ $transaction->resi ? $transaction->resi : 'No Resi Belum Tersedia' }}</span>
                                                     </div>
                                                 @endif
+                                                @if ($transaction->transfer_proof)
+                                                    <div>
+                                                        <span class="text-muted">Bukti Pembayaran:</span>
+                                                        <span class="fw-bold text-dark"
+                                                            style="text-transform: uppercase"><a
+                                                                href="{{ asset('storage/bukti_pembayaran/' . $transaction->transfer_proof) }}"
+                                                                target="_blank">Link
+                                                                Bukti</a>
+                                                        </span>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

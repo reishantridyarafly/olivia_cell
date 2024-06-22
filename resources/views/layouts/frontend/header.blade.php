@@ -10,7 +10,7 @@
 
                 <!--====== Main Logo ======-->
 
-                <a class="main-logo" href="index.html">
+                <a class="main-logo" href="{{ route('beranda.index') }}">
 
                     <img src="{{ asset('frontend/assets') }}/images/logo.png" alt=""></a>
                 <!--====== End - Main Logo ======-->
