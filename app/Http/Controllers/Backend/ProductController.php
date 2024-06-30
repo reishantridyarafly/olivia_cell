@@ -81,7 +81,6 @@ class ProductController extends Controller
             $request->all(),
             [
                 'name' => 'required|string|unique:products,name',
-                'imei1' => 'required',
                 'after_price' => 'required',
                 'stock' => 'required|string',
                 'weight' => 'required',
@@ -93,7 +92,6 @@ class ProductController extends Controller
                 'name.required' => 'Silakan isi nama terlebih dahulu.',
                 'name.string' => 'Nama harus berupa teks.',
                 'name.unique' => 'Nama sudah tersedia.',
-                'imei1.required' => 'Silakan isi imei terlebih dahulu.',
                 'after_price.required' => 'Silakan isi harga terlebih dahulu.',
                 'stock.required' => 'Silakan isi stok terlebih dahulu.',
                 'stock.string' => 'Stok harus berupa teks.',
@@ -115,25 +113,27 @@ class ProductController extends Controller
 
             $product->name = $request->name;
             $product->slug = Str::slug($request->name);
-            $product->imei1 = $request->imei1;
-            $product->imei2 = $request->imei2;
             $product->description = $request->description;
             $product->short_description = $request->short_description;
             $product->before_price = $request->before_price ? str_replace(['Rp', ' ', '.'], '', $request->before_price) : null;
             $product->after_price = str_replace(['Rp', ' ', '.'], '', $request->after_price);
             $product->stock = $request->stock;
             $product->weight = $request->weight;
-            $product->network = $request->network;
-            $product->launch = $request->launch;
-            $product->dimension = $request->dimension;
-            $product->sim = $request->sim;
-            $product->type_display = $request->type_display;
-            $product->resolution_display = $request->resolution_display;
-            $product->chipset = $request->chipset;
-            $product->memory = $request->memory;
+            $product->os = $request->os;
+            $product->processor = $request->processor;
+            $product->gpu = $request->gpu;
+            $product->ram = $request->ram;
+            $product->capacity = $request->capacity;
+            $product->screen_size = $request->screen_size;
+            $product->screen_type = $request->screen_type;
+            $product->screen_resolution = $request->screen_resolution;
+            $product->rear_camera = $request->rear_camera;
+            $product->front_camera = $request->front_camera;
+            $product->sensor = $request->sensor;
             $product->battery = $request->battery;
-            $product->camera = $request->camera;
-            $product->colors = $request->colors;
+            $product->charging = $request->charging;
+            $product->dimension = $request->dimension;
+            $product->color = $request->color;
             $product->catalog_id = $request->catalog;
             $product->save();
 
@@ -163,7 +163,6 @@ class ProductController extends Controller
             $request->all(),
             [
                 'name' => 'required|string|unique:products,name,' . $id,
-                'imei1' => 'required',
                 'after_price' => 'required',
                 'stock' => 'required|string',
                 'weight' => 'required',
@@ -175,7 +174,6 @@ class ProductController extends Controller
                 'name.required' => 'Silakan isi nama terlebih dahulu.',
                 'name.string' => 'Nama harus berupa teks.',
                 'name.unique' => 'Nama sudah tersedia.',
-                'imei1.required' => 'Silakan isi imei terlebih dahulu.',
                 'after_price.required' => 'Silakan isi harga terlebih dahulu.',
                 'stock.required' => 'Silakan isi stok terlebih dahulu.',
                 'stock.string' => 'Stok harus berupa teks.',
@@ -197,25 +195,27 @@ class ProductController extends Controller
 
             $product->name = $request->name;
             $product->slug = Str::slug($request->name);
-            $product->imei1 = $request->imei1;
-            $product->imei2 = $request->imei2;
             $product->description = $request->description;
             $product->short_description = $request->short_description;
             $product->before_price = $request->before_price ? str_replace(['Rp', ' ', '.'], '', $request->before_price) : null;
             $product->after_price = str_replace(['Rp', ' ', '.'], '', $request->after_price);
             $product->stock = $request->stock;
             $product->weight = $request->weight;
-            $product->network = $request->network;
-            $product->launch = $request->launch;
-            $product->dimension = $request->dimension;
-            $product->sim = $request->sim;
-            $product->type_display = $request->type_display;
-            $product->resolution_display = $request->resolution_display;
-            $product->chipset = $request->chipset;
-            $product->memory = $request->memory;
+            $product->os = $request->os;
+            $product->processor = $request->processor;
+            $product->gpu = $request->gpu;
+            $product->ram = $request->ram;
+            $product->capacity = $request->capacity;
+            $product->screen_size = $request->screen_size;
+            $product->screen_type = $request->screen_type;
+            $product->screen_resolution = $request->screen_resolution;
+            $product->rear_camera = $request->rear_camera;
+            $product->front_camera = $request->front_camera;
+            $product->sensor = $request->sensor;
             $product->battery = $request->battery;
-            $product->camera = $request->camera;
-            $product->colors = $request->colors;
+            $product->charging = $request->charging;
+            $product->dimension = $request->dimension;
+            $product->color = $request->color;
             $product->catalog_id = $request->catalog;
             $product->save();
 

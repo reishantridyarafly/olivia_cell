@@ -12,16 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('network', 100)->after('weight')->nullable();
-            $table->string('launch', 100)->after('network')->nullable();
-            $table->string('dimension', 100)->after('launch')->nullable();
-            $table->string('sim', 100)->after('dimension')->nullable();
-            $table->string('type_display', 100)->after('sim')->nullable();
-            $table->string('resolution_display', 100)->after('type_display')->nullable();
-            $table->string('chipset', 100)->after('resolution_display')->nullable();
-            $table->string('memory', 100)->after('chipset')->nullable();
-            $table->string('battery', 100)->after('memory')->nullable();
-            $table->string('colors', 100)->after('battery')->nullable();
+            $table->text('os')->after('weight')->nullable();
+            $table->text('processor')->after('os')->nullable();
+            $table->text('GPU')->after('processor')->nullable();
+            $table->text('ram')->after('GPU')->nullable();
+            $table->text('capacity')->after('ram')->nullable();
+            $table->text('screen_size')->after('capacity')->nullable();
+            $table->text('screen_type')->after('screen_size')->nullable();
+            $table->text('screen_resolution')->after('screen_type')->nullable();
+            $table->text('rear_camera')->after('screen_resolution')->nullable();
+            $table->text('front_camera')->after('rear_camera')->nullable();
+            $table->text('sensor')->after('front_camera')->nullable();
+            $table->text('battery')->after('sensor')->nullable();
+            $table->text('charging')->after('battery')->nullable();
+            $table->text('dimension')->after('charging')->nullable();
+            $table->text('color')->after('dimension')->nullable();
         });
     }
 
@@ -31,18 +36,20 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn([
-                'network',
-                'launch',
-                'dimension',
-                'sim',
-                'type_display',
-                'resolution_display',
-                'chipset',
-                'memory_internal',
-                'battery',
-                'colors'
-            ]);
+            $table->dropColumn('os');
+            $table->dropColumn('processor');
+            $table->dropColumn('GPU');
+            $table->dropColumn('ram');
+            $table->dropColumn('capacity');
+            $table->dropColumn('screen_size');
+            $table->dropColumn('screen_type');
+            $table->dropColumn('screen_resolution');
+            $table->dropColumn('rear_camera');
+            $table->dropColumn('front_camera');
+            $table->dropColumn('sensor');
+            $table->dropColumn('battery');
+            $table->dropColumn('charging');
+            $table->dropColumn('dimension');
         });
     }
 };

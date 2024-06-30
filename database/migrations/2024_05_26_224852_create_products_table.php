@@ -15,8 +15,6 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name', 100);
             $table->string('slug');
-            $table->string('imei1', 100)->nullable();
-            $table->string('imei2', 100)->nullable();
             $table->text('description')->nullable();
             $table->text('short_description')->nullable();
             $table->decimal('before_price', 15, 2)->nullable();

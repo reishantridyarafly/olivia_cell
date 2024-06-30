@@ -51,20 +51,6 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="imei1" class="form-label">Imei 1 <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="number" class="form-control" id="imei1" name="imei1">
-                                                <small class="text-danger errorImei1 mt-2"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="imei2" class="form-label">Imei 2</label>
-                                                <input type="text" class="form-control" id="imei2" name="imei2">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
                                                 <label for="after_price" class="form-label">Harga Sesudah (Harga yang akan
                                                     ditampilkan) <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="after_price"
@@ -98,16 +84,91 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="network" class="form-label">Jaringan</label>
-                                                <input type="text" class="form-control" id="network"
-                                                    name="network">
+                                                <label for="os" class="form-label">Sistem Operasi</label>
+                                                <input type="text" class="form-control" id="os" name="os">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="launch" class="form-label">Peluncuran</label>
-                                                <input type="date" class="form-control" id="launch"
-                                                    name="launch">
+                                                <label for="processor" class="form-label">Prosesor</label>
+                                                <input type="text" class="form-control" id="processor" name="processor">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="gpu" class="form-label">GPU</label>
+                                                <input type="text" class="form-control" id="gpu"
+                                                    name="gpu">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="ram" class="form-label">RAM</label>
+                                                <input type="text" class="form-control" id="ram"
+                                                    name="ram">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="capacity" class="form-label">Kapasitas</label>
+                                                <input type="text" class="form-control" id="capacity"
+                                                    name="capacity">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="screen_size" class="form-label">Ukuran Layar</label>
+                                                <input type="text" class="form-control" id="screen_size"
+                                                    name="screen_size">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="screen_type" class="form-label">Tipe Layar</label>
+                                                <input type="text" class="form-control" id="screen_type"
+                                                    name="screen_type">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="screen_resolution" class="form-label">Resolusi Layar</label>
+                                                <input type="text" class="form-control" id="screen_resolution"
+                                                    name="screen_resolution">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="rear_camera" class="form-label">Kamera Belakang</label>
+                                                <input type="text" class="form-control" id="rear_camera"
+                                                    name="rear_camera">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="front_camera" class="form-label">Kamera Depan</label>
+                                                <input type="text" class="form-control" id="front_camera"
+                                                    name="front_camera">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="sensor" class="form-label">Sensor</label>
+                                                <input type="text" class="form-control" id="sensor"
+                                                    name="sensor">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="battery" class="form-label">Beterai</label>
+                                                <input type="text" class="form-control" id="battery"
+                                                    name="battery">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="charging" class="form-label">Pengisian Daya</label>
+                                                <input type="text" class="form-control" id="charging"
+                                                    name="charging">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
@@ -119,58 +180,9 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="sim" class="form-label">SIM</label>
-                                                <input type="text" class="form-control" id="sim"
-                                                    name="sim">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="type_display" class="form-label">Tipe Layar</label>
-                                                <input type="text" class="form-control" id="type_display"
-                                                    name="type_display">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="resolution_display" class="form-label">Resolusi Layar</label>
-                                                <input type="text" class="form-control" id="resolution_display"
-                                                    name="resolution_display">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="chipset" class="form-label">Chipset</label>
-                                                <input type="text" class="form-control" id="chipset"
-                                                    name="chipset">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="memory" class="form-label">Memori</label>
-                                                <input type="text" class="form-control" id="memory"
-                                                    name="memory">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="battery" class="form-label">Baterai</label>
-                                                <input type="text" class="form-control" id="battery"
-                                                    name="battery">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="colors" class="form-label">Warna</label>
-                                                <input type="text" class="form-control" id="colors"
-                                                    name="colors">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="camera" class="form-label">Kamera</label>
-                                                <input type="text" class="form-control" id="camera"
-                                                    name="camera">
+                                                <label for="color" class="form-label">Warna</label>
+                                                <input type="text" class="form-control" id="color"
+                                                    name="color">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
@@ -460,14 +472,6 @@
                             } else {
                                 $('#name').removeClass('is-invalid');
                                 $('.errorName').html('');
-                            }
-
-                            if (response.errors.imei1) {
-                                $('#imei1').addClass('is-invalid');
-                                $('.errorImei1').html(response.errors.imei1);
-                            } else {
-                                $('#imei1').removeClass('is-invalid');
-                                $('.errorImei1').html('');
                             }
 
                             if (response.errors.before_price) {

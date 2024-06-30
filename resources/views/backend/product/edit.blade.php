@@ -54,22 +54,6 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="imei1" class="form-label">Imei 1 <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="number" class="form-control" id="imei1" name="imei1"
-                                                    value="{{ $product->imei1 }}">
-                                                <small class="text-danger errorImei1 mt-2"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="imei2" class="form-label">Imei 2</label>
-                                                <input type="text" class="form-control" id="imei2" name="imei2"
-                                                    value="{{ $product->imei2 }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
                                                 <label for="after_price" class="form-label">Harga Sesudah (Harga yang akan
                                                     ditampilkan) <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="after_price"
@@ -106,16 +90,93 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="network" class="form-label">Jaringan</label>
-                                                <input type="text" class="form-control" id="network" name="network"
-                                                    value="{{ $product->network }}">
+                                                <label for="os" class="form-label">Sistem Operasi</label>
+                                                <input type="text" class="form-control" id="os" name="os"
+                                                    value="{{ $product->os }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="launch" class="form-label">Peluncuran</label>
-                                                <input type="date" class="form-control" id="launch" name="launch"
-                                                    value="{{ $product->launch }}">
+                                                <label for="processor" class="form-label">Prosesor</label>
+                                                <input type="text" class="form-control" id="processor"
+                                                    name="processor" value="{{ $product->processor }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="gpu" class="form-label">GPU</label>
+                                                <input type="text" class="form-control" id="gpu" name="gpu"
+                                                    value="{{ $product->GPU }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="ram" class="form-label">RAM</label>
+                                                <input type="text" class="form-control" id="ram" name="ram"
+                                                    value="{{ $product->ram }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="capacity" class="form-label">Kapasitas</label>
+                                                <input type="text" class="form-control" id="capacity"
+                                                    name="capacity" value="{{ $product->capacity }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="screen_size" class="form-label">Ukuran Layar</label>
+                                                <input type="text" class="form-control" id="screen_size"
+                                                    name="screen_size" value="{{ $product->screen_size }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="screen_type" class="form-label">Tipe Layar</label>
+                                                <input type="text" class="form-control" id="screen_type"
+                                                    name="screen_type" value="{{ $product->screen_type }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="screen_resolution" class="form-label">Resolusi Layar</label>
+                                                <input type="text" class="form-control" id="screen_resolution"
+                                                    name="screen_resolution" value="{{ $product->screen_resolution }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="rear_camera" class="form-label">Kamera Belakang</label>
+                                                <input type="text" class="form-control" id="rear_camera"
+                                                    name="rear_camera" value="{{ $product->rear_camera }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="front_camera" class="form-label">Kamera Depan</label>
+                                                <input type="text" class="form-control" id="front_camera"
+                                                    name="front_camera" value="{{ $product->front_camera }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="sensor" class="form-label">Sensor</label>
+                                                <input type="text" class="form-control" id="sensor" name="sensor"
+                                                    value="{{ $product->sensor }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="battery" class="form-label">Beterai</label>
+                                                <input type="text" class="form-control" id="battery" name="battery"
+                                                    value="{{ $product->battery }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="charging" class="form-label">Pengisian Daya</label>
+                                                <input type="text" class="form-control" id="charging"
+                                                    name="charging" value="{{ $product->charging }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
@@ -127,58 +188,9 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="sim" class="form-label">SIM</label>
-                                                <input type="text" class="form-control" id="sim" name="sim"
-                                                    value="{{ $product->sim }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="type_display" class="form-label">Tipe Layar</label>
-                                                <input type="text" class="form-control" id="type_display"
-                                                    name="type_display" value="{{ $product->type_display }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="resolution_display" class="form-label">Resolusi Layar</label>
-                                                <input type="text" class="form-control" id="resolution_display"
-                                                    name="resolution_display" value="{{ $product->resolution_display }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="chipset" class="form-label">Chipset</label>
-                                                <input type="text" class="form-control" id="chipset" name="chipset"
-                                                    value="{{ $product->chipset }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="memory" class="form-label">Memori</label>
-                                                <input type="text" class="form-control" id="memory" name="memory"
-                                                    value="{{ $product->memory }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="battery" class="form-label">Baterai</label>
-                                                <input type="text" class="form-control" id="battery" name="battery"
-                                                    value="{{ $product->battery }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="colors" class="form-label">Warna</label>
-                                                <input type="text" class="form-control" id="colors" name="colors"
-                                                    value="{{ $product->colors }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="camera" class="form-label">Kamera</label>
-                                                <input type="text" class="form-control" id="camera" name="camera"
-                                                    value="{{ $product->camera }}">
+                                                <label for="color" class="form-label">Warna</label>
+                                                <input type="text" class="form-control" id="color" name="color"
+                                                    value="{{ $product->color }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">

@@ -58,6 +58,15 @@
                                             <!--====== Row ======-->
                                             <tr>
                                                 <td>
+                                                    <div class="check-box">
+                                                        <input type="checkbox">
+                                                        <div class="check-box__state check-box__state--primary">
+                                                            <label class="check-box__label"
+                                                                for="term-and-condition"></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
                                                     <div class="table-p__box">
                                                         <div class="table-p__img-wrap">
                                                             <img class="u-img-fluid"
@@ -129,12 +138,11 @@
 
         <!--====== Section 3 ======-->
         <div class="u-s-p-b-60">
-            <!--====== Section Content ======-->
             <div class="section__content">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
-                            <form class="f-cart" method="post" action="{{ route('checkout.cartCheckout') }}">
+                            <form class="f-cart">
                                 @csrf
                                 <div class="row justify-content-end">
                                     <div class="col-lg-8 col-md-8"></div>
@@ -145,13 +153,14 @@
                                                     <tbody>
                                                         <tr>
                                                             <td>Total</td>
-                                                            <td></td>
+                                                            <td id="cart-total">Rp 0</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div>
-                                                <button class="btn btn--e-brand-b-2" type="submit">PEMBAYARAN</button>
+                                                <button class="btn btn--e-brand-b-2" type="submit" id="checkout-btn"
+                                                    disabled>PEMBAYARAN</button>
                                             </div>
                                         </div>
                                     </div>
@@ -161,7 +170,6 @@
                     </div>
                 </div>
             </div>
-            <!--====== End - Section Content ======-->
         </div>
         <!--====== End - Section 3 ======-->
     </div>
@@ -170,36 +178,6 @@
 
 @section('script')
     <script>
-        updateCartTotals();
-
-        function formatRupiah(angka, prefix) {
-            var number_string = angka.toString().replace(/[^0-9.-]+/g, ""),
-                split = number_string.split(','),
-                sisa = split[0].length % 3,
-                rupiah = split[0].substr(0, sisa),
-                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-            if (ribuan) {
-                separator = sisa ? '.' : '';
-                rupiah += separator + ribuan.join('.');
-            }
-
-            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-            return prefix == undefined ? rupiah : (rupiah ? prefix + rupiah : '');
-        }
-
-        function updateCartTotals() {
-            var total = 0;
-            $('.input-counter__text').each(function() {
-                var $this = $(this);
-                var quantity = parseInt($this.val());
-                var price = parseFloat($this.data('price'));
-                total += quantity * price;
-            });
-
-            $('.f-cart__table tbody tr td:last-child').text(formatRupiah(total, 'Rp '));
-        }
-
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
@@ -207,7 +185,45 @@
                 }
             });
 
-            $('body').on('change', '#qty', function() {
+            function formatRupiah(angka, prefix) {
+                var number_string = angka.toString().replace(/[^,\d]/g, ''),
+                    split = number_string.split(','),
+                    sisa = split[0].length % 3,
+                    rupiah = split[0].substr(0, sisa),
+                    ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+                if (ribuan) {
+                    separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+
+                rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                return prefix == undefined ? rupiah : (rupiah ? 'Rp ' + rupiah : '');
+            }
+
+            function updateCartTotal() {
+                var total = 0;
+                $('.check-box input[type="checkbox"]:checked').each(function() {
+                    var $row = $(this).closest('tr');
+                    var quantity = parseInt($row.find('.input-counter__text').val());
+                    var price = parseFloat($row.find('.input-counter__text').data('price'));
+                    total += quantity * price;
+                });
+
+                $('#cart-total').text(formatRupiah(total, 'Rp '));
+
+                if (total > 0) {
+                    $('#checkout-btn').prop('disabled', false);
+                } else {
+                    $('#checkout-btn').prop('disabled', true);
+                }
+            }
+
+            $('body').on('change', '.check-box input[type="checkbox"]', function() {
+                updateCartTotal();
+            });
+
+            $('body').on('change', '.input-counter__text', function() {
                 var $this = $(this);
                 var id = $this.data('id');
                 var newQuantity = $this.val();
@@ -221,7 +237,7 @@
                     },
                     success: function(response) {
                         console.log(response.message);
-                        updateCartTotals();
+                        updateCartTotal();
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         console.error(xhr.status + "\n" + xhr.responseText + "\n" +
@@ -241,7 +257,8 @@
                     success: function(response) {
                         $this.closest('tr').remove();
                         console.log(response.message);
-                        updateCartTotals();
+                        updateCartTotal();
+                        updateCartCount();
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         console.error(xhr.status + "\n" + xhr.responseText + "\n" +
@@ -250,6 +267,7 @@
                 });
             });
 
+            updateCartTotal();
         });
     </script>
 @endsection

@@ -184,32 +184,32 @@ class CheckoutController extends Controller
         return $prefix . $date . $nextCode;
     }
 
-    public function cartCheckout()
-    {
-        $userId = auth()->id();
-        $cart = Cart::where('user_id', $userId)->first();
+    // public function cartCheckout()
+    // {
+    //     $userId = auth()->id();
+    //     $cart = Cart::where('user_id', $userId)->first();
 
-        if ($cart) {
-            $items = $cart->items()->with('product')->get();
-        } else {
-            $items = collect();
-        }
+    //     if ($cart) {
+    //         $items = $cart->items()->with('product')->get();
+    //     } else {
+    //         $items = collect();
+    //     }
 
-        $address = DB::table('address')
-            ->join('provinces', 'address.province_id', '=', 'provinces.id')
-            ->join('cities', 'address.city_id', '=', 'cities.id')
-            ->select('address.*', 'provinces.name as province_name', 'cities.name as city_name', 'cities.postal_code as kode_pos')
-            ->where('user_id', auth()->user()->id)
-            ->get();
+    //     $address = DB::table('address')
+    //         ->join('provinces', 'address.province_id', '=', 'provinces.id')
+    //         ->join('cities', 'address.city_id', '=', 'cities.id')
+    //         ->select('address.*', 'provinces.name as province_name', 'cities.name as city_name', 'cities.postal_code as kode_pos')
+    //         ->where('user_id', auth()->user()->id)
+    //         ->get();
 
-        $rekening = BankAccount::all();
+    //     $rekening = BankAccount::all();
 
-        $subtotal = $items->sum(function ($row) {
-            return $row->quantity * $row->product->after_price;
-        });
+    //     $subtotal = $items->sum(function ($row) {
+    //         return $row->quantity * $row->product->after_price;
+    //     });
 
-        return view('frontend.checkout.cart', compact(['items', 'address', 'rekening', 'subtotal']));
-    }
+    //     return view('frontend.checkout.cart', compact(['items', 'address', 'rekening', 'subtotal']));
+    // }
 
     public function storeCart(Request $request)
     {
