@@ -27,123 +27,124 @@
         </div>
         <!--====== End - Section 1 ======-->
 
+        <form class="f-cart" action="{{ route('checkout.cartCheckout') }}" method="POST">
+            @csrf
+            <!--====== Section 2 ======-->
+            <div class="u-s-p-b-60">
 
-        <!--====== Section 2 ======-->
-        <div class="u-s-p-b-60">
-
-            <!--====== Section Intro ======-->
-            <div class="section__intro u-s-m-b-60">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="section__text-wrap">
-                                <h1 class="section__heading u-c-secondary">KERANJANG BELANJA</h1>
+                <!--====== Section Intro ======-->
+                <div class="section__intro u-s-m-b-60">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="section__text-wrap">
+                                    <h1 class="section__heading u-c-secondary">KERANJANG BELANJA</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--====== End - Section Intro ======-->
+                <!--====== End - Section Intro ======-->
 
 
-            <!--====== Section Content ======-->
-            <div class="section__content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
-                            <div class="table-responsive">
-                                <table class="table-p">
-                                    <tbody>
-                                        @forelse ($items as $item)
-                                            <!--====== Row ======-->
-                                            <tr>
-                                                <td>
-                                                    <div class="check-box">
-                                                        <input type="checkbox">
-                                                        <div class="check-box__state check-box__state--primary">
-                                                            <label class="check-box__label"
-                                                                for="term-and-condition"></label>
+                <!--====== Section Content ======-->
+                <div class="section__content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
+                                <div class="table-responsive">
+                                    <table class="table-p">
+                                        <tbody>
+                                            @forelse ($items as $item)
+                                                <!--====== Row ======-->
+                                                <tr>
+                                                    <td>
+                                                        <div class="check-box">
+                                                            <input type="checkbox" name="selected_items[]"
+                                                                value="{{ $item->id }}">
+                                                            <div class="check-box__state check-box__state--primary">
+                                                                <label class="check-box__label"
+                                                                    for="term-and-condition"></label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="table-p__box">
-                                                        <div class="table-p__img-wrap">
-                                                            <img class="u-img-fluid"
-                                                                src="{{ asset('storage/uploads/products/' . $item->product->photos->first()->photo_name) }}"
-                                                                alt="">
+                                                    </td>
+                                                    <td>
+                                                        <div class="table-p__box">
+                                                            <div class="table-p__img-wrap">
+                                                                <img class="u-img-fluid"
+                                                                    src="{{ asset('storage/uploads/products/' . $item->product->photos->first()->photo_name) }}"
+                                                                    alt="">
+                                                            </div>
+                                                            <div class="table-p__info">
+                                                                <span class="table-p__name">
+                                                                    <a
+                                                                        href="{{ route('shop.detail', $item->product->slug) }}">{{ $item->product->name }}</a>
+                                                                </span>
+                                                                <span class="table-p__category">
+                                                                    <a
+                                                                        href="{{ route('shop.catalog', $item->product->catalog->slug) }}">{{ $item->product->catalog->name }}</a>
+                                                                </span>
+                                                            </div>
                                                         </div>
-                                                        <div class="table-p__info">
-                                                            <span class="table-p__name">
-                                                                <a
-                                                                    href="{{ route('shop.detail', $item->product->slug) }}">{{ $item->product->name }}</a>
-                                                            </span>
-                                                            <span class="table-p__category">
-                                                                <a
-                                                                    href="{{ route('shop.catalog', $item->product->catalog->slug) }}">{{ $item->product->catalog->name }}</a>
-                                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                            class="table-p__price">{{ 'Rp ' . number_format($item->product->after_price, 0, ',', '.') }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="table-p__input-counter-wrap">
+
+                                                            <!--====== Input Counter ======-->
+                                                            <div class="input-counter">
+
+                                                                <span class="input-counter__minus fas fa-minus"></span>
+
+                                                                <input
+                                                                    class="input-counter__text input-counter--text-primary-style"
+                                                                    type="text" id="qty" name="qty"
+                                                                    value="{{ $item->quantity }}" data-min="1"
+                                                                    data-max="1000" data-id="{{ $item->id }}"
+                                                                    data-price="{{ $item->product->after_price }}">
+
+                                                                <span class="input-counter__plus fas fa-plus"></span>
+                                                            </div>
+                                                            <!--====== End - Input Counter ======-->
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span
-                                                        class="table-p__price">{{ 'Rp ' . number_format($item->product->after_price, 0, ',', '.') }}</span>
-                                                </td>
-                                                <td>
-                                                    <div class="table-p__input-counter-wrap">
-
-                                                        <!--====== Input Counter ======-->
-                                                        <div class="input-counter">
-
-                                                            <span class="input-counter__minus fas fa-minus"></span>
-
-                                                            <input
-                                                                class="input-counter__text input-counter--text-primary-style"
-                                                                type="text" id="qty" name="qty"
-                                                                value="{{ $item->quantity }}" data-min="1" data-max="1000"
-                                                                data-id="{{ $item->id }}"
-                                                                data-price="{{ $item->product->after_price }}">
-
-                                                            <span class="input-counter__plus fas fa-plus"></span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="table-p__del-wrap">
+                                                            <a class="far fa-trash-alt table-p__delete-link remove"
+                                                                href="javascript:(0);" data-id="{{ $item->id }}"></a>
                                                         </div>
-                                                        <!--====== End - Input Counter ======-->
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="table-p__del-wrap">
-                                                        <a class="far fa-trash-alt table-p__delete-link remove"
-                                                            href="javascript:(0);" data-id="{{ $item->id }}"></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <!--====== End - Row ======-->
-                                        @empty
-                                            <!--====== Row ======-->
-                                            <tr>
-                                                <td colspan="5" class="text-center">Data tidak tersedia</td>
-                                            </tr>
-                                            <!--====== End - Row ======-->
-                                        @endforelse
-                                    </tbody>
-                                </table>
+                                                    </td>
+                                                </tr>
+                                                <!--====== End - Row ======-->
+                                            @empty
+                                                <!--====== Row ======-->
+                                                <tr>
+                                                    <td colspan="5" class="text-center">Data tidak tersedia</td>
+                                                </tr>
+                                                <!--====== End - Row ======-->
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--====== End - Section Content ======-->
             </div>
-            <!--====== End - Section Content ======-->
-        </div>
-        <!--====== End - Section 2 ======-->
+            <!--====== End - Section 2 ======-->
 
 
-        <!--====== Section 3 ======-->
-        <div class="u-s-p-b-60">
-            <div class="section__content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
-                            <form class="f-cart">
-                                @csrf
+            <!--====== Section 3 ======-->
+            <div class="u-s-p-b-60">
+                <div class="section__content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
+
                                 <div class="row justify-content-end">
                                     <div class="col-lg-8 col-md-8"></div>
                                     <div class="col-lg-4 col-md-4 u-s-m-b-30">
@@ -165,13 +166,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--====== End - Section 3 ======-->
+            <!--====== End - Section 3 ======-->
+        </form>
     </div>
     <!--====== End - App Content ======-->
 @endsection

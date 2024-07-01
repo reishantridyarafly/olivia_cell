@@ -184,32 +184,41 @@ class CheckoutController extends Controller
         return $prefix . $date . $nextCode;
     }
 
-    // public function cartCheckout()
-    // {
-    //     $userId = auth()->id();
-    //     $cart = Cart::where('user_id', $userId)->first();
+    public function cartCheckout(Request $request)
+    {
+        $userId = auth()->id();
+        $selectedItems = $request->input('selected_items', []);
 
-    //     if ($cart) {
-    //         $items = $cart->items()->with('product')->get();
-    //     } else {
-    //         $items = collect();
-    //     }
+        $cart = Cart::where('user_id', $userId)->first();
 
-    //     $address = DB::table('address')
-    //         ->join('provinces', 'address.province_id', '=', 'provinces.id')
-    //         ->join('cities', 'address.city_id', '=', 'cities.id')
-    //         ->select('address.*', 'provinces.name as province_name', 'cities.name as city_name', 'cities.postal_code as kode_pos')
-    //         ->where('user_id', auth()->user()->id)
-    //         ->get();
+        if (!$cart) {
+            return redirect()->route('cart.index', $userId)->with('error', 'Keranjang belanja tidak ditemukan.');
+        }
 
-    //     $rekening = BankAccount::all();
+        $items = $cart->items()
+            ->whereIn('id', $selectedItems)
+            ->with('product')
+            ->get();
 
-    //     $subtotal = $items->sum(function ($row) {
-    //         return $row->quantity * $row->product->after_price;
-    //     });
+        if ($items->isEmpty()) {
+            return redirect()->route('cart.index', $userId)->with('error', 'Pilih setidaknya satu item untuk checkout.');
+        }
 
-    //     return view('frontend.checkout.cart', compact(['items', 'address', 'rekening', 'subtotal']));
-    // }
+        $address = DB::table('address')
+            ->join('provinces', 'address.province_id', '=', 'provinces.id')
+            ->join('cities', 'address.city_id', '=', 'cities.id')
+            ->select('address.*', 'provinces.name as province_name', 'cities.name as city_name', 'cities.postal_code as kode_pos')
+            ->where('user_id', $userId)
+            ->get();
+
+        $rekening = BankAccount::all();
+
+        $subtotal = $items->sum(function ($item) {
+            return $item->quantity * $item->product->after_price;
+        });
+
+        return view('frontend.checkout.cart', compact('items', 'address', 'rekening', 'subtotal'));
+    }
 
     public function storeCart(Request $request)
     {
@@ -264,6 +273,7 @@ class CheckoutController extends Controller
                     $transaction->save();
 
                     if (is_array($request->product_id)) {
+                        $purchasedProductIds = [];
                         foreach ($request->product_id as $key => $product_id) {
                             $transaction_detail = new TransactionDetail();
                             $transaction_detail->transaction_id = $transaction->id;
@@ -276,6 +286,8 @@ class CheckoutController extends Controller
                             $product = Product::find($product_id);
                             $product->stock -= $request->qty[$key];
                             $product->save();
+
+                            $purchasedProductIds[] = $product_id;
                         }
                     } else {
                         return response()->json(['errors' => ['product_id' => 'Invalid product data']], 422);
@@ -284,8 +296,13 @@ class CheckoutController extends Controller
                     $userCart = Cart::where('user_id', auth()->id())->first();
 
                     if ($userCart) {
-                        CartItem::where('cart_id', $userCart->id)->delete();
-                        $userCart->delete();
+                        CartItem::where('cart_id', $userCart->id)
+                            ->whereIn('product_id', $purchasedProductIds)
+                            ->delete();
+
+                        if ($userCart->items()->count() == 0) {
+                            $userCart->delete();
+                        }
                     }
 
                     return response()->json(['message' => 'Transaksi berhasil ditambahkan']);
