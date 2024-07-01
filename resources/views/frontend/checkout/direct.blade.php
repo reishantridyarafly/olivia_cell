@@ -100,6 +100,8 @@
                                                     <option value="">Data tidak tersedia</option>
                                                 @endforelse
                                             </select>
+                                            <small>Note: Silakan isi <a href="{{ route('address.index') }}">Alamat</a> jika
+                                                masih kosong</small>
                                             <small class="text-danger errorAddress" style="color: red"></small>
                                             <!--====== End - Select Box ======-->
                                         </div>

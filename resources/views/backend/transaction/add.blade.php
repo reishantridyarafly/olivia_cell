@@ -48,7 +48,8 @@
                                         <div class="col-9">
                                             <select class="form-control" data-select2-selector="icon" name="customers"
                                                 id="customers" required>
-                                                <option value="0" data-customer-name="Umum" data-icon="feather-user" selected>Umum</option>
+                                                <option value="0" data-customer-name="Umum" data-icon="feather-user"
+                                                    selected>Umum</option>
                                                 @foreach ($users as $user)
                                                     <option value="{{ $user->id }}"
                                                         data-customer-name="{{ $user->first_name . ' ' . $user->last_name }}"
@@ -56,7 +57,8 @@
                                                         {{ $user->first_name . ' ' . $user->last_name }}
                                                     </option>
                                                 @endforeach
-                                                <input type="hidden" name="customer_name" id="customer_name" value="Umum">
+                                                <input type="hidden" name="customer_name" id="customer_name"
+                                                    value="Umum">
                                             </select>
                                         </div>
                                     </div>
@@ -90,7 +92,8 @@
                                                                         data-icon="feather-archive"
                                                                         data-price="{{ $product->after_price }}"
                                                                         data-stock="{{ $product->stock }}">
-                                                                        {{ $product->name }} | {{ $product->memory }}
+                                                                        {{ $product->name }} | {{ $product->ram }} |
+                                                                        {{ $product->capacity }}
                                                                     </option>
                                                                 @endforeach
                                                             </select>

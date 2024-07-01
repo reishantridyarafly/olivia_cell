@@ -9,6 +9,9 @@
                     <div class="page-header-title">
                         <h5 class="m-b-10">Dashboard</h5>
                     </div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">Selamat datang, <strong>{{ auth()->user()->first_name }}</strong></li>
+                    </ul>
                 </div>
             </div>
             <!-- [ page-header ] end -->
@@ -20,7 +23,30 @@
                         <div class="card stretch stretch-full">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-xxl-2 col-lg-4 col-md-6">
+                                    <div class="col-xxl-3 col-lg-4 col-md-6">
+                                        <div class="card stretch stretch-full border border-dashed border-gray-5">
+                                            <div class="card-body rounded-3 text-center">
+                                                <i class="bi bi-cash-stack fs-3 text-primary"></i>
+                                                <div class="fs-4 fw-bolder text-dark mt-3 mb-1">
+                                                    {{ 'Rp ' . number_format($totalRevenue, 0, ',', '.') }}</div>
+                                                <p
+                                                    class="fs-12 fw-medium text-muted text-spacing-1 mb-0 text-truncate-1-line">
+                                                    Total Pendapatan</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-3 col-lg-4 col-md-6">
+                                        <div class="card stretch stretch-full border border-dashed border-gray-5">
+                                            <div class="card-body rounded-3 text-center">
+                                                <i class="bi bi-box fs-3 text-primary"></i>
+                                                <div class="fs-4 fw-bolder text-dark mt-3 mb-1">{{ $product_count }}</div>
+                                                <p
+                                                    class="fs-12 fw-medium text-muted text-spacing-1 mb-0 text-truncate-1-line">
+                                                    Total Produk</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-3 col-lg-4 col-md-6">
                                         <div class="card stretch stretch-full border border-dashed border-gray-5">
                                             <div class="card-body rounded-3 text-center">
                                                 <i class="bi bi-archive fs-3 text-primary"></i>
@@ -31,375 +57,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xxl-2 col-lg-4 col-md-6">
+                                    <div class="col-xxl-3 col-lg-4 col-md-6">
                                         <div class="card stretch stretch-full border border-dashed border-gray-5">
                                             <div class="card-body rounded-3 text-center">
-                                                <i class="bi bi-box fs-3 text-warning"></i>
-                                                <div class="fs-4 fw-bolder text-dark mt-3 mb-1">{{ $product_count }}</div>
+                                                <i class="bi bi-star-fill fs-3 text-primary"></i>
+                                                <div class="fs-4 fw-bolder text-dark mt-3 mb-1">{{ $rating_count }}</div>
                                                 <p
                                                     class="fs-12 fw-medium text-muted text-spacing-1 mb-0 text-truncate-1-line">
-                                                    Total Produk</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xxl-2 col-lg-4 col-md-6">
-                                        <div class="card stretch stretch-full border border-dashed border-gray-5">
-                                            <div class="card-body rounded-3 text-center">
-                                                <i class="bi bi-envelope-check fs-3 text-success"></i>
-                                                <div class="fs-4 fw-bolder text-dark mt-3 mb-1">20,354</div>
-                                                <p
-                                                    class="fs-12 fw-medium text-muted text-spacing-1 mb-0 text-truncate-1-line">
-                                                    Emails Delivered</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xxl-2 col-lg-4 col-md-6">
-                                        <div class="card stretch stretch-full border border-dashed border-gray-5">
-                                            <div class="card-body rounded-3 text-center">
-                                                <i class="bi bi-envelope-open fs-3 text-indigo"></i>
-                                                <div class="fs-4 fw-bolder text-dark mt-3 mb-1">12,422</div>
-                                                <p
-                                                    class="fs-12 fw-medium text-muted text-spacing-1 mb-0 text-truncate-1-line">
-                                                    Emails Opened</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xxl-2 col-lg-4 col-md-6">
-                                        <div class="card stretch stretch-full border border-dashed border-gray-5">
-                                            <div class="card-body rounded-3 text-center">
-                                                <i class="bi bi-envelope-heart fs-3 text-teal"></i>
-                                                <div class="fs-4 fw-bolder text-dark mt-3 mb-1">6,248</div>
-                                                <p
-                                                    class="fs-12 fw-medium text-muted text-spacing-1 mb-0 text-truncate-1-line">
-                                                    Emails Clicked</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xxl-2 col-lg-4 col-md-6">
-                                        <div class="card stretch stretch-full border border-dashed border-gray-5">
-                                            <div class="card-body rounded-3 text-center">
-                                                <i class="bi bi-envelope-slash fs-3 text-danger"></i>
-                                                <div class="fs-4 fw-bolder text-dark mt-3 mb-1">2,047</div>
-                                                <p
-                                                    class="fs-12 fw-medium text-muted text-spacing-1 mb-0 text-truncate-1-line">
-                                                    Emails Bounce</p>
+                                                    Total Penilai</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- [Mini Card] end -->
-                    <!-- [Visitors Overview] start -->
-                    <div class="col-xxl-8">
-                        <div class="card stretch stretch-full">
-                            <div class="card-header">
-                                <h5 class="card-title">Visitors Overview</h5>
-                                <div class="card-header-action">
-                                    <div class="card-header-btn">
-                                        <div data-bs-toggle="tooltip" title="Collapse/Expand">
-                                            <a href="#" class="avatar-text avatar-xs bg-gray-300"
-                                                data-bs-toggle="collapse"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Delete">
-                                            <a href="#" class="avatar-text avatar-xs bg-danger"
-                                                data-bs-toggle="remove"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Refresh">
-                                            <a href="#" class="avatar-text avatar-xs bg-warning"
-                                                data-bs-toggle="refresh"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Maximize/Minimize">
-                                            <a href="#" class="avatar-text avatar-xs bg-success"
-                                                data-bs-toggle="expand"> </a>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <a href="#" class="avatar-text avatar-sm" data-bs-toggle="dropdown"
-                                            data-bs-offset="25, 25">
-                                            <div data-bs-toggle="tooltip" title="Options">
-                                                <i class="feather-more-vertical"></i>
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-at-sign"></i>New</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-calendar"></i>Event</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-bell"></i>Snoozed</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-trash-2"></i>Deleted</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-settings"></i>Settings</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-life-buoy"></i>Tips & Tricks</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body custom-card-action">
-                                <div id="visitors-overview-statistics-chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- [Visitors Overview] end -->
-                    <!-- [Browser States] start -->
-                    <div class="col-xxl-4">
-                        <div class="card stretch stretch-full">
-                            <div class="card-header">
-                                <h5 class="card-title">Browser States</h5>
-                                <div class="card-header-action">
-                                    <div class="card-header-btn">
-                                        <div data-bs-toggle="tooltip" title="Collapse/Expand">
-                                            <a href="#" class="avatar-text avatar-xs bg-gray-300"
-                                                data-bs-toggle="collapse"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Delete">
-                                            <a href="#" class="avatar-text avatar-xs bg-danger"
-                                                data-bs-toggle="remove"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Refresh">
-                                            <a href="#" class="avatar-text avatar-xs bg-warning"
-                                                data-bs-toggle="refresh"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Maximize/Minimize">
-                                            <a href="#" class="avatar-text avatar-xs bg-success"
-                                                data-bs-toggle="expand"> </a>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <a href="#" class="avatar-text avatar-sm" data-bs-toggle="dropdown"
-                                            data-bs-offset="25, 25">
-                                            <div data-bs-toggle="tooltip" title="Options">
-                                                <i class="feather-more-vertical"></i>
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-at-sign"></i>New</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-calendar"></i>Event</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-bell"></i>Snoozed</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-trash-2"></i>Deleted</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-settings"></i>Settings</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-life-buoy"></i>Tips & Tricks</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body custom-card-action p-0">
-                                <div class="table-responsive">
-                                    <table class="table table-hover mb-0">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <a href="javascript:void(0);">
-                                                        <i class="fa-brands fa-chrome fs-16 text-primary me-2"></i>
-                                                        <span>Google Chrome</span>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <span class="text-end d-flex align-items-center m-0">
-                                                        <span class="me-3">90%</span>
-                                                        <span class="progress w-100 ht-5">
-                                                            <span class="progress-bar bg-success"
-                                                                style="width: 90%"></span>
-                                                        </span>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="javascript:void(0);">
-                                                        <i
-                                                            class="fa-brands fa-firefox-browser fs-16 text-warning me-2"></i>
-                                                        <span>Mozila Firefox</span>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <span class="text-end d-flex align-items-center m-0">
-                                                        <span class="me-3">76%</span>
-                                                        <span class="progress w-100 ht-5">
-                                                            <span class="progress-bar bg-primary"
-                                                                style="width: 76%"></span>
-                                                        </span>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="javascript:void(0);">
-                                                        <i class="fa-brands fa-safari fs-16 text-info me-2"></i>
-                                                        <span>Apple Safari</span>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <span class="text-end d-flex align-items-center m-0">
-                                                        <span class="me-3">50%</span>
-                                                        <span class="progress w-100 ht-5">
-                                                            <span class="progress-bar bg-warning"
-                                                                style="width: 50%"></span>
-                                                        </span>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="javascript:void(0);">
-                                                        <i class="fa-brands fa-edge fs-16 text-success me-2"></i>
-                                                        <span>Edge Browser</span>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <span class="text-end d-flex align-items-center m-0">
-                                                        <span class="me-3">20%</span>
-                                                        <span class="progress w-100 ht-5">
-                                                            <span class="progress-bar bg-success"
-                                                                style="width: 20%"></span>
-                                                        </span>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="javascript:void(0);">
-                                                        <i class="fa-brands fa-opera fs-16 text-danger me-2"></i>
-                                                        <span>Opera mini</span>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <span class="text-end d-flex align-items-center m-0">
-                                                        <span class="me-3">15%</span>
-                                                        <span class="progress w-100 ht-5">
-                                                            <span class="progress-bar bg-danger"
-                                                                style="width: 15%"></span>
-                                                        </span>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="javascript:void(0);">
-                                                        <i class="fa-brands fa-internet-explorer fs-16 text-teal me-2"></i>
-                                                        <span>Internet Explorer</span>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <span class="text-end d-flex align-items-center m-0">
-                                                        <span class="me-3">12%</span>
-                                                        <span class="progress w-100 ht-5">
-                                                            <span class="progress-bar bg-teal" style="width: 12%"></span>
-                                                        </span>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="javascript:void(0);">
-                                                        <i class="fa-brands fa-octopus-deploy fs-16 text-dark me-2"></i>
-                                                        <span>Others Browser</span>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <span class="text-end d-flex align-items-center m-0">
-                                                        <span class="me-3">6%</span>
-                                                        <span class="progress w-100 ht-5">
-                                                            <span class="progress-bar bg-dark" style="width: 6%"></span>
-                                                        </span>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <a href="javascript:void(0);"
-                                class="card-footer fs-11 fw-bold text-uppercase text-center">Explore Details</a>
-                        </div>
-                    </div>
-                    <!-- [Browser States] end -->
-                    <!-- [Mini Card] start -->
-                    <div class="col-xxl-3 col-md-6">
-                        <div class="card stretch stretch-full">
-                            <div class="card-body p-0">
-                                <div class="d-flex justify-content-between p-4 mb-4">
-                                    <div>
-                                        <div class="fw-bold mb-2 text-dark text-truncate-1-line">Bounce Rate (Avg)
-                                        </div>
-                                        <div class="fs-11 text-muted">VS 20.49% (Prev)</div>
-                                    </div>
-                                    <div class="text-end">
-                                        <div class="fs-24 fw-bold mb-2 text-dark"><span class="counter">78.65</span>%
-                                        </div>
-                                        <div class="fs-11 text-success">(+ 22.85%)</div>
-                                    </div>
-                                </div>
-                                <div id="bounce-rate"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xxl-3 col-md-6">
-                        <div class="card stretch stretch-full">
-                            <div class="card-body p-0">
-                                <div class="d-flex justify-content-between p-4 mb-4">
-                                    <div>
-                                        <div class="fw-bold mb-2 text-dark text-truncate-1-line">Page Views (Avg)
-                                        </div>
-                                        <div class="fs-11 text-muted">VS 36.47% (Prev)</div>
-                                    </div>
-                                    <div class="text-end">
-                                        <div class="fs-24 fw-bold mb-2 text-dark"><span class="counter">86.37</span>%
-                                        </div>
-                                        <div class="fs-11 text-danger">(- 34.25%)</div>
-                                    </div>
-                                </div>
-                                <div id="page-views"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xxl-3 col-md-6">
-                        <div class="card stretch stretch-full">
-                            <div class="card-body p-0">
-                                <div class="d-flex justify-content-between p-4 mb-4">
-                                    <div>
-                                        <div class="fw-bold mb-2 text-dark text-truncate-1-line">Site Impressions
-                                            (Avg)</div>
-                                        <div class="fs-11 text-muted">VS 43.67% (Prev)</div>
-                                    </div>
-                                    <div class="tx-right">
-                                        <div class="fs-24 fw-bold mb-2 text-dark"><span class="counter">67.53</span>%
-                                        </div>
-                                        <div class="fs-11 text-success">(+ 42.72%)</div>
-                                    </div>
-                                </div>
-                                <div id="site-impressions"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xxl-3 col-md-6">
-                        <div class="card stretch stretch-full">
-                            <div class="card-body p-0">
-                                <div class="d-flex justify-content-between p-4 mb-4">
-                                    <div>
-                                        <div class="fw-bold mb-2 text-dark text-truncate-1-line">Conversions Rate
-                                            (Avg)</div>
-                                        <div class="fs-11 text-muted">VS 22.34% (Prev)</div>
-                                    </div>
-                                    <div class="tx-right">
-                                        <div class="fs-24 fw-bold mb-2 text-dark"><span class="counter">32.53</span>%
-                                        </div>
-                                        <div class="fs-11 text-success">(+ 35.47%)</div>
-                                    </div>
-                                </div>
-                                <div id="conversions-rate"></div>
                             </div>
                         </div>
                     </div>
@@ -408,537 +77,475 @@
                     <div class="col-xxl-4">
                         <div class="card stretch stretch-full">
                             <div class="card-header">
-                                <h5 class="card-title">Goal Progress</h5>
-                                <div class="card-header-action">
-                                    <div class="card-header-btn">
-                                        <div data-bs-toggle="tooltip" title="Delete">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-danger"
-                                                data-bs-toggle="remove"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Refresh">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-warning"
-                                                data-bs-toggle="refresh"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Maximize/Minimize">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-success"
-                                                data-bs-toggle="expand"> </a>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <a href="javascript:void(0);" class="avatar-text avatar-sm"
-                                            data-bs-toggle="dropdown" data-bs-offset="25, 25">
-                                            <div data-bs-toggle="tooltip" title="Options">
-                                                <i class="feather-more-vertical"></i>
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-at-sign"></i>New</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-calendar"></i>Event</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-bell"></i>Snoozed</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-trash-2"></i>Deleted</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-settings"></i>Settings</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-life-buoy"></i>Tips & Tricks</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h5 class="card-title">Transaksi</h5>
                             </div>
                             <div class="card-body custom-card-action">
                                 <div class="row g-4">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="px-4 py-3 text-center border border-dashed rounded-3">
-                                            <div class="mx-auto mb-4">
-                                                <div class="goal-progress-1"></div>
+                                            <h2 class="fs-13 tx-spacing-1">Total Transaksi</h2>
+                                            <div class="fs-13 text-muted text-truncate-1-line">
+                                                <strong>{{ $total_transaction }}</strong>
                                             </div>
-                                            <h2 class="fs-13 tx-spacing-1">Marketing Gaol</h2>
-                                            <div class="fs-11 text-muted text-truncate-1-line">$550/$1250 USD</div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="px-4 py-3 text-center border border-dashed rounded-3">
-                                            <div class="mx-auto mb-4">
-                                                <div class="goal-progress-2"></div>
+                                            <h2 class="fs-13 tx-spacing-1">Selesai</h2>
+                                            <div class="fs-13 text-muted text-truncate-1-line">
+                                                <strong>{{ $total_completed }}</strong>
                                             </div>
-                                            <h2 class="fs-13 tx-spacing-1">Teams Goal</h2>
-                                            <div class="fs-11 text-muted text-truncate-1-line">$550/$1250 USD</div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="px-4 py-3 text-center border border-dashed rounded-3">
-                                            <div class="mx-auto mb-4">
-                                                <div class="goal-progress-3"></div>
+                                            <h2 class="fs-13 tx-spacing-1">Proses</h2>
+                                            <div class="fs-13 text-muted text-truncate-1-line">
+                                                <strong>{{ $total_process }}</strong>
                                             </div>
-                                            <h2 class="fs-13 tx-spacing-1">Leads Goal</h2>
-                                            <div class="fs-11 text-muted text-truncate-1-line">$850/$950 USD</div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="px-4 py-3 text-center border border-dashed rounded-3">
-                                            <div class="mx-auto mb-4">
-                                                <div class="goal-progress-4"></div>
+                                            <h2 class="fs-13 tx-spacing-1">Pending</h2>
+                                            <div class="fs-13 text-muted text-truncate-1-line">
+                                                <strong>{{ $total_pending }}</strong>
                                             </div>
-                                            <h2 class="fs-13 tx-spacing-1">Revenue Goal</h2>
-                                            <div class="fs-11 text-muted text-truncate-1-line">$5,655/$12,500 USD
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="px-4 py-3 text-center border border-dashed rounded-3">
+                                            <h2 class="fs-13 tx-spacing-1">Gagal</h2>
+                                            <div class="fs-13 text-muted text-truncate-1-line">
+                                                <strong>{{ $total_failed }}</strong>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
-                                <a href="javascript:void(0);" class="btn btn-primary">Generate Report</a>
                             </div>
                         </div>
                     </div>
                     <!-- [Goal Progress] end -->
+
                     <!-- [Marketing Campaign] start -->
                     <div class="col-xxl-8">
                         <div class="card stretch stretch-full">
                             <div class="card-header">
-                                <h5 class="card-title">Marketing Campaign</h5>
-                                <div class="card-header-action">
-                                    <div class="card-header-btn">
-                                        <div data-bs-toggle="tooltip" title="Collapse/Expand">
-                                            <a href="#" class="avatar-text avatar-xs bg-gray-300"
-                                                data-bs-toggle="collapse"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Delete">
-                                            <a href="#" class="avatar-text avatar-xs bg-danger"
-                                                data-bs-toggle="remove"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Refresh">
-                                            <a href="#" class="avatar-text avatar-xs bg-warning"
-                                                data-bs-toggle="refresh"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Maximize/Minimize">
-                                            <a href="#" class="avatar-text avatar-xs bg-success"
-                                                data-bs-toggle="expand"> </a>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <a href="#" class="avatar-text avatar-sm" data-bs-toggle="dropdown"
-                                            data-bs-offset="25, 25">
-                                            <div data-bs-toggle="tooltip" title="Options">
-                                                <i class="feather-more-vertical"></i>
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-at-sign"></i>New</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-calendar"></i>Event</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-bell"></i>Snoozed</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-trash-2"></i>Deleted</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-settings"></i>Settings</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-life-buoy"></i>Tips & Tricks</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h5 class="card-title">Pendapatan Bulanan</h5>
                             </div>
                             <div class="card-body custom-card-action p-0">
                                 <div id="campaign-alytics-bar-chart"></div>
                             </div>
-                            <div class="card-footer">
-                                <div class="row g-4">
-                                    <div class="col-lg-3">
-                                        <div class="p-3 border border-dashed rounded">
-                                            <div class="fs-12 text-muted mb-1">Reach</div>
-                                            <h6 class="fw-bold text-dark">5,486</h6>
-                                            <div class="progress mt-2 ht-3">
-                                                <div class="progress-bar bg-primary" role="progressbar"
-                                                    style="width: 81%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="p-3 border border-dashed rounded">
-                                            <div class="fs-12 text-muted mb-1">Opened</div>
-                                            <h6 class="fw-bold text-dark">42.75%</h6>
-                                            <div class="progress mt-2 ht-3">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                    style="width: 82%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="p-3 border border-dashed rounded">
-                                            <div class="fs-12 text-muted mb-1">Clicked</div>
-                                            <h6 class="fw-bold text-dark">38.68%</h6>
-                                            <div class="progress mt-2 ht-3">
-                                                <div class="progress-bar bg-danger" role="progressbar"
-                                                    style="width: 68%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="p-3 border border-dashed rounded">
-                                            <div class="fs-12 text-muted mb-1">Conversion</div>
-                                            <h6 class="fw-bold text-dark">16.68%</h6>
-                                            <div class="progress mt-2 ht-3">
-                                                <div class="progress-bar bg-dark" role="progressbar" style="width: 75%">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <!-- [Marketing Campaign] end -->
-                    <!-- [Project Remainders] start -->
+
+                    <!-- [Leads Overview] start -->
                     <div class="col-xxl-8">
                         <div class="card stretch stretch-full">
                             <div class="card-header">
-                                <h5 class="card-title">Project Remainders</h5>
-                                <div class="card-header-action">
-                                    <div class="card-header-btn">
-                                        <div data-bs-toggle="tooltip" title="Delete">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-danger"
-                                                data-bs-toggle="remove"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Refresh">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-warning"
-                                                data-bs-toggle="refresh"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Maximize/Minimize">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-success"
-                                                data-bs-toggle="expand"> </a>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <a href="javascript:void(0);" class="avatar-text avatar-sm"
-                                            data-bs-toggle="dropdown" data-bs-offset="25, 25">
-                                            <div data-bs-toggle="tooltip" title="Options">
-                                                <i class="feather-more-vertical"></i>
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-at-sign"></i>New</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-calendar"></i>Event</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-bell"></i>Snoozed</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-trash-2"></i>Deleted</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-settings"></i>Settings</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-life-buoy"></i>Tips & Tricks</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h5 class="card-title">Brand Terlaris</h5>
                             </div>
-                            <div class="card-body custom-card-action p-0">
-                                <div class="table-responsive">
-                                    <table class="table table-hover mb-0">
-                                        <thead>
+                            <div class="card-body custom-card-action">
+                                <div id="leads-overview-donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [Leads Overview] end -->
+
+                    <!-- [Browser States] start -->
+                    <div class="col-xxl-4">
+                        <div class="card stretch stretch-full">
+                            <div class="card-header">
+                                <h5 class="card-title">Penilaian Terbaru</h5>
+                            </div>
+                            <div class="card-body custom-card-action">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nama</th>
+                                            <th>Product</th>
+                                            <th>Penilaian</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($rating as $row)
                                             <tr>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Remaining</th>
-                                                <th scope="col">Stage</th>
-                                                <th scope="col" class="text-end">Action</th>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $row->user->first_name . ' ' . $row->user->last_name }}</td>
+                                                <td>{{ $row->product->name }}</td>
+                                                <td>{{ $row->rating }}</td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
+                                        @empty
                                             <tr>
+                                                <td colspan="4" class="text-center">Data tidak tersedia</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [Browser States] end -->
+
+                    <!-- [Project Remainders] start -->
+                    <div class="col-xxl-12">
+                        <div class="card stretch stretch-full">
+                            <div class="card-header">
+                                <h5 class="card-title">Transaksi Terbaru</h5>
+                            </div>
+                            <div class="card-body custom-card-action mb-3">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Kode</th>
+                                            <th scope="col">Tanggal</th>
+                                            <th scope="col">Pelanggan</th>
+                                            <th scope="col">Pembayaran</th>
+                                            <th scope="col">Transaksi</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Total</th>
+                                            <th scope="col" class="text-end">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($transaction as $row)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $row->code }}</td>
+                                                <td>{{ $row->transaction_date }}</td>
+                                                <td>{{ $row->customer_name }}</td>
+                                                <td>{{ $row->type_payment == 'cash' ? 'Tunai' : 'Transfer' }}</td>
                                                 <td>
-                                                    <div class="hstack gap-2">
+                                                    @if ($row->type_transaction == 'online')
                                                         <span
-                                                            class="wd-10 ht-10 bg-gray-400 rounded-circle d-inline-block me-2 lh-base"></span>
-                                                        <div class="border-3 border-start rounded ps-3">
-                                                            <a href="javascript:void(0);" class="mb-2 d-block">
-                                                                <span>CRM Dashboard Redesign</span>
+                                                            class="badge rounded-pill text-bg-success text-light">Online</span>
+                                                    @else<span
+                                                            class="badge rounded-pill text-bg-danger text-light">Offline</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($row->status == 'pending')
+                                                        <span class="fw-bold text-warning">Pending</span>
+                                                    @elseif ($row->status == 'process')
+                                                        <span class="fw-bold text-warning">Proses</span>
+                                                    @elseif ($row->status == 'completed')
+                                                        <span class="fw-bold text-success">Selesai</span>
+                                                    @else
+                                                        <span class="fw-bold text-danger">Gagal</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    {{ 'Rp ' . number_format($row->total_price, 0, ',', '.') }}
+                                                </td>
+                                                <td>
+                                                    <div class="hstack gap-2 justify-content-end">
+                                                        <div class="dropdown">
+                                                            <a href="javascript:void(0)" class="avatar-text avatar-md"
+                                                                data-bs-toggle="dropdown" data-bs-offset="0,21">
+                                                                <i class="feather feather-more-horizontal"></i>
                                                             </a>
-                                                            <p class="fs-12 text-muted mb-0">Management of project
-                                                                under "Duralux" brand</p>
+                                                            <ul class="dropdown-menu">
+                                                                <li>
+                                                                    <a href="{{ route('transaction.detail', $row->id) }}"
+                                                                        class="dropdown-item">
+                                                                        <i class="feather feather-eye me-3"></i>
+                                                                        <span>Lihat</span>
+                                                                    </a>
+                                                                <li>
+                                                                    <button class="dropdown-item" id="btnDelete"
+                                                                        data-id="{{ $row->id }}">
+                                                                        <i class="feather feather-trash-2 me-3"></i>
+                                                                        <span>Hapus</span>
+                                                                    </button>
+                                                                </li>
+                                                            </ul>
                                                         </div>
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-soft-primary text-primary">In
-                                                        Prograss</span>
-                                                </td>
-                                                <td>
-                                                    <div data-time-countdown="countdown_1"></div>
-                                                </td>
-                                                <td>
-                                                    <div class="hstack gap-1">
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-warning rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-warning rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-gray-300 rounded-pill"></div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" class="avatar-text avatar-md ms-auto">
-                                                        <i class="feather-arrow-right"></i>
-                                                    </a>
                                                 </td>
                                             </tr>
+                                        @empty
                                             <tr>
-                                                <td>
-                                                    <div class="hstack gap-2">
-                                                        <span
-                                                            class="wd-10 ht-10 bg-gray-400 rounded-circle d-inline-block me-2 lh-base"></span>
-                                                        <div class="border-3 border-start rounded ps-3">
-                                                            <a href="javascript:void(0);" class="mb-2 d-block">
-                                                                <span>Duralux CRM Admin Project</span>
-                                                            </a>
-                                                            <p class="fs-12 text-muted mb-0">Duralux CRM Dashbaord
-                                                                Project</p>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-soft-info text-info">Updading</span>
-                                                </td>
-                                                <td>
-                                                    <div data-time-countdown="countdown_2"></div>
-                                                </td>
-                                                <td>
-                                                    <div class="hstack gap-1">
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-warning rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-warning rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-gray-300 rounded-pill"></div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" class="avatar-text avatar-md ms-auto">
-                                                        <i class="feather-arrow-right"></i>
-                                                    </a>
-                                                </td>
+                                                <td colspan="9" class="text-center">Data tidak tersedia</td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="hstack gap-2">
-                                                        <span
-                                                            class="wd-10 ht-10 bg-gray-400 rounded-circle d-inline-block me-2 lh-base"></span>
-                                                        <div class="border-3 border-start rounded ps-3">
-                                                            <a href="javascript:void(0);" class="mb-2 d-block">
-                                                                <span>Website Redesign for Nike</span>
-                                                            </a>
-                                                            <p class="fs-12 text-muted mb-0">Website Redesign for Nike
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-soft-danger text-danger">Upcoming</span>
-                                                </td>
-                                                <td>
-                                                    <div data-time-countdown="countdown_3"></div>
-                                                </td>
-                                                <td>
-                                                    <div class="hstack gap-1">
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-warning rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-warning rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-gray-300 rounded-pill"></div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" class="avatar-text avatar-md ms-auto">
-                                                        <i class="feather-arrow-right"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="hstack gap-2">
-                                                        <span
-                                                            class="wd-10 ht-10 bg-gray-400 rounded-circle d-inline-block me-2 lh-base"></span>
-                                                        <div class="border-3 border-start rounded ps-3">
-                                                            <a href="javascript:void(0);" class="mb-2 d-block">
-                                                                <span>Duralux CRM Dashbaord Project</span>
-                                                            </a>
-                                                            <p class="fs-12 text-muted mb-0">Duralux CRM Dashbaord
-                                                                Project</p>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-soft-teal text-teal">Submitted</span>
-                                                </td>
-                                                <td>
-                                                    <div data-time-countdown="countdown_4"></div>
-                                                </td>
-                                                <td>
-                                                    <div class="hstack gap-1">
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-warning rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-warning rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-gray-300 rounded-pill"></div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" class="avatar-text avatar-md ms-auto">
-                                                        <i class="feather-arrow-right"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="hstack gap-2">
-                                                        <span
-                                                            class="wd-10 ht-10 bg-gray-400 rounded-circle d-inline-block me-2 lh-base"></span>
-                                                        <div class="border-3 border-start rounded ps-3">
-                                                            <a href="javascript:void(0);" class="mb-2 d-block">
-                                                                <span>Update User Flows with UX Feedback</span>
-                                                            </a>
-                                                            <p class="fs-12 text-muted mb-0">Update User Flows with UX
-                                                                Feedback</p>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-soft-warning text-warning">Working</span>
-                                                </td>
-                                                <td>
-                                                    <div data-time-countdown="countdown_5"></div>
-                                                </td>
-                                                <td>
-                                                    <div class="hstack gap-1">
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-success rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-warning rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-warning rounded-pill opacity-75">
-                                                        </div>
-                                                        <div class="wd-15 ht-4 bg-gray-300 rounded-pill"></div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" class="avatar-text avatar-md ms-auto">
-                                                        <i class="feather-arrow-right"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="card-footer">
-                                    <ul class="list-unstyled d-flex align-items-center gap-2 mb-0 pagination-common-style">
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="bi bi-arrow-left"></i></a>
-                                        </li>
-                                        <li><a href="javascript:void(0);" class="active">1</a></li>
-                                        <li><a href="javascript:void(0);">2</a></li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="bi bi-dot"></i></a>
-                                        </li>
-                                        <li><a href="javascript:void(0);">8</a></li>
-                                        <li><a href="javascript:void(0);">9</a></li>
-                                        <li>
-                                            <a href="javascript:void(0);"><i class="bi bi-arrow-right"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                        @endforelse
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                     <!-- [Project Remainders] end -->
-                    <!-- [Social Statistics] start -->
-                    <div class="col-xxl-4">
-                        <div class="card stretch stretch-full">
-                            <div class="card-header">
-                                <h5 class="card-title">Social Statistics</h5>
-                                <div class="card-header-action">
-                                    <div class="card-header-btn">
-                                        <div data-bs-toggle="tooltip" title="Delete">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-danger"
-                                                data-bs-toggle="remove"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Refresh">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-warning"
-                                                data-bs-toggle="refresh"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Maximize/Minimize">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-success"
-                                                data-bs-toggle="expand"> </a>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <a href="javascript:void(0);" class="avatar-text avatar-sm"
-                                            data-bs-toggle="dropdown" data-bs-offset="25, 25">
-                                            <div data-bs-toggle="tooltip" title="Options">
-                                                <i class="feather-more-vertical"></i>
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-at-sign"></i>New</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-calendar"></i>Event</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-bell"></i>Snoozed</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-trash-2"></i>Deleted</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-settings"></i>Settings</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="feather-life-buoy"></i>Tips & Tricks</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div id="social-radar-chart"></div>
-                            </div>
-                            <a href="javascript:void(0);"
-                                class="card-footer fs-11 fw-bold text-uppercase text-center">Explore Details</a>
-                        </div>
-                    </div>
-                    <!-- [Social Statistics] end -->
                 </div>
             </div>
             <!-- [ Main Content ] end -->
         </div>
     </main>
+@endsection
+
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('body').on('click', '#btnDelete', function() {
+                let id = $(this).data('id');
+                Swal.fire({
+                    title: 'Hapus',
+                    text: "Apakah anda yakin?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal',
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: "{{ url('produk/"+id+"') }}",
+                            data: {
+                                id: id
+                            },
+                            dataType: 'json',
+                            success: function(response) {
+                                if (response.message) {
+                                    const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: "top-end",
+                                        showConfirmButton: false,
+                                        timer: 2000,
+                                        timerProgressBar: true,
+                                        didOpen: (toast) => {
+                                            toast.onmouseenter = Swal
+                                                .stopTimer;
+                                            toast.onmouseleave = Swal
+                                                .resumeTimer;
+                                        }
+                                    });
+                                    Toast.fire({
+                                        icon: "success",
+                                        title: response.message
+                                    });
+                                    $('#datatable').DataTable().ajax.reload()
+                                }
+                            },
+                            error: function(xhr, ajaxOptions, thrownError) {
+                                alert(xhr.status + "\n" + xhr.responseText + "\n" +
+                                    thrownError);
+                            }
+                        })
+                    }
+                })
+            })
+
+            var monthlyRevenue = @json($monthlyRevenue);
+
+            var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            var data = new Array(12).fill(0);
+
+            monthlyRevenue.forEach(function(item) {
+                data[item.month - 1] = item.total;
+            });
+
+            function formatRupiah(angka, prefix) {
+                var number_string = angka.toString().replace(/[^,\d]/g, ''),
+                    split = number_string.split(','),
+                    sisa = split[0].length % 3,
+                    rupiah = split[0].substr(0, sisa),
+                    ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+                if (ribuan) {
+                    separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+
+                rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+            }
+
+
+            new ApexCharts(document.querySelector("#campaign-alytics-bar-chart"), {
+                chart: {
+                    type: "bar",
+                    height: 370,
+                    toolbar: {
+                        show: false
+                    }
+                },
+                series: [{
+                    name: "Pendapatan",
+                    data: data
+                }],
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        endingShape: "rounded",
+                        columnWidth: "30%"
+                    }
+                },
+                dataLabels: {
+                    enabled: false,
+                    offsetX: -6,
+                    style: {
+                        fontSize: "12px",
+                        colors: ["#fff"]
+                    }
+                },
+                stroke: {
+                    show: false,
+                    width: 1,
+                    colors: ["#fff"]
+                },
+                colors: ["#DB4540"],
+                xaxis: {
+                    categories: months,
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false
+                    },
+                    labels: {
+                        style: {
+                            colors: "#64748b",
+                            fontFamily: "Inter"
+                        }
+                    }
+                },
+                yaxis: {
+                    labels: {
+                        formatter: function(value) {
+                            return formatRupiah(value, 'Rp ');
+                        },
+                        style: {
+                            color: "#64748b",
+                            fontFamily: "Inter"
+                        }
+                    }
+                },
+                grid: {
+                    strokeDashArray: 3,
+                    borderColor: "#e9ecef"
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(value) {
+                            return formatRupiah(value, 'Rp ');
+                        }
+                    },
+                    style: {
+                        colors: "#64748b",
+                        fontFamily: "Inter"
+                    }
+                },
+                legend: {
+                    show: false,
+                    fontFamily: "Inter",
+                    labels: {
+                        colors: "#64748b"
+                    }
+                }
+            }).render();
+
+            var topBrands = @json($topBrands);
+            var labels = [];
+            var series = [];
+
+            topBrands.forEach(function(item) {
+                labels.push(item.name);
+                series.push(item.total_sales);
+            });
+
+            new ApexCharts(document.querySelector("#leads-overview-donut"), {
+                chart: {
+                    width: 328,
+                    type: "donut"
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                series: series,
+                labels: labels,
+                colors: ["#3454d1", "#1565c0", "#1976d2", "#1e88e5", "#2196f3", "#42a5f5", "#64b5f6",
+                    "#90caf9", "#aad6fa", "#cfe8ff"
+                ],
+                stroke: {
+                    width: 0,
+                    lineCap: "round"
+                },
+                legend: {
+                    show: false,
+                    position: "bottom",
+                    fontFamily: "Inter",
+                    fontWeight: 500,
+                    labels: {
+                        colors: "#A0ACBB",
+                        fontFamily: "Inter"
+                    },
+                    markers: {
+                        width: 10,
+                        height: 10
+                    },
+                    itemMargin: {
+                        horizontal: 20,
+                        vertical: 5
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            size: "85%",
+                            labels: {
+                                show: false,
+                                name: {
+                                    show: false,
+                                    fontSize: "16px",
+                                    colors: "#A0ACBB",
+                                    fontFamily: "Inter"
+                                },
+                                value: {
+                                    show: false,
+                                    fontSize: "30px",
+                                    fontFamily: "Inter",
+                                    color: "#A0ACBB",
+                                    formatter: function(e) {
+                                        return e;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                responsive: [{
+                    breakpoint: 380,
+                    options: {
+                        chart: {
+                            width: 280
+                        },
+                        legend: {
+                            show: false
+                        }
+                    }
+                }],
+                tooltip: {
+                    y: {
+                        formatter: function(value) {
+                            return value;
+                        }
+                    },
+                    style: {
+                        colors: "#A0ACBB",
+                        fontFamily: "Inter"
+                    }
+                }
+            }).render();
+        })
+    </script>
 @endsection
