@@ -25,6 +25,7 @@ class YearlyReportController extends Controller
 
         $transactions = Transaction::with(['details.product'])
             ->whereYear('created_at', $year)
+            ->where('status', 'completed')
             ->orderBy('created_at', 'asc')
             ->get();
 

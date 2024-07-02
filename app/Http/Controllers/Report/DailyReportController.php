@@ -30,6 +30,7 @@ class DailyReportController extends Controller
 
         $transactions = Transaction::with(['details.product'])
             ->whereBetween('created_at', [$start_date, $end_date])
+            ->where('status', 'completed')
             ->orderBy('created_at', 'asc')
             ->get();
 

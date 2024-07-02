@@ -18,7 +18,10 @@ class DashboardController extends Controller
         $catalog_count = Catalog::all()->count();
         $product_count = Product::all()->count();
         $rating_count = Rating::all()->count();
-        $totalRevenue = Transaction::where('status', 'completed')->sum('total_price');
+        $totalRevenue =  DB::table('transactions')
+            ->join('transaction_details', 'transactions.id', '=', 'transaction_details.transaction_id')
+            ->where('transactions.status', 'completed')
+            ->sum('transaction_details.total_price');
 
         $total_transaction = Transaction::all()->count();
         $total_completed = Transaction::where('status', 'completed')->count();
@@ -28,13 +31,15 @@ class DashboardController extends Controller
 
         $transaction = Transaction::orderBy('transaction_date', 'desc')->take(10)->get();
 
-        $monthlyRevenue = Transaction::select(
-            DB::raw('YEAR(transaction_date) as year'),
-            DB::raw('MONTH(transaction_date) as month'),
-            DB::raw('SUM(total_price) as total')
-        )
-            ->where('status', 'completed')
-            ->groupBy('year', 'month')
+        $monthlyRevenue = DB::table('transaction_details')
+            ->join('transactions', 'transaction_details.transaction_id', '=', 'transactions.id')
+            ->select(
+                DB::raw('YEAR(transactions.transaction_date) as year'),
+                DB::raw('MONTH(transactions.transaction_date) as month'),
+                DB::raw('SUM(transaction_details.total_price) as total')
+            )
+            ->where('transactions.status', 'completed')
+            ->groupBy(DB::raw('YEAR(transactions.transaction_date)'), DB::raw('MONTH(transactions.transaction_date)'))
             ->get();
 
         $topBrands = TransactionDetail::join('products', 'transaction_details.product_id', '=', 'products.id')
