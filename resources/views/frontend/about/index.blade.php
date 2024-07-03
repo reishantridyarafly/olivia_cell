@@ -40,7 +40,11 @@
                                     <div class="about__info">
                                         <h2 class="about__h2">Selamat Datang di {{ config('app.name') }}!</h2>
                                         <div class="about__p-wrap">
-                                            <p class="about__p">Olivia Cell
+                                            <p class="about__p"> Selamat datang di website Toko Olivia Cell Merah!
+                                                Kami menyediakan berbagai macam produk elektronik berkualitas dengan harga terjangkau.
+                                                Temukan beragam ponsel, aksesoris, dan gadget terkini di toko kami.
+                                                Pelayanan ramah dan pengiriman cepat adalah prioritas kami untuk memastikan kepuasan pelanggan. 
+                                                Nikmati pengalaman berbelanja yang mudah dan menyenangkan hanya di Toko Olivia Cell Merah.
 
                                             </p>
                                         </div>
