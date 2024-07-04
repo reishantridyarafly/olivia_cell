@@ -13,17 +13,16 @@
                             <div class="col-12">
                                 <div class="slider-content slider-content--animation">
 
-                                    <span class="content-span-1 u-c-secondary">Latest Update Stock</span>
+                                    <span class="content-span-1 u-c-secondary">Selamat Datang di Toko Olivia Cell Merah!</span>
 
-                                    <span class="content-span-2 u-c-secondary">30% Off On Electronics</span>
+                                    <span class="content-span-2 u-c-secondary">Tempat Terbaik untuk Semua <br>
+                                    Kebutuhan Elektronik Anda</span>
 
-                                    <span class="content-span-3 u-c-secondary">Find electronics on best prices,
-                                        Also
-                                        Discover most selling products of electronics</span>
+                                    <span class="content-span-3 u-c-secondary"> Kami menyediakan berbagai produk elektronik berkualitas dengan harga terjangkau.</span>
 
-                                    <span class="content-span-4 u-c-secondary">Starting At
+                                    <span class="content-span-4 u-c-secondary">Mulai Dari
 
-                                        <span class="u-c-brand">$1050.00</span></span>
+                                        <span class="u-c-brand">Rp. 1.000.000</span></span>
 
                                     <a class="shop-now-link btn--e-brand" href="{{ route('shop.index') }}">BELANJA
                                         SEKARANG</a>
@@ -38,16 +37,16 @@
                             <div class="col-12">
                                 <div class="slider-content slider-content--animation">
 
-                                    <span class="content-span-1 u-c-white">Find Top Brands</span>
+                                    <span class="content-span-1 u-c-white">Produk Terbaru & Penawaran Spesial</span>
 
-                                    <span class="content-span-2 u-c-white">10% Off On Electronics</span>
+                                    <span class="content-span-2 u-c-white">Jelajahi Koleksi Terbaru dan Diskon Hingga 50%</span>
 
-                                    <span class="content-span-3 u-c-white">Find electronics on best prices, Also
-                                        Discover most selling products of electronics</span>
+                                    <span class="content-span-3 u-c-white">Temukan ponsel, tablet, dan aksesoris terkini <br>
+                                    dengan penawaran spesial yang tidak boleh Anda lewatkan.</span>
 
-                                    <span class="content-span-4 u-c-white">Starting At
+                                    <span class="content-span-4 u-c-white">
 
-                                        <span class="u-c-brand">$380.00</span></span>
+                                        <span class="u-c-brand"></span></span>
 
                                     <a class="shop-now-link btn--e-brand" href="{{ route('shop.index') }}">BELANJA
                                         SEKARANG</a>
@@ -62,17 +61,15 @@
                             <div class="col-12">
                                 <div class="slider-content slider-content--animation">
 
-                                    <span class="content-span-1 u-c-secondary">Find Top Brands</span>
+                                    <span class="content-span-1 u-c-secondary">Layanan Pelanggan & Pengiriman Cepat</span>
 
-                                    <span class="content-span-2 u-c-secondary">10% Off On Electronics</span>
+                                    <span class="content-span-2 u-c-secondary">Kepuasan Anda Prioritas Kami</span>
 
-                                    <span class="content-span-3 u-c-secondary">Find electronics on best prices,
-                                        Also
-                                        Discover most selling products of electronics</span>
+                                    <span class="content-span-3 u-c-secondary">Nikmati pelayanan ramah dan pengiriman cepat untuk memastikan barang Anda sampai tepat waktu.</span>
 
-                                    <span class="content-span-4 u-c-secondary">Starting At
+                                    <span class="content-span-4 u-c-secondary">
 
-                                        <span class="u-c-brand">$550.00</span></span>
+                                        <span class="u-c-brand"></span></span>
 
                                     <a class="shop-now-link btn--e-brand" href="{{ route('shop.index') }}">BELANJA
                                         SEKARANG</a>
@@ -275,23 +272,21 @@
                                 <div class="service__icon"><i class="fas fa-truck"></i></div>
                                 <div class="service__info-wrap">
 
-                                    <span class="service__info-text-1">Free Shipping</span>
+                                    <span class="service__info-text-1">Pengiriman Cepat dan Aman</span>
 
-                                    <span class="service__info-text-2">Free shipping on all US order or order
-                                        above
-                                        $200</span>
+                                    <span class="service__info-text-2">Kami memastikan pengiriman cepat dan aman dengan nomor pelacakan untuk memantau status pesanan Anda.</span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 u-s-m-b-30">
                             <div class="service u-h-100">
-                                <div class="service__icon"><i class="fas fa-redo"></i></div>
+                                <div class="service__icon"><i class="fas fa-thumbs-up"></i></div>
                                 <div class="service__info-wrap">
 
-                                    <span class="service__info-text-1">Shop with Confidence</span>
+                                    <span class="service__info-text-1">Garansi Resmi</span>
 
-                                    <span class="service__info-text-2">Our Protection covers your purchase from
-                                        click to delivery</span>
+                                    <span class="service__info-text-2">Semua produk kami dilengkapi dengan garansi resmi dari pabrikan, 
+                                        melindungi Anda dari cacat produksi dan kerusakan.</span>
                                 </div>
                             </div>
                         </div>
@@ -300,10 +295,10 @@
                                 <div class="service__icon"><i class="fas fa-headphones-alt"></i></div>
                                 <div class="service__info-wrap">
 
-                                    <span class="service__info-text-1">24/7 Help Center</span>
+                                    <span class="service__info-text-1">Layanan Pelanggan Responsif</span>
 
-                                    <span class="service__info-text-2">Round-the-clock assistance for a smooth
-                                        shopping experience</span>
+                                    <span class="service__info-text-2">Hubungi layanan pelanggan kami melalui Kontak.
+                                    Kami siap membantu Anda setiap hari dari pukul 08.00 hingga 20.00.</span>
                                 </div>
                             </div>
                         </div>
