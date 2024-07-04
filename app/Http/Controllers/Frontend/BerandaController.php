@@ -29,6 +29,7 @@ class BerandaController extends Controller
         $most_purchased_products = DB::table('transaction_details')
             ->select(
                 'products.id',
+                'products.cover_photo',
                 'products.name',
                 'products.slug',
                 'products.before_price',
@@ -43,6 +44,7 @@ class BerandaController extends Controller
             ->join('catalog', 'products.catalog_id', '=', 'catalog.id')
             ->groupBy(
                 'products.id',
+                'products.cover_photo',
                 'products.name',
                 'products.slug',
                 'products.before_price',

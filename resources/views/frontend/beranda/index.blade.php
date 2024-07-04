@@ -117,7 +117,7 @@
                                                         data-id="{{ $row->id }}"
                                                         href="{{ route('shop.detail', $row->slug) }}">
                                                         <img class="aspect__img"
-                                                            src="{{ asset('storage/uploads/products/' . $row->photo_name) }}"
+                                                            src="{{ asset('storage/uploads/cover/' . $row->cover_photo) }}"
                                                             alt=""></a>
                                                     <div class="product-o__action-wrap">
                                                         <ul class="product-o__action-list">
