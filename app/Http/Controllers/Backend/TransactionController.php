@@ -9,6 +9,7 @@ use App\Models\TransactionDetail;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
@@ -196,10 +197,31 @@ class TransactionController extends Controller
     public function failed(Request $request)
     {
         $checkout = Transaction::find($request->id);
-        $checkout->status = 'failed';
-        $checkout->save();
-        return response()->json(['message' => 'Data berhasil di simpan.']);
+
+        if ($checkout) {
+            $checkout->status = 'failed';
+            $checkout->save();
+
+            $transactionDetails = DB::table('transaction_details')
+                ->where('transaction_id', $checkout->id)
+                ->get();
+
+            foreach ($transactionDetails as $detail) {
+                $product = DB::table('products')->where('id', $detail->product_id)->first();
+                if ($product) {
+                    $newStock = $product->stock + $detail->quantity;
+                    DB::table('products')
+                        ->where('id', $detail->product_id)
+                        ->update(['stock' => $newStock]);
+                }
+            }
+
+            return response()->json(['message' => 'Data berhasil disimpan']);
+        } else {
+            return response()->json(['error' => 'Transaksi tidak ditemukan'], 404);
+        }
     }
+
 
     public function process(Request $request)
     {

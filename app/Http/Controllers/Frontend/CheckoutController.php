@@ -50,7 +50,7 @@ class CheckoutController extends Controller
     public function checkOngkir(Request $request)
     {
         try {
-            $origin = 80;
+            $origin = 81;
             $destination = $request->city;
             $weight = $request->weight;
             $courier = $request->courier;

@@ -72,7 +72,7 @@
                                                         <div class="table-p__box">
                                                             <div class="table-p__img-wrap">
                                                                 <img class="u-img-fluid"
-                                                                    src="{{ asset('storage/uploads/products/' . $item->product->photos->first()->photo_name) }}"
+                                                                    src="{{ asset('storage/uploads/cover/' . $item->product->cover_photo) }}"
                                                                     alt="">
                                                             </div>
                                                             <div class="table-p__info">
