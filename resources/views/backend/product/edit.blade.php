@@ -32,10 +32,19 @@
                             <div class="card-body lead-status">
                                 <form id="form">
                                     <div class="row">
-                                        <div class="col-lg-12 col-md-6">
+                                        <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
                                                 <input type="hidden" name="id" id="id"
                                                     value="{{ $product->id }}">
+                                                <label for="cover_photo" class="form-label">Cover Foto <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" id="cover_photo"
+                                                    name="cover_photo">
+                                                <small class="text-danger errorCoverPhoto mt-2"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
                                                 <label for="photo" class="form-label">Foto <span
                                                         class="text-danger">*</span></label>
                                                 <input type="file" class="form-control" id="photo" name="photo[]"
@@ -45,11 +54,43 @@
                                         </div>
                                         <div class="col-lg-12 col-md-6">
                                             <div class="form-group mb-3">
+                                                <label class="form-label">Katalog <span class="text-danger">*</span></label>
+                                                <select class="form-control" data-select2-selector="icon" name="catalog"
+                                                    id="catalog">
+                                                    <option value="" data-icon="feather-archive">-- Pilih Katalog --
+                                                    </option>
+                                                    @foreach ($catalog as $row)
+                                                        <option value="{{ $row->id }}"
+                                                            {{ $row->id == $product->catalog_id ? 'selected' : '' }}
+                                                            data-icon="feather-archive">
+                                                            {{ $row->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <small class="text-danger errorCatalog mt-2"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-6">
+                                            <div class="form-group mb-3">
                                                 <label for="name" class="form-label">Nama <span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="name" name="name"
                                                     value="{{ $product->name }}">
                                                 <small class="text-danger errorName mt-2"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="color" class="form-label">Warna</label>
+                                                <input type="text" class="form-control" id="color" name="color"
+                                                    value="{{ $product->color }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="network" class="form-label">Jaringan</label>
+                                                <input type="text" class="form-control" id="network" name="network"
+                                                    value="{{ $product->network }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
@@ -64,7 +105,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
                                                 <label for="before_price" class="form-label">Harga Sebelum (Harga
-                                                    Diskon)<span class="text-danger">*</span></label>
+                                                    Diskon)</label>
                                                 <input type="text" class="form-control" id="before_price"
                                                     name="before_price" value="{{ $product->before_price }}">
                                                 <small class="text-danger errorBeforePrice mt-2"></small>
@@ -77,15 +118,6 @@
                                                 <input type="number" class="form-control" id="stock" name="stock"
                                                     value="{{ $product->stock }}">
                                                 <small class="text-danger errorStock mt-2"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="weight" class="form-label">Berat (Gram) <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="number" class="form-control" id="weight" name="weight"
-                                                    value="{{ $product->weight }}">
-                                                <small class="text-danger errorWeight mt-2"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
@@ -160,6 +192,27 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
+                                                <label for="audio" class="form-label">Audio</label>
+                                                <input type="text" class="form-control" id="audio" name="audio"
+                                                    value="{{ $product->audio }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="wlan" class="form-label">WLAN</label>
+                                                <input type="text" class="form-control" id="wlan" name="wlan"
+                                                    value="{{ $product->wlan }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label for="bluetooth" class="form-label">Bluetooth</label>
+                                                <input type="text" class="form-control" id="bluetooth"
+                                                    name="bluetooth" value="{{ $product->bluetooth }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
                                                 <label for="sensor" class="form-label">Sensor</label>
                                                 <input type="text" class="form-control" id="sensor" name="sensor"
                                                     value="{{ $product->sensor }}">
@@ -181,6 +234,13 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
+                                                <label for="memory_slot" class="form-label">Slot Memori Eksternal</label>
+                                                <input type="text" class="form-control" id="memory_slot"
+                                                    name="memory_slot" value="{{ $product->memory_slot }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group mb-3">
                                                 <label for="dimension" class="form-label">Dimensi</label>
                                                 <input type="text" class="form-control" id="dimension"
                                                     name="dimension" value="{{ $product->dimension }}">
@@ -188,27 +248,11 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-group mb-3">
-                                                <label for="color" class="form-label">Warna</label>
-                                                <input type="text" class="form-control" id="color" name="color"
-                                                    value="{{ $product->color }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label class="form-label">Katalog <span
+                                                <label for="weight" class="form-label">Berat (Gram) <span
                                                         class="text-danger">*</span></label>
-                                                <select class="form-control" data-select2-selector="icon" name="catalog"
-                                                    id="catalog">
-                                                    <option value="" data-icon="feather-archive">-- Pilih Katalog --
-                                                    </option>
-                                                    @foreach ($catalog as $row)
-                                                        <option value="{{ $row->id }}" data-icon="feather-archive"
-                                                            {{ $row->id == $product->catalog_id ? 'selected' : '' }}>
-                                                            {{ $row->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                <small class="text-danger errorCatalog mt-2"></small>
+                                                <input type="number" class="form-control" id="weight" name="weight"
+                                                    value="{{ $product->weight }}">
+                                                <small class="text-danger errorWeight mt-2"></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-6">
@@ -219,8 +263,7 @@
                                         </div>
                                         <div class="col-lg-12 col-md-6">
                                             <div class="form-group mb-3">
-                                                <label class="form-label">Deskripsi Singkat <span
-                                                        class="text-danger">*</span></label>
+                                                <label class="form-label">Deskripsi Singkat</label>
                                                 <textarea name="short_description" id="short_description" rows="3" class="form-control">{{ $product->short_description }}</textarea>
                                             </div>
                                         </div>
@@ -275,7 +318,7 @@
                         '-',
                         'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
                         'alignment', '|',
-                        'link', 'blockQuote', 'insertTable', 'mediaEmbed',
+                        'link', 'blockQuote', 'insertTable',
                         '|',
                         'specialCharacters', 'horizontalLine', 'pageBreak', '|',
                     ],
@@ -468,6 +511,14 @@
                     },
                     success: function(response) {
                         if (response.errors) {
+                            if (response.errors.cover_photo) {
+                                $('#cover_photo').addClass('is-invalid');
+                                $('.errorCoverPhoto').html(response.errors.cover_photo);
+                            } else {
+                                $('#cover_photo').removeClass('is-invalid');
+                                $('.errorCoverPhoto').html('');
+                            }
+
                             if (response.errors.photo) {
                                 $('#photo').addClass('is-invalid');
                                 $('.errorPhoto').html(response.errors.photo);

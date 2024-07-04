@@ -84,6 +84,7 @@ class ProductController extends Controller
                 'after_price' => 'required',
                 'stock' => 'required|string',
                 'weight' => 'required',
+                'cover_photo' => 'required|mimes:jpg,png,jpeg,webp,svg|file|max:5120',
                 'photo' => 'required|max:5120',
                 'photo.*' => 'image|mimes:jpg,png,jpeg,webp,svg|file|max:5120',
                 'catalog' => 'required|string',
@@ -92,12 +93,18 @@ class ProductController extends Controller
                 'name.required' => 'Silakan isi nama terlebih dahulu.',
                 'name.string' => 'Nama harus berupa teks.',
                 'name.unique' => 'Nama sudah tersedia.',
+                'weight.required' => 'Silakan isi berat terlebih dahulu.',
                 'after_price.required' => 'Silakan isi harga terlebih dahulu.',
                 'stock.required' => 'Silakan isi stok terlebih dahulu.',
                 'stock.string' => 'Stok harus berupa teks.',
                 'weight.required' => 'Silakan isi berat terlebih dahulu.',
                 'catalog.required' => 'Silakan pilih Katalog terlebih dahulu.',
                 'catalog.string' => 'Katalog harus berupa teks.',
+                'cover_photo.required' => 'Silakan isi cover foto terlebih dahulu.',
+                'cover_photo.image' => 'File harus berupa gambar.',
+                'cover_photo.mimes' => 'Ekstensi file harus berupa: jpg, png, jpeg, webp, atau svg.',
+                'cover_photo.file' => 'File harus berupa gambar.',
+                'cover_photo.max' => 'Ukuran file tidak boleh lebih dari 5 MB.',
                 'photo.required' => 'Silakan isi foto terlebih dahulu.',
                 'photo.image' => 'File harus berupa gambar.',
                 'photo.mimes' => 'Ekstensi file harus berupa: jpg, png, jpeg, webp, atau svg.',
@@ -108,46 +115,59 @@ class ProductController extends Controller
 
         if ($validated->fails()) {
             return response()->json(['errors' => $validated->errors()]);
-        } else {
-            $product = new Product();
-
-            $product->name = $request->name;
-            $product->slug = Str::slug($request->name);
-            $product->description = $request->description;
-            $product->short_description = $request->short_description;
-            $product->before_price = $request->before_price ? str_replace(['Rp', ' ', '.'], '', $request->before_price) : null;
-            $product->after_price = str_replace(['Rp', ' ', '.'], '', $request->after_price);
-            $product->stock = $request->stock;
-            $product->weight = $request->weight;
-            $product->os = $request->os;
-            $product->processor = $request->processor;
-            $product->gpu = $request->gpu;
-            $product->ram = $request->ram;
-            $product->capacity = $request->capacity;
-            $product->screen_size = $request->screen_size;
-            $product->screen_type = $request->screen_type;
-            $product->screen_resolution = $request->screen_resolution;
-            $product->rear_camera = $request->rear_camera;
-            $product->front_camera = $request->front_camera;
-            $product->sensor = $request->sensor;
-            $product->battery = $request->battery;
-            $product->charging = $request->charging;
-            $product->dimension = $request->dimension;
-            $product->color = $request->color;
-            $product->catalog_id = $request->catalog;
-            $product->save();
-
-            if ($request->hasFile('photo')) {
-                foreach ($request->file('photo') as $image) {
-                    $imageName = time() . '_' . $image->getClientOriginalName();
-                    Storage::putFileAs('public/uploads/products', $image, $imageName);
-                    $product->photos()->create(['photo_name' => $imageName]);
-                }
-            }
-
-            return response()->json(['success' => 'Data berhasil disimpan']);
         }
+
+        $product = new Product();
+        $product->name = $request->name;
+        $product->slug = Str::slug($request->name);
+        $product->description = $request->description;
+        $product->short_description = $request->short_description;
+        $product->before_price = $request->before_price ? str_replace(['Rp', ' ', '.'], '', $request->before_price) : null;
+        $product->after_price = str_replace(['Rp', ' ', '.'], '', $request->after_price);
+        $product->stock = $request->stock;
+        $product->weight = $request->weight;
+        $product->os = $request->os;
+        $product->processor = $request->processor;
+        $product->gpu = $request->gpu;
+        $product->ram = $request->ram;
+        $product->capacity = $request->capacity;
+        $product->screen_size = $request->screen_size;
+        $product->screen_type = $request->screen_type;
+        $product->screen_resolution = $request->screen_resolution;
+        $product->rear_camera = $request->rear_camera;
+        $product->front_camera = $request->front_camera;
+        $product->sensor = $request->sensor;
+        $product->battery = $request->battery;
+        $product->charging = $request->charging;
+        $product->dimension = $request->dimension;
+        $product->color = $request->color;
+        $product->network = $request->network;
+        $product->audio = $request->audio;
+        $product->wlan = $request->wlan;
+        $product->bluetooth = $request->bluetooth;
+        $product->memory_slot = $request->memory_slot;
+        $product->catalog_id = $request->catalog;
+
+        if ($request->hasFile('cover_photo')) {
+            $coverPhoto = $request->file('cover_photo');
+            $coverPhotoName = time() . '_cover_' . $coverPhoto->getClientOriginalName();
+            Storage::putFileAs('public/uploads/cover', $coverPhoto, $coverPhotoName);
+            $product->cover_photo = $coverPhotoName;
+        }
+
+        $product->save();
+
+        if ($request->hasFile('photo')) {
+            foreach ($request->file('photo') as $image) {
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                Storage::putFileAs('public/uploads/products', $image, $imageName);
+                $product->photos()->create(['photo_name' => $imageName]);
+            }
+        }
+
+        return response()->json(['success' => 'Data berhasil disimpan']);
     }
+
 
     public function edit($id)
     {
@@ -166,6 +186,7 @@ class ProductController extends Controller
                 'after_price' => 'required',
                 'stock' => 'required|string',
                 'weight' => 'required',
+                'cover_photo' => 'mimes:jpg,png,jpeg,webp,svg|file|max:5120',
                 'photo' => 'max:5120',
                 'photo.*' => 'image|mimes:jpg,png,jpeg,webp,svg|file|max:5120',
                 'catalog' => 'required|string',
@@ -174,12 +195,18 @@ class ProductController extends Controller
                 'name.required' => 'Silakan isi nama terlebih dahulu.',
                 'name.string' => 'Nama harus berupa teks.',
                 'name.unique' => 'Nama sudah tersedia.',
+                'weight.required' => 'Silakan isi berat terlebih dahulu.',
                 'after_price.required' => 'Silakan isi harga terlebih dahulu.',
                 'stock.required' => 'Silakan isi stok terlebih dahulu.',
                 'stock.string' => 'Stok harus berupa teks.',
                 'weight.required' => 'Silakan isi berat terlebih dahulu.',
                 'catalog.required' => 'Silakan pilih Katalog terlebih dahulu.',
                 'catalog.string' => 'Katalog harus berupa teks.',
+                'cover_photo.required' => 'Silakan isi cover foto terlebih dahulu.',
+                'cover_photo.image' => 'File harus berupa gambar.',
+                'cover_photo.mimes' => 'Ekstensi file harus berupa: jpg, png, jpeg, webp, atau svg.',
+                'cover_photo.file' => 'File harus berupa gambar.',
+                'cover_photo.max' => 'Ukuran file tidak boleh lebih dari 5 MB.',
                 'photo.required' => 'Silakan isi foto terlebih dahulu.',
                 'photo.image' => 'File harus berupa gambar.',
                 'photo.mimes' => 'Ekstensi file harus berupa: jpg, png, jpeg, webp, atau svg.',
@@ -216,7 +243,23 @@ class ProductController extends Controller
             $product->charging = $request->charging;
             $product->dimension = $request->dimension;
             $product->color = $request->color;
+            $product->network = $request->network;
+            $product->audio = $request->audio;
+            $product->wlan = $request->wlan;
+            $product->bluetooth = $request->bluetooth;
+            $product->memory_slot = $request->memory_slot;
             $product->catalog_id = $request->catalog;
+
+            if ($request->hasFile('cover_photo')) {
+                if ($product->cover_photo) {
+                    Storage::delete('public/uploads/cover/' . $product->cover_photo);
+                }
+                $coverPhoto = $request->file('cover_photo');
+                $coverPhotoName = time() . '_cover_' . $coverPhoto->getClientOriginalName();
+                Storage::putFileAs('public/uploads/cover', $coverPhoto, $coverPhotoName);
+                $product->cover_photo = $coverPhotoName;
+            }
+
             $product->save();
 
             if ($request->hasFile('photo')) {
@@ -243,6 +286,9 @@ class ProductController extends Controller
     public function destroy(Request $request)
     {
         $product = Product::findOrFail($request->id);
+        if ($product->cover_photo) {
+            Storage::delete('public/uploads/cover/' . $product->cover_photo);
+        }
         $this->deleteProductImages($product);
         $product->delete();
 

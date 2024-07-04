@@ -189,6 +189,14 @@
                                                             <td>{{ $product->color }}</td>
                                                         </tr>
                                                         <tr>
+                                                            <td>Jaringan</td>
+                                                            <td>{{ $product->network }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Sistem Operasi</td>
+                                                            <td>{{ $product->os }}</td>
+                                                        </tr>
+                                                        <tr>
                                                             <td>Processor</td>
                                                             <td>{{ $product->processor }}</td>
                                                         </tr>
@@ -217,12 +225,25 @@
                                                             <td>{{ $product->screen_resolution }}</td>
                                                         </tr>
                                                         <tr>
+                                                            <td>Kamera Belakang</td>
+                                                            <td>{{ $product->front_camera }}</td>
+                                                        </tr>
+                                                        <tr>
                                                             <td>Kamera Depan</td>
                                                             <td>{{ $product->rear_camera }}</td>
                                                         </tr>
+                                                      
                                                         <tr>
-                                                            <td>Kamera Belakang</td>
-                                                            <td>{{ $product->front_camera }}</td>
+                                                            <td>Audio</td>
+                                                            <td>{{ $product->audio }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>WLAN</td>
+                                                            <td>{{ $product->wlan }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Bluetooth</td>
+                                                            <td>{{ $product->bluetooth }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Sensor</td>
@@ -235,6 +256,10 @@
                                                         <tr>
                                                             <td>Pengisian Daya</td>
                                                             <td>{{ $product->charging }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Slot Memori Eksternal</td>
+                                                            <td>{{ $product->memory_slot }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Berat</td>
@@ -569,7 +594,7 @@
                                                 href="{{ route('shop.detail', $recommendedProduct->slug) }}">
 
                                                 <img class="aspect__img"
-                                                    src="{{ asset('storage/uploads/products/' . $recommendedProduct->photos->first()->photo_name) }}"
+                                                    src="{{ asset('storage/uploads/cover/' . $recommendedProduct->cover_photo) }}"
                                                     alt=""></a>
                                             <div class="product-o__action-wrap">
                                                 <ul class="product-o__action-list">

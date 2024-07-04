@@ -302,10 +302,9 @@
                 }
             });
 
-            var addressId = $('#address').val();
-            if (addressId) {
+            function getAddressDetails(addressId) {
                 $.ajax({
-                    url: "{{ url('/pembayaran/get-address-details/"+addressId+"') }}",
+                    url: "{{ url('/pembayaran/get-address-details/') }}" + "/" + addressId,
                     type: 'POST',
                     data: {
                         id: addressId
@@ -321,10 +320,25 @@
                             thrownError);
                     }
                 });
+            }
+
+            var addressId = $('#address').val();
+            if (addressId) {
+                getAddressDetails(addressId);
             } else {
                 $('#province').val('');
                 $('#city').val('');
             }
+
+            $('#address').on('change', function() {
+                var newAddressId = $(this).val();
+                if (newAddressId) {
+                    getAddressDetails(newAddressId);
+                } else {
+                    $('#province').val('');
+                    $('#city').val('');
+                }
+            });
 
             $('#courier').on('change', function() {
                 let city = $('#city_id').val();

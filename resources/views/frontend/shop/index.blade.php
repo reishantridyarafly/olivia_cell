@@ -65,7 +65,7 @@
                                                         href="{{ route('shop.detail', $product->slug) }}">
 
                                                         <img class="aspect__img"
-                                                            src="{{ asset('storage/uploads/products/' . $product->photos->first()->photo_name) }}"
+                                                            src="{{ asset('storage/uploads/cover/' . $product->cover_photo) }}"
                                                             alt=""></a>
                                                     <div class="product-m__add-cart product-view"
                                                         data-id="{{ $product->id }}">

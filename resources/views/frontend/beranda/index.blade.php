@@ -212,7 +212,7 @@
                                                 data-id="{{ $new_product->id }}"
                                                 href="{{ route('shop.detail', $new_product->slug) }}">
                                                 <img class="aspect__img"
-                                                    src="{{ asset('storage/uploads/products/' . $new_product->photos->first()->photo_name) }}"
+                                                    src="{{ asset('storage/uploads/cover/' . $new_product->cover_photo) }}"
                                                     alt=""></a>
                                             <div class="product-o__action-wrap">
                                                 <ul class="product-o__action-list">
