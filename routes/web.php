@@ -60,6 +60,11 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/penilaian', [App\Http\Controllers\Frontend\RatingController::class, 'store'])->name('ratings.store');
 
+    Route::get('/wishlist', [App\Http\Controllers\Frontend\WistlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist', [App\Http\Controllers\Frontend\WistlistController::class, 'store'])->name('wishlist.store');
+    Route::delete('/wishlist/{id}', [App\Http\Controllers\Frontend\WistlistController::class, 'destroy'])->name('wishlist.destroy');
+
+
     Route::get('/transaksi', [App\Http\Controllers\Backend\TransactionController::class, 'index'])->name('transaction.index');
     Route::get('/transaksi/detail/{id}', [App\Http\Controllers\Backend\TransactionController::class, 'detail'])->name('transaction.detail');
     Route::post('/transaksi/selesai', [App\Http\Controllers\Backend\TransactionController::class, 'completed'])->name('transaction.completed');
@@ -71,6 +76,8 @@ Route::middleware(['auth', 'user-access:Pemilik,Administrator'])->group(function
 
 Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::get('/transaksi/tambah', [App\Http\Controllers\Backend\TransactionController::class, 'create'])->name('transaction.create');
+    Route::get('/transaksi/get-product', [App\Http\Controllers\Backend\TransactionController::class, 'getProducts'])->name('transaction.getProducts');
+
     Route::get('/transaksi/{id}/edit', [App\Http\Controllers\Backend\TransactionController::class, 'edit'])->name('transaction.edit');
     Route::post('/transaksi', [App\Http\Controllers\Backend\TransactionController::class, 'store'])->name('transaction.store');
     Route::delete('/transaksi/{id}', [App\Http\Controllers\Backend\TransactionController::class, 'destroy'])->name('transaction.destroy');

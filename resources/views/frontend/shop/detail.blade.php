@@ -232,7 +232,7 @@
                                                             <td>Kamera Depan</td>
                                                             <td>{{ $product->rear_camera }}</td>
                                                         </tr>
-                                                      
+
                                                         <tr>
                                                             <td>Audio</td>
                                                             <td>{{ $product->audio }}</td>
@@ -606,6 +606,11 @@
                                                         <input type="hidden" name="qty" id="qty"
                                                             value="1">
                                                     </li>
+                                                    <li>
+                                                        <a href="javascript:(0);" id="addWishlist"
+                                                            data-id="{{ $recommendedProduct->id }}"
+                                                            title="Tambah Wishlist"><i class="fas fa-heart"></i></a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -755,6 +760,40 @@
                             top.location.href =
                                 "{{ route('shop.detail', ['slug' => $product->slug]) }}";
                         });
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        console.error(xhr.status + "\n" + xhr.responseText + "\n" +
+                            thrownError);
+                    }
+                });
+            });
+
+            $('body').on('click', '#addWishlist', function() {
+                let id = $(this).data('id');
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('wishlist.store') }}",
+                    data: {
+                        id: id,
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: response.icon,
+                            title: response.message
+                        });
+                        updateCartCount();
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         console.error(xhr.status + "\n" + xhr.responseText + "\n" +

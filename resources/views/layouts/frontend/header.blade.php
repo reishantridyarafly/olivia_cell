@@ -162,7 +162,10 @@
                             <li>
                                 <a href="{{ route('beranda.index') }}"><i class="fas fa-home u-c-brand"></i></a>
                             </li>
-                            <li class="has-dropdown">
+                            <li>
+                                <a href="{{ route('wishlist.index') }}"><i class="far fa-heart"></i></a>
+                            </li>
+                            <li>
                                 <a href="@auth{{ route('cart.index', auth()->user()->id) }} @endauth"
                                     class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
                                     <span class="total-item-round" id="cart-count">0</span></a>

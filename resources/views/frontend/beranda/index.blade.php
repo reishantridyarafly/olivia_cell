@@ -13,12 +13,14 @@
                             <div class="col-12">
                                 <div class="slider-content slider-content--animation">
 
-                                    <span class="content-span-1 u-c-secondary">Selamat Datang di Toko Olivia Cell Merah!</span>
+                                    <span class="content-span-1 u-c-secondary">Selamat Datang di Toko Olivia Cell
+                                        Merah!</span>
 
                                     <span class="content-span-2 u-c-secondary">Tempat Terbaik untuk Semua <br>
-                                    Kebutuhan Elektronik Anda</span>
+                                        Kebutuhan Elektronik Anda</span>
 
-                                    <span class="content-span-3 u-c-secondary"> Kami menyediakan berbagai produk elektronik berkualitas dengan harga terjangkau.</span>
+                                    <span class="content-span-3 u-c-secondary"> Kami menyediakan berbagai produk elektronik
+                                        berkualitas dengan harga terjangkau.</span>
 
                                     <span class="content-span-4 u-c-secondary">Mulai Dari
 
@@ -39,10 +41,12 @@
 
                                     <span class="content-span-1 u-c-white">Produk Terbaru & Penawaran Spesial</span>
 
-                                    <span class="content-span-2 u-c-white">Jelajahi Koleksi Terbaru dan Diskon Hingga 50%</span>
+                                    <span class="content-span-2 u-c-white">Jelajahi Koleksi Terbaru dan Diskon Hingga
+                                        50%</span>
 
-                                    <span class="content-span-3 u-c-white">Temukan ponsel, tablet, dan aksesoris terkini <br>
-                                    dengan penawaran spesial yang tidak boleh Anda lewatkan.</span>
+                                    <span class="content-span-3 u-c-white">Temukan ponsel, tablet, dan aksesoris terkini
+                                        <br>
+                                        dengan penawaran spesial yang tidak boleh Anda lewatkan.</span>
 
                                     <span class="content-span-4 u-c-white">
 
@@ -65,7 +69,8 @@
 
                                     <span class="content-span-2 u-c-secondary">Kepuasan Anda Prioritas Kami</span>
 
-                                    <span class="content-span-3 u-c-secondary">Nikmati pelayanan ramah dan pengiriman cepat untuk memastikan barang Anda sampai tepat waktu.</span>
+                                    <span class="content-span-3 u-c-secondary">Nikmati pelayanan ramah dan pengiriman cepat
+                                        untuk memastikan barang Anda sampai tepat waktu.</span>
 
                                     <span class="content-span-4 u-c-secondary">
 
@@ -125,6 +130,11 @@
                                                                         class="fas fa-plus-circle"></i></a>
                                                                 <input type="hidden" name="qty" id="qty"
                                                                     value="1">
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:(0);" id="addWishlist"
+                                                                    data-id="{{ $row->id }}"
+                                                                    title="Tambah Wishlist"><i class="fas fa-heart"></i></a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -220,6 +230,11 @@
                                                         <input type="hidden" name="qty" id="qty"
                                                             value="1">
                                                     </li>
+                                                    <li>
+                                                        <a href="javascript:(0);" id="addWishlist"
+                                                            data-id="{{ $new_product->id }}" title="Tambah Wishlist"><i
+                                                                class="fas fa-heart"></i></a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -274,7 +289,8 @@
 
                                     <span class="service__info-text-1">Pengiriman Cepat dan Aman</span>
 
-                                    <span class="service__info-text-2">Kami memastikan pengiriman cepat dan aman dengan nomor pelacakan untuk memantau status pesanan Anda.</span>
+                                    <span class="service__info-text-2">Kami memastikan pengiriman cepat dan aman dengan
+                                        nomor pelacakan untuk memantau status pesanan Anda.</span>
                                 </div>
                             </div>
                         </div>
@@ -285,7 +301,8 @@
 
                                     <span class="service__info-text-1">Garansi Resmi</span>
 
-                                    <span class="service__info-text-2">Semua produk kami dilengkapi dengan garansi resmi dari pabrikan, 
+                                    <span class="service__info-text-2">Semua produk kami dilengkapi dengan garansi resmi
+                                        dari pabrikan,
                                         melindungi Anda dari cacat produksi dan kerusakan.</span>
                                 </div>
                             </div>
@@ -298,7 +315,7 @@
                                     <span class="service__info-text-1">Layanan Pelanggan Responsif</span>
 
                                     <span class="service__info-text-2">Hubungi layanan pelanggan kami melalui Kontak.
-                                    Kami siap membantu Anda setiap hari dari pukul 08.00 hingga 20.00.</span>
+                                        Kami siap membantu Anda setiap hari dari pukul 08.00 hingga 20.00.</span>
                                 </div>
                             </div>
                         </div>
@@ -445,6 +462,40 @@
                         });
                         Toast.fire({
                             icon: "success",
+                            title: response.message
+                        });
+                        updateCartCount();
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        console.error(xhr.status + "\n" + xhr.responseText + "\n" +
+                            thrownError);
+                    }
+                });
+            });
+
+            $('body').on('click', '#addWishlist', function() {
+                let id = $(this).data('id');
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('wishlist.store') }}",
+                    data: {
+                        id: id,
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: response.icon,
                             title: response.message
                         });
                         updateCartCount();

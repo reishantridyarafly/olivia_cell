@@ -262,4 +262,29 @@ class TransactionController extends Controller
             return response()->json(['message' => 'Data berhasil di simpan.']);
         }
     }
+
+    public function getProducts(Request $request)
+    {
+        $search = $request->get('q');
+        $page = $request->get('page', 1);
+        $perPage = 10;
+
+        $products = Product::where(function ($query) use ($search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('ram', 'like', "%{$search}%")
+                ->orWhere('capacity', 'like', "%{$search}%");
+        })
+            ->where('stock', '>', 0)
+            ->select('id', 'name', 'ram', 'capacity', 'after_price as price', 'stock')
+            ->orderBy('name')
+            ->paginate($perPage, ['*'], 'page', $page);
+
+        return response()->json([
+            'results' => $products->items(),
+            'pagination' => [
+                'more' => $products->hasMorePages()
+            ],
+            'total_count' => $products->total()
+        ]);
+    }
 }
