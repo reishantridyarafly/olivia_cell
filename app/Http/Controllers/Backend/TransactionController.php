@@ -194,6 +194,19 @@ class TransactionController extends Controller
         return view('backend.transaction.detail', compact(['transaction', 'subtotal']));
     }
 
+    public function destroy(Request $request)
+    {
+        try {
+            $transaction = Transaction::findOrFail($request->id);
+            $transaction->details()->delete();
+            $transaction->delete();
+
+            return response()->json(['message' => 'Transaksi berhasil dihapus']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Terjadi kesalahan saat menghapus transaksi'], 500);
+        }
+    }
+
     public function failed(Request $request)
     {
         $checkout = Transaction::find($request->id);

@@ -110,9 +110,10 @@
                                             </table>
                                         </div>
                                         <div class="d-flex justify-content-end gap-2 mt-3">
-                                            <button id="delete_row"
+                                            <button type="button" id="delete_row"
                                                 class="btn btn-sm bg-soft-danger text-danger">Hapus</button>
-                                            <button id="add_row" class="btn btn-sm btn-primary">Tambah Item</button>
+                                            <button type="button" id="add_row" class="btn btn-sm btn-primary">Tambah
+                                                Item</button>
                                         </div>
                                     </div>
                                 </div>
@@ -403,7 +404,7 @@
                     <option value="1" data-icon="feather-archive" data-price="0" data-stock="0">-- Pilih Produk --</option>
                     @foreach ($products as $product)
                         <option value="{{ $product->id }}" data-icon="feather-archive" data-price="{{ $product->after_price }}"  data-stock="{{ $product->stock }}">
-                            {{ $product->name }} | {{ $product->memory }}
+                            {{ $product->name }} | {{ $product->ram }} | {{ $product->capacity }}
                         </option>
                     @endforeach
                 </select>

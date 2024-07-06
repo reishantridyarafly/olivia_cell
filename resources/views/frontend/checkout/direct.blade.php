@@ -240,7 +240,7 @@
                                     </div>
                                     <div class="o-summary__section u-s-m-b-30">
                                         <div class="o-summary__box">
-                                            <h1 class="checkout-f__h1">INFORMASI PEMBAYARAN</h1>
+                                            <h1 class="checkout-f__h1">KONFIRMASI PEMBAYARAN</h1>
                                             <div>
                                                 <button class="btn btn--e-brand-b-2" id="checkout" type="submit">PEMBAYARAN</button>
                                             </div>

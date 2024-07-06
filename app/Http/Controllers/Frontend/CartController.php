@@ -52,7 +52,7 @@ class CartController extends Controller
         $itemCount = 0;
 
         if ($cart) {
-            $itemCount = $cart->items()->count();
+            $itemCount = $cart->items()->sum('quantity');
         }
 
         return response()->json(['count' => $itemCount]);

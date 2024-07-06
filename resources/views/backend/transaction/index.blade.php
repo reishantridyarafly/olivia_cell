@@ -128,7 +128,7 @@
                     if (result.value) {
                         $.ajax({
                             type: "DELETE",
-                            url: "{{ url('produk/"+id+"') }}",
+                            url: "{{ url('transaksi/"+id+"') }}",
                             data: {
                                 id: id
                             },
