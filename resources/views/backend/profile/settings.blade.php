@@ -175,8 +175,8 @@
 
         $('body').on('click', '#deletePhoto', function() {
             Swal.fire({
-                title: 'Delete Photo',
-                text: "Are you sure?",
+                title: 'Hapus',
+                text: "Apakah anda yakin?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -184,7 +184,7 @@
                 confirmButtonText: 'Yes, delete!',
                 cancelButtonText: 'Cancel',
             }).then((result) => {
-                if (result.isConfirmed) {
+                if (result.value) {
                     $.ajax({
                         url: "{{ route('profile.deletePhoto') }}",
                         type: "POST",
