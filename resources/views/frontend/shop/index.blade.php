@@ -111,8 +111,8 @@
                                                         </div>
                                                         <div class="product-m__wishlist">
 
-                                                            <a class="far fa-heart" href="#" data-tooltip="tooltip"
-                                                                data-placement="top" title="Add to Wishlist"></a>
+                                                            <a class="far fa-heart"href="javascript:(0);" id="addWishlist"
+                                                                data-id="{{ $product->id }}" title="Tambah wishlist"></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -232,6 +232,40 @@
                     },
                     error: function(xhr) {
                         console.error(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+            });
+
+            $('body').on('click', '#addWishlist', function() {
+                let id = $(this).data('id');
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('wishlist.store') }}",
+                    data: {
+                        id: id,
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: response.icon,
+                            title: response.message
+                        });
+                        updateCartCount();
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        console.error(xhr.status + "\n" + xhr.responseText + "\n" +
+                            thrownError);
                     }
                 });
             });
