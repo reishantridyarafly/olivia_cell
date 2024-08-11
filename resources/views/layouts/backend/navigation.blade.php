@@ -82,16 +82,16 @@
                             <span class="nxl-mtext">Pelanggan</span>
                         </a>
                     </li>
+                @endif
 
+                @if (auth()->user()->type == 'Pemilik')
                     <li class="nxl-item {{ request()->routeIs(['users.*']) ? 'active' : '' }}">
                         <a href="{{ route('users.index') }}" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-user"></i></span>
                             <span class="nxl-mtext">Administrator</span>
                         </a>
                     </li>
-                @endif
 
-                @if (auth()->user()->type == 'Pemilik')
                     <li
                         class="nxl-item nxl-hasmenu {{ request()->routeIs(['daily-report.*', 'monthly-report.*', 'yearly-report.*']) ? 'active nxl-trigger' : '' }}">
                         <a href="javascript:void(0);" class="nxl-link">

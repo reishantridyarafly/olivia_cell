@@ -116,17 +116,17 @@ Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::get('/pelanggan/{id}/edit', [App\Http\Controllers\Backend\CustomersController::class, 'edit'])->name('customers.edit');
     Route::delete('/pelanggan/{id}', [App\Http\Controllers\Backend\CustomersController::class, 'destroy'])->name('customers.destroy');
 
+    Route::get('/penilaian', [App\Http\Controllers\Backend\RatingController::class, 'index'])->name('rating.index');
+    Route::delete('/penilaian/{id}', [App\Http\Controllers\Backend\RatingController::class, 'destroy'])->name('rating.destroy');
+});
+
+Route::middleware(['auth', 'user-access:Pemilik'])->group(function () {
     Route::get('/pengguna', [App\Http\Controllers\Backend\UsersController::class, 'index'])->name('users.index');
     Route::post('/pengguna', [App\Http\Controllers\Backend\UsersController::class, 'store'])->name('users.store');
     Route::post('/pengguna/updateStatus', [App\Http\Controllers\Backend\UsersController::class, 'updateStatus'])->name('users.updateStatus');
     Route::get('/pengguna/{id}/edit', [App\Http\Controllers\Backend\UsersController::class, 'edit'])->name('users.edit');
     Route::delete('/pengguna/{id}', [App\Http\Controllers\Backend\UsersController::class, 'destroy'])->name('users.destroy');
 
-    Route::get('/penilaian', [App\Http\Controllers\Backend\RatingController::class, 'index'])->name('rating.index');
-    Route::delete('/penilaian/{id}', [App\Http\Controllers\Backend\RatingController::class, 'destroy'])->name('rating.destroy');
-});
-
-Route::middleware(['auth', 'user-access:Pemilik'])->group(function () {
     Route::get('/cetak-laporan/harian', [App\Http\Controllers\Report\DailyReportController::class, 'index'])->name('daily-report.index');
     Route::post('/cetak-laporan/harian/print', [App\Http\Controllers\Report\DailyReportController::class, 'print'])->name('daily-report.print');
 
