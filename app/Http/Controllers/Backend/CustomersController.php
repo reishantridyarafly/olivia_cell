@@ -102,7 +102,7 @@ class CustomersController extends Controller
             ];
 
             if (!$id) {
-                $userData['password'] = Hash::make('12345789');
+                $userData['password'] = Hash::make('123456789');
             }
 
             $user = User::updateOrCreate(['id' => $id], $userData);
