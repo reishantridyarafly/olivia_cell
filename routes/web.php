@@ -25,7 +25,6 @@ Route::get('/belanja', [App\Http\Controllers\Frontend\ShopController::class, 'in
 Route::get('/belanja/detail/{slug}', [App\Http\Controllers\Frontend\ShopController::class, 'detail'])->name('shop.detail');
 Route::get('/belanja/pencarian/', [App\Http\Controllers\Frontend\ShopController::class, 'search'])->name('shop.search');
 Route::get('/belanja/katalog/{slug}', [App\Http\Controllers\Frontend\ShopController::class, 'catalog'])->name('shop.catalog');
-Route::get('/belanja/detail/{slug}', [App\Http\Controllers\Frontend\ShopController::class, 'detail'])->name('shop.detail');
 
 Route::post('/product-views', [App\Http\Controllers\Frontend\ProductViewController::class, 'store'])->name('productViews.store');
 

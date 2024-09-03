@@ -186,7 +186,7 @@
                                         <tbody>
                                             @forelse ($transaction->details as $detail)
                                                 <tr>
-                                                    <td><a href="javascript:void(0)">{{ $detail->product->name }} </a>
+                                                    <td><a href="{{route('shop.detail', $detail->product->slug)}}">{{ $detail->product->name }} </a>
                                                     </td>
                                                     <td>{{ 'Rp ' . number_format($detail->product->after_price, 0, ',', '.') }}
                                                     </td>
