@@ -13,7 +13,7 @@
         <div class="auth-cover-sidebar-inner">
             <div class="auth-cover-card-wrapper">
                 <div class="auth-cover-card p-sm-5">
-                    <div class="wd-50 mb-5">
+                    <div class="wd-80 mb-5">
                         <img src="{{ asset('backend/assets') }}/images/logo.png" alt="" class="img-fluid">
                     </div>
                     <h2 class="fs-20 fw-bolder mb-4">@yield('title')</h2>
@@ -34,9 +34,44 @@
                             <small class="text-danger errorEmail mt-2"></small>
                         </div>
                         <div class="mb-4">
-                            <input type="tel" class="form-control" placeholder="No Telepon" name="telephone"
+                            <input type="number" class="form-control" placeholder="No Telepon" name="telephone"
                                 id="telephone">
                             <small class="text-danger errorTelephone mt-2"></small>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="mb-4">
+                                        <select name="province" id="province" data-select2-selector="icon"
+                                            class="form-control">
+                                            <option value="">Provinsi</option>
+                                            @foreach ($provinces as $row)
+                                                <option value="{{ $row->id }}">
+                                                    {{ $row->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <small class="text-danger errorProvince mt-2"></small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-4">
+                                        <select name="city" id="city" class="form-control"
+                                            data-select2-selector="icon">
+                                            <option value="">Kota</option>
+                                        </select>
+                                        <small class="text-danger errorCity mt-2"></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" class="form-control" placeholder="Jalan" id="street" name="street">
+                            <small class="text-danger errorStreet mt-2"></small>
+                        </div>
+                        <div class="mb-4">
+                            <textarea name="detail_address" id="detail_address" rows="2" class="form-control" placeholder="Detail Alamat"></textarea>
+                            <small class="text-danger errorDetailAddress mt-2"></small>
                         </div>
                         <div class="mb-4 generate-pass">
                             <div class="input-group field">
@@ -137,6 +172,38 @@
                                 $('.errorTelephone').html('');
                             }
 
+                            if (response.errors.province) {
+                                $('#province').addClass('is-invalid');
+                                $('.errorProvince').html(response.errors.province);
+                            } else {
+                                $('#province').removeClass('is-invalid');
+                                $('.errorProvince').html('');
+                            }
+
+                            if (response.errors.city) {
+                                $('#city').addClass('is-invalid');
+                                $('.errorCity').html(response.errors.city);
+                            } else {
+                                $('#city').removeClass('is-invalid');
+                                $('.errorCity').html('');
+                            }
+
+                            if (response.errors.street) {
+                                $('#street').addClass('is-invalid');
+                                $('.errorStreet').html(response.errors.street);
+                            } else {
+                                $('#street').removeClass('is-invalid');
+                                $('.errorStreet').html('');
+                            }
+
+                            if (response.errors.detail_address) {
+                                $('#detail_address').addClass('is-invalid');
+                                $('.errorDetailAddress').html(response.errors.detail_address);
+                            } else {
+                                $('#detail_address').removeClass('is-invalid');
+                                $('.errorDetailAddress').html('');
+                            }
+
                             if (response.errors.password) {
                                 $('#password').addClass('is-invalid');
                                 $('.errorPassword').html(response.errors.password);
@@ -164,6 +231,25 @@
                                     "{{ route('login') }}";
                             });
                         }
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        console.error(xhr.status + "\n" + xhr.responseText + "\n" +
+                            thrownError);
+                    }
+                });
+            });
+
+            $('#province').on('change', function() {
+                let id_province = $('#province').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('register.get-city') }}",
+                    data: {
+                        province_id: id_province
+                    },
+                    success: function(response) {
+                        $('#city').html(response);
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         console.error(xhr.status + "\n" + xhr.responseText + "\n" +

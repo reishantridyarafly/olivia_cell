@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/register/kota', [App\Http\Controllers\Auth\RegisterController::class, 'getCity'])->name('register.get-city');
+
 Route::get('/', [App\Http\Controllers\Frontend\BerandaController::class, 'index'])->name('beranda.index');
 Route::get('/tentang', [App\Http\Controllers\Frontend\AboutController::class, 'index'])->name('about.index');
 Route::get('/faq', [App\Http\Controllers\Frontend\FaqController::class, 'index'])->name('faq.index');

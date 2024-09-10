@@ -24,8 +24,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/jquery.time-to.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/dataTables.bs5.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/datepicker.min.css">
     <!--! END: Vendors CSS-->
     <!--! BEGIN: Custom CSS-->

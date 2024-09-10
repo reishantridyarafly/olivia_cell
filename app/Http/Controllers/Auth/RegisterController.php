@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
+use App\Models\City;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -53,7 +55,11 @@ class RegisterController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'telephone' => 'required|unique:users|max:15',
+            'telephone' => 'required|max:15|unique:users,telephone',
+            'province' => 'required',
+            'city' => 'required',
+            'street' => 'required',
+            'detail_address' => 'required',
             'password' => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required',
         ], [
@@ -69,6 +75,10 @@ class RegisterController extends Controller
             'password.min' => 'Password minimal 8 karakter!',
             'password.confirmed' => 'Konfirmasi password tidak sama!',
             'password_confirmation.required' => 'Silakan isi konfirmasi password terlebih dahulu!',
+            'province.required' => 'Silakan pilih provinsi terlebih dahulu!',
+            'city.required' => 'Silakan kota kota terlebih dahulu!',
+            'street.required' => 'Silakan isi jalan terlebih dahulu!',
+            'detail_address.required' => 'Silakan isi detail alamat terlebih dahulu!',
         ]);
 
         if ($validator->fails()) {
@@ -82,9 +92,30 @@ class RegisterController extends Controller
             'telephone' => $request->telephone,
             'password' => Hash::make($request->password),
             'type' => 2,
+        ]);
 
+
+        Address::create([
+            'name' => $request->first_name . ' ' . $request->last_name,
+            'telephone' => $request->telephone,
+            'province_id' => $request->province,
+            'city_id' => $request->city,
+            'street' => $request->street,
+            'detail_address' => $request->detail_address,
+            'default_address' => 0,
+            'user_id' => $user->id
         ]);
 
         return response()->json($user);
+    }
+
+    public function getCity(Request $request)
+    {
+        $province_id = $request->province_id;
+        $city = City::where('province_id', $province_id)->get();
+        echo "<option value=''>-- Pilih Kota --</option>";
+        foreach ($city as $row) {
+            echo "<option value='" . $row->id . "'>" . $row->name . "</option>";
+        }
     }
 }

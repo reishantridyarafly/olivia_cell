@@ -5423,7 +5423,7 @@ ul.pagination-common-style li a:hover {
     flex-direction: column;
     min-height: 100vh;
     width: 100%;
-    max-width: 550px;
+    max-width: 600px;
     background-color: #fff;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px -1px rgba(0, 0, 0, .1)
 }
@@ -5437,7 +5437,7 @@ ul.pagination-common-style li a:hover {
 
 .auth-cover-wrapper .auth-cover-sidebar-inner .auth-cover-card-wrapper .auth-cover-card {
     width: 100%;
-    max-width: 450px;
+    max-width: 500px;
     margin: auto auto
 }
 

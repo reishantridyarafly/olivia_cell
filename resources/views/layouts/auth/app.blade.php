@@ -21,6 +21,9 @@
     <!--! END: Vendors CSS-->
     <!--! BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/css/theme.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets') }}/vendors/css/select2-theme.min.css">
     <!--! END: Custom CSS-->
     <!--! HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries !-->
     <!--! WARNING: Respond.js doesn"t work if you view the page via file: !-->
@@ -56,6 +59,9 @@
     <!--! BEGIN: Theme Customizer  !-->
     <script src="{{ asset('backend/assets') }}/js/theme-customizer-init.min.js"></script>
     <!--! END: Theme Customizer !-->
+
+    <script src="{{ asset('backend/assets') }}/vendors/js/select2.min.js"></script>
+    <script src="{{ asset('backend/assets') }}/vendors/js/select2-active.min.js"></script>
 
     @yield('script')
 </body>
