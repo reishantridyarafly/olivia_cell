@@ -42,6 +42,9 @@
                         <!--====== List ======-->
                         <ul class="ah-list ah-list--design1 ah-list--link-color-secondary">
 
+                            <li data-tooltip="tooltip" data-placement="left" title="Hubungi Admin">
+                                <a href=""><i class="fas fa-envelope"></i></a>
+                            </li>
                             <li data-tooltip="tooltip" data-placement="left" title="Whatsapp">
                                 <a href="https://wa.me/6285315922275" target="_blank"><i
                                         class="fas fa-phone-volume"></i></a>

@@ -110,6 +110,15 @@
                     </li>
                 @endif
 
+                @if (auth()->user()->type == 'Pelanggan')
+                    <li class="nxl-item {{ request()->routeIs(['administrator.*']) ? 'active' : '' }}">
+                        <a href="{{ route('administrator.index') }}" class="nxl-link">
+                            <span class="nxl-micon"><i class="feather-user"></i></span>
+                            <span class="nxl-mtext">Administrator</span>
+                        </a>
+                    </li>
+                @endif
+
                 <li class="nxl-item {{ request()->routeIs(['profile.*']) ? 'active' : '' }}">
                     <a href="{{ route('profile.index') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-settings"></i></span>

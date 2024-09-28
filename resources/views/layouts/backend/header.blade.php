@@ -37,14 +37,19 @@
                     </div>
                 </div>
                 <div class="nxl-h-item dark-light-theme">
-                    <a href="javascript:void(0);" class="nxl-head-link me-3 dark-button">
+                    <a href="javascript:void(0);" class="nxl-head-link me-0 dark-button">
                         <i class="feather-moon"></i>
                     </a>
-                    <a href="javascript:void(0);" class="nxl-head-link me-3 light-button" style="display: none">
+                    <a href="javascript:void(0);" class="nxl-head-link me-0 light-button" style="display: none">
                         <i class="feather-sun"></i>
                     </a>
                 </div>
 
+                <div class="nxl-h-item">
+                    <a href="{{ url('chat-oliviacell') }}" target="_blank" class="nxl-head-link me-3">
+                        <i class="feather-mail"></i>
+                    </a>
+                </div>
 
                 <div class="dropdown nxl-h-item">
                     <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" data-bs-auto-close="outside">

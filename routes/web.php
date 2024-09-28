@@ -65,7 +65,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/wishlist', [App\Http\Controllers\Frontend\WistlistController::class, 'store'])->name('wishlist.store');
     Route::delete('/wishlist/{id}', [App\Http\Controllers\Frontend\WistlistController::class, 'destroy'])->name('wishlist.destroy');
 
-
     Route::get('/transaksi', [App\Http\Controllers\Backend\TransactionController::class, 'index'])->name('transaction.index');
     Route::get('/transaksi/detail/{id}', [App\Http\Controllers\Backend\TransactionController::class, 'detail'])->name('transaction.detail');
     Route::post('/transaksi/selesai', [App\Http\Controllers\Backend\TransactionController::class, 'completed'])->name('transaction.completed');
@@ -119,6 +118,10 @@ Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
 
     Route::get('/penilaian', [App\Http\Controllers\Backend\RatingController::class, 'index'])->name('rating.index');
     Route::delete('/penilaian/{id}', [App\Http\Controllers\Backend\RatingController::class, 'destroy'])->name('rating.destroy');
+});
+
+Route::middleware(['auth', 'user-access:Pelanggan'])->group(function () {
+    Route::get('/administrator', [App\Http\Controllers\Backend\AdministratorController::class, 'index'])->name('administrator.index');
 });
 
 Route::middleware(['auth', 'user-access:Pemilik'])->group(function () {
