@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 
-class Transaction extends Model
+class RefundProof extends Model
 {
     use HasFactory;
 
+    protected $table = 'refund_proofs';
     protected $guarded = [];
-    protected $table = 'transactions';
 
     public $incrementing = false;
     protected $keyType = 'string';
@@ -35,18 +35,8 @@ class Transaction extends Model
         return 'string';
     }
 
-    public function details()
+    public function refund()
     {
-        return $this->hasMany(TransactionDetail::class, 'transaction_id');
-    }
-
-    public function address()
-    {
-        return $this->belongsTo(Address::class);
-    }
-
-    public function refunds()
-    {
-        return $this->hasMany(Refund::class);
+        return $this->belongsTo(Refund::class);
     }
 }

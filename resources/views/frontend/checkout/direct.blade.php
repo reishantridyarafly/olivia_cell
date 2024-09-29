@@ -166,7 +166,7 @@
                                                 <div class="o-card__flex">
                                                     <div class="o-card__img-wrap">
 
-                                                        <img class="u-img-fluid" src="{{ asset('storage/uploads/products/' . $product->photos->first()->photo_name) }}" alt="">
+                                                        <img class="u-img-fluid" src="{{ asset('storage/uploads/cover/' . $product->cover_photo) }}" alt="">
                                                     </div>
                                                     <div class="o-card__info-wrap">
 

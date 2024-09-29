@@ -74,6 +74,15 @@ Route::middleware(['auth', 'user-access:Pemilik,Administrator'])->group(function
     Route::get('/dashboard', [App\Http\Controllers\Backend\DashboardController::class, 'index'])->name('dashboard.index');
 });
 
+Route::middleware(['auth', 'user-access:Pelanggan,Administrator'])->group(function () {
+    Route::get('/pengembalian', [App\Http\Controllers\Backend\RefundController::class, 'index'])->name('refund.index');
+    Route::post('/pengembalian/tolak', [App\Http\Controllers\Backend\RefundController::class, 'failed'])->name('refund.failed');
+    Route::post('/pengembalian/proses', [App\Http\Controllers\Backend\RefundController::class, 'process'])->name('refund.process');
+    Route::post('/pengembalian/selesai', [App\Http\Controllers\Backend\RefundController::class, 'completed'])->name('refund.completed');
+    Route::delete('/pengembalian/{id}', [App\Http\Controllers\Backend\RefundController::class, 'destroy'])->name('refund.destroy');
+    Route::get('/pengembalian/{id}/detail', [App\Http\Controllers\Backend\RefundController::class, 'detail'])->name('refund.detail');
+});
+
 Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::get('/transaksi/tambah', [App\Http\Controllers\Backend\TransactionController::class, 'create'])->name('transaction.create');
     Route::get('/transaksi/get-product', [App\Http\Controllers\Backend\TransactionController::class, 'getProducts'])->name('transaction.getProducts');
@@ -84,6 +93,7 @@ Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
     Route::post('/transaksi/tolak', [App\Http\Controllers\Backend\TransactionController::class, 'failed'])->name('transaction.failed');
     Route::post('/transaksi/proses', [App\Http\Controllers\Backend\TransactionController::class, 'process'])->name('transaction.process');
     Route::post('/transaksi/update/resi', [App\Http\Controllers\Backend\TransactionController::class, 'updateResi'])->name('transaction.updateResi');
+    Route::post('/transaksi/pengembalian', [App\Http\Controllers\Backend\TransactionController::class, 'refund'])->name('transaction.refund');
 
     Route::get('/katalog', [App\Http\Controllers\Backend\CatalogController::class, 'index'])->name('catalog.index');
     Route::get('/katalog/tambah', [App\Http\Controllers\Backend\CatalogController::class, 'create'])->name('catalog.create');

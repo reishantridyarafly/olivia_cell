@@ -151,7 +151,7 @@ class ProductController extends Controller
         if ($request->hasFile('cover_photo')) {
             $coverPhoto = $request->file('cover_photo');
             $coverPhotoName = time() . '_cover_' . $coverPhoto->getClientOriginalName();
-            Storage::putFileAs('public/uploads/cover', $coverPhoto, $coverPhotoName);
+            Storage::putFileAs('uploads/cover', $coverPhoto, $coverPhotoName);
             $product->cover_photo = $coverPhotoName;
         }
 
@@ -160,7 +160,7 @@ class ProductController extends Controller
         if ($request->hasFile('photo')) {
             foreach ($request->file('photo') as $image) {
                 $imageName = time() . '_' . $image->getClientOriginalName();
-                Storage::putFileAs('public/uploads/products', $image, $imageName);
+                Storage::putFileAs('uploads/products', $image, $imageName);
                 $product->photos()->create(['photo_name' => $imageName]);
             }
         }
@@ -252,11 +252,11 @@ class ProductController extends Controller
 
             if ($request->hasFile('cover_photo')) {
                 if ($product->cover_photo) {
-                    Storage::delete('public/uploads/cover/' . $product->cover_photo);
+                    Storage::delete('uploads/cover/' . $product->cover_photo);
                 }
                 $coverPhoto = $request->file('cover_photo');
                 $coverPhotoName = time() . '_cover_' . $coverPhoto->getClientOriginalName();
-                Storage::putFileAs('public/uploads/cover', $coverPhoto, $coverPhotoName);
+                Storage::putFileAs('uploads/cover', $coverPhoto, $coverPhotoName);
                 $product->cover_photo = $coverPhotoName;
             }
 
@@ -266,7 +266,7 @@ class ProductController extends Controller
                 $this->deleteProductImages($product);
                 foreach ($request->file('photo') as $image) {
                     $imageName = time() . '_' . $image->getClientOriginalName();
-                    Storage::putFileAs('public/uploads/products', $image, $imageName);
+                    Storage::putFileAs('uploads/products', $image, $imageName);
                     $product->photos()->create(['photo_name' => $imageName]);
                 }
             }
@@ -278,7 +278,7 @@ class ProductController extends Controller
     private function deleteProductImages($product)
     {
         foreach ($product->photos as $photo) {
-            Storage::delete('public/uploads/products/' . $photo->photo_name);
+            Storage::delete('uploads/products/' . $photo->photo_name);
             $photo->delete();
         }
     }
@@ -287,7 +287,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($request->id);
         if ($product->cover_photo) {
-            Storage::delete('public/uploads/cover/' . $product->cover_photo);
+            Storage::delete('uploads/cover/' . $product->cover_photo);
         }
         $this->deleteProductImages($product);
         $product->delete();

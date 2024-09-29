@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Refund;
+use App\Models\RefundProof;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
@@ -59,6 +62,8 @@ class TransactionController extends Controller
                         $status = '<span class="fw-bold text-warning">Proses</span>';
                     } elseif ($data->status == 'completed') {
                         $status = '<span class="fw-bold text-success">Selesai</span>';
+                    } elseif ($data->status == 'refund') {
+                        $status = '<span class="fw-bold text-danger">Pengembalian</span>';
                     } else {
                         $status = '<span class="fw-bold text-danger">Gagal</span>';
                     }
@@ -299,5 +304,55 @@ class TransactionController extends Controller
             ],
             'total_count' => $products->total()
         ]);
+    }
+
+    public function refund(Request $request)
+    {
+        $id = $request->id;
+        $validated = Validator::make(
+            $request->all(),
+            [
+                'reason' => 'required',
+                'proof' => 'required|max:5120',
+                'proof.*' => 'image|mimes:jpg,png,jpeg,webp,svg|file|max:5120',
+            ],
+            [
+                'reason.required' => 'Silakan isi alasan terlebih dahulu.',
+                'proof.required' => 'Silakan isi foto terlebih dahulu.',
+                'proof.image' => 'File harus berupa gambar.',
+                'proof.mimes' => 'Ekstensi file harus berupa: jpg, png, jpeg, webp, atau svg.',
+                'proof.file' => 'File harus berupa gambar.',
+                'proof.max' => 'Ukuran file tidak boleh lebih dari 5 MB.',
+            ]
+        );
+
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()]);
+        } else {
+            $transaction = Transaction::find($id);
+            $transaction->status = 'refund';
+            $transaction->save();
+
+            $refund = new Refund();
+            $refund->transaction_id = $transaction->id;
+            $refund->user_id = $transaction->user_id;
+            $refund->reason = $request->reason;
+            $refund->refund_date = now();
+            $refund->save();
+
+            if ($request->hasFile('proof')) {
+                foreach ($request->file('proof') as $file) {
+                    $filename = 'refund_' . time() . '_' . $file->getClientOriginalName();
+                    Storage::putFileAs('uploads/refunds', $file, $filename);
+
+                    $refundProof = new RefundProof();
+                    $refundProof->refund_id = $refund->id;
+                    $refundProof->file_refund = $filename;
+                    $refundProof->save();
+                }
+            }
+
+            return response()->json(['message' => 'Permintaan berhasil dikirim']);
+        }
     }
 }

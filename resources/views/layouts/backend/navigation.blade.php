@@ -119,6 +119,13 @@
                     </li>
                 @endif
 
+                <li class="nxl-item {{ request()->routeIs(['refund.*']) ? 'active' : '' }}">
+                    <a href="{{ route('refund.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-refresh-ccw"></i></span>
+                        <span class="nxl-mtext">Pengembalian</span>
+                    </a>
+                </li>
+
                 <li class="nxl-item {{ request()->routeIs(['profile.*']) ? 'active' : '' }}">
                     <a href="{{ route('profile.index') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-settings"></i></span>

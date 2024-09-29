@@ -66,6 +66,11 @@
                                     @if ($transaction->status == 'process' && $transaction->resi != null)
                                         <a href="javascript:void(0)" class="d-flex me-1">
                                             <div class="avatar-text avatar-md" data-bs-toggle="tooltip"
+                                                data-bs-trigger="hover" id="btnRefund" data-id="{{ $transaction->id }}"
+                                                title="Pengembalian"><i class="feather feather-refresh-ccw"></i></div>
+                                        </a>
+                                        <a href="javascript:void(0)" class="d-flex me-1">
+                                            <div class="avatar-text avatar-md" data-bs-toggle="tooltip"
                                                 data-bs-trigger="hover" id="btnCompleted" data-id="{{ $transaction->id }}"
                                                 title="Barang diterima"><i class="feather feather-check-circle"></i></div>
                                         </a>
@@ -133,6 +138,8 @@
                                                         <span class="fw-bold text-warning">Proses</span>
                                                     @elseif ($transaction->status == 'completed')
                                                         <span class="fw-bold text-success">Selesai</span>
+                                                    @elseif ($transaction->status == 'refund')
+                                                        <span class="fw-bold text-danger">Pengembalian</span>
                                                     @else
                                                         <span class="fw-bold text-danger">Gagal</span>
                                                     @endif
@@ -186,7 +193,8 @@
                                         <tbody>
                                             @forelse ($transaction->details as $detail)
                                                 <tr>
-                                                    <td><a href="{{route('shop.detail', $detail->product->slug)}}">{{ $detail->product->name }} </a>
+                                                    <td><a href="{{ route('shop.detail', $detail->product->slug) }}">{{ $detail->product->name }}
+                                                        </a>
                                                     </td>
                                                     <td>{{ 'Rp ' . number_format($detail->product->after_price, 0, ',', '.') }}
                                                     </td>
@@ -233,13 +241,13 @@
     </main>
 
     <!-- modal -->
-    <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+    <div id="modalUpdateResi" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalUpdateResiTitle"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form id="form">
+                <form id="formUpdateResi">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="modalLabel"></h4>
+                        <h4 class="modal-title" id="modalUpdateResiTitle"></h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                     </div>
                     <div class="modal-body">
@@ -253,6 +261,44 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary" id="simpan">Simpan</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- modal -->
+    <div id="modalRefund" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalRefundTitle"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="formRefund">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modalRefundTitle"></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <input type="hidden" name="id" id="id" value="{{ $transaction->id }}">
+                            <label for="invoice" class="form-label">Invoice</label>
+                            <input type="text" id="invoice" name="invoice" class="form-control"
+                                value="{{ $transaction->code }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="reason" class="form-label">Alasan</label>
+                            <textarea name="reason" id="reason" rows="3" class="form-control"></textarea>
+                            <small class="text-danger errorReason"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="proof" class="form-label">Bukti Foto</label>
+                            <input type="file" id="proof" name="proof[]" class="form-control" accept="image/*"
+                                multiple>
+                            <small class="text-danger errorProof"></small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary" id="simpan_refund">Simpan</button>
                     </div>
                 </form>
             </div><!-- /.modal-content -->
@@ -370,15 +416,15 @@
             })
 
             $('body').on('click', '#btnUpdateResi', function() {
-                $('#modalLabel').html("Update Resi");
-                $('#modal').modal('show');
-                $('#form').trigger("reset");
+                $('#modalUpdateResiTitle').html("Update Resi");
+                $('#modalUpdateResi').modal('show');
+                $('#formUpdateResi').trigger("reset");
 
                 $('#noResi').removeClass('is-invalid');
                 $('.errorNoResi').html('');
             });
 
-            $('#form').submit(function(e) {
+            $('#formUpdateResi').submit(function(e) {
                 e.preventDefault();
                 $.ajax({
                     data: $(this).serialize(),
@@ -408,8 +454,74 @@
                                 title: 'Sukses',
                                 text: response.message,
                             }).then(function() {
-                                $('#modal').modal('hide');
-                                $('#form').trigger("reset");
+                                $('#modalUpdateResi').modal('hide');
+                                $('#formUpdateResi').trigger("reset");
+                                window.location.href = window.location.href;
+                            });
+                        }
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        console.error(xhr.status + "\n" + xhr.responseText + "\n" +
+                            thrownError);
+                    }
+                });
+            });
+
+            $('body').on('click', '#btnRefund', function() {
+                $('#modalRefundTitle').html("Pengembalian");
+                $('#modalRefund').modal('show');
+                $('#formRefund').trigger("reset");
+
+                $('#reason').removeClass('is-invalid');
+                $('.errorReason').html('');
+
+                $('#proof').removeClass('is-invalid');
+                $('.errorProof').html('');
+            });
+
+            $('#formRefund').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    data: new FormData(this),
+                    url: "{{ route('transaction.refund') }}",
+                    type: "POST",
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    beforeSend: function() {
+                        $('#simpan_refund').attr('disable', 'disabled');
+                        $('#simpan_refund').text('Proses...');
+                    },
+                    complete: function() {
+                        $('#simpan_refund').removeAttr('disable');
+                        $('#simpan_refund').html('Simpan');
+                    },
+                    success: function(response) {
+                        if (response.errors) {
+                            if (response.errors.reason) {
+                                $('#reason').addClass('is-invalid');
+                                $('.errorReason').html(response.errors.reason);
+                            } else {
+                                $('#reason').removeClass('is-invalid');
+                                $('.errorReason').html('');
+                            }
+
+                            if (response.errors.proof) {
+                                $('#proof').addClass('is-invalid');
+                                $('.errorProof').html(response.errors.proof);
+                            } else {
+                                $('#proof').removeClass('is-invalid');
+                                $('.errorProof').html('');
+                            }
+                        } else {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Sukses',
+                                text: response.message,
+                            }).then(function() {
+                                $('#modalRefund').modal('hide');
+                                $('#formRefund').trigger("reset");
                                 window.location.href = window.location.href;
                             });
                         }

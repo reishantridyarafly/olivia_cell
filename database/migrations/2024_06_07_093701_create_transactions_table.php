@@ -19,7 +19,7 @@ return new class extends Migration
             $table->uuid('address_id')->nullable();
             $table->text('note')->nullable();
             $table->decimal('shipping_cost', 15, 2)->nullable();
-            $table->string('status')->default('pending')->comment('pending, process, completed, failed');
+            $table->string('status')->default('pending')->comment('pending, process, completed, failed', 'refund');
             $table->enum('type_transaction', ['online', 'offline']);
             $table->string('type_payment', 100);
             $table->string('transfer_proof')->nullable();
