@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Refund;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
 class RefundController extends Controller
@@ -106,5 +107,24 @@ class RefundController extends Controller
         $refund->save();
 
         return response()->json(['message' => 'Pengembalian selesai diproses!']);
+    }
+
+    public function destroy(Request $request)
+    {
+        $refund = Refund::findOrFail($request->id);
+        $this->deleteImages($refund);
+        $refund->delete();
+
+        return response()->json(['message' => 'Data berhasil dihapus']);
+    }
+
+    private function deleteImages($refund)
+    {
+        $refundProofs = $refund->file; 
+
+        foreach ($refundProofs as $refundProof) {
+            Storage::delete('uploads/refunds/' . $refundProof->file_refund);
+            $refundProof->delete();
+        }
     }
 }
