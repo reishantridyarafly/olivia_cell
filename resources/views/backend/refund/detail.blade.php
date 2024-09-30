@@ -61,6 +61,10 @@
                                 <div class="col-lg-10">{{ $refund->user->telephone }}</div>
                             </div>
                             <div class="row mb-4">
+                                <div class="col-lg-2 fw-medium">Alasan</div>
+                                <div class="col-lg-10">{{ $refund->reason }}</div>
+                            </div>
+                            <div class="row mb-4">
                                 <div class="col-lg-2 fw-medium">Status</div>
                                 <div class="col-lg-10">
                                     @if ($refund->status == 'pending')
