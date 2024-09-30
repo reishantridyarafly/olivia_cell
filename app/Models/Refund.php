@@ -45,8 +45,8 @@ class Refund extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function file()
+    public function refundProofs()
     {
-        return $this->hasMany(RefundProof::class);
+        return $this->hasMany(RefundProof::class, 'refund_id');
     }
 }

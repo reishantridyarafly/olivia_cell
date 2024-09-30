@@ -343,14 +343,16 @@ class TransactionController extends Controller
             if ($request->hasFile('proof')) {
                 foreach ($request->file('proof') as $file) {
                     $filename = 'refund_' . time() . '_' . $file->getClientOriginalName();
-                    Storage::putFileAs('uploads/refunds', $file, $filename);
-
+                    $file->storeAs('uploads/refunds', $filename, 'public');
+            
                     $refundProof = new RefundProof();
                     $refundProof->refund_id = $refund->id;
                     $refundProof->file_refund = $filename;
                     $refundProof->save();
                 }
             }
+            
+            
 
             return response()->json(['message' => 'Permintaan berhasil dikirim']);
         }

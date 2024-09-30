@@ -112,19 +112,23 @@ class RefundController extends Controller
     public function destroy(Request $request)
     {
         $refund = Refund::findOrFail($request->id);
-        $this->deleteImages($refund);
+
+        // Ambil semua file_refund
+        $fileNames = $refund->refundProofs()->pluck('file_refund'); // Pastikan relasi refundProofs ada di model Refund
+
+        // Hapus semua file menggunakan array dan memastikan disk 'public'
+        foreach ($fileNames as $fileName) {
+            if (Storage::disk('public')->exists('uploads/refunds/' . $fileName)) {
+                Storage::disk('public')->delete('uploads/refunds/' . $fileName);
+            }
+        }
+
+        // Hapus record refundProofs sekaligus
+        $refund->refundProofs()->delete();
+
+        // Hapus refund
         $refund->delete();
 
         return response()->json(['message' => 'Data berhasil dihapus']);
-    }
-
-    private function deleteImages($refund)
-    {
-        $refundProofs = $refund->file; 
-
-        foreach ($refundProofs as $refundProof) {
-            Storage::delete('uploads/refunds/' . $refundProof->file_refund);
-            $refundProof->delete();
-        }
     }
 }

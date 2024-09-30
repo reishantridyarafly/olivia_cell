@@ -28,6 +28,7 @@ class DashboardController extends Controller
         $total_process = Transaction::where('status', 'process')->count();
         $total_pending = Transaction::where('status', 'pending')->count();
         $total_failed = Transaction::where('status', 'failed')->count();
+        $total_refund = Transaction::where('status', 'refund')->count();
 
         $transaction = Transaction::orderBy('transaction_date', 'desc')->take(10)->get();
 
@@ -57,7 +58,7 @@ class DashboardController extends Controller
         return view('backend.dashboard.index', compact([
             'catalog_count', 'product_count', 'rating_count', 'totalRevenue',
             'total_transaction', 'total_completed', 'total_process', 'total_pending',
-            'total_failed', 'transaction', 'monthlyRevenue', 'topBrands', 'rating'
+            'total_failed', 'total_refund','transaction', 'monthlyRevenue', 'topBrands', 'rating'
         ]));
     }
 }

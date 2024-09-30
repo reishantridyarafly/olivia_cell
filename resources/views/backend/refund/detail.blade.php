@@ -98,7 +98,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="row">
-                                    @foreach ($refund->file as $proof)
+                                    @foreach ($refund->refundProofs as $proof)
                                         <div class="col-3 mb-4">
                                             <a href="{{ asset('storage/uploads/refunds/' . $proof->file_refund) }}"
                                                 target="_blank">

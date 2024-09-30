@@ -121,6 +121,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-sm-12">
+                                        <div class="px-4 py-3 text-center border border-dashed rounded-3">
+                                            <h2 class="fs-13 tx-spacing-1">Pengembalian</h2>
+                                            <div class="fs-13 text-muted text-truncate-1-line">
+                                                <strong>{{ $total_refund }}</strong>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -233,6 +241,8 @@
                                                         <span class="fw-bold text-warning">Proses</span>
                                                     @elseif ($row->status == 'completed')
                                                         <span class="fw-bold text-success">Selesai</span>
+                                                    @elseif ($row->status == 'refund')
+                                                        <span class="fw-bold text-danger">Pengembalian</span>
                                                     @else
                                                         <span class="fw-bold text-danger">Gagal</span>
                                                     @endif
