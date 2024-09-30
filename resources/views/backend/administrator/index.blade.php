@@ -1,5 +1,5 @@
 @extends('layouts.backend.main')
-@section('title', 'Pelanggan')
+@section('title', 'Administrator')
 @section('content')
     <main class="nxl-container">
         <div class="nxl-content">
@@ -21,12 +21,6 @@
                                 <i class="feather-arrow-left me-2"></i>
                                 <span>Kembali</span>
                             </a>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 page-header-right-items-wrapper">
-                            <button class="btn btn-primary" id="btnAdd">
-                                <i class="feather-plus me-2"></i>
-                                <span>Tambah @yield('title')</span>
-                            </button>
                         </div>
                     </div>
                     <div class="d-md-none d-flex align-items-center">
