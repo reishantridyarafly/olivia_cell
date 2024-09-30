@@ -32,6 +32,8 @@ Route::post('/product-views', [App\Http\Controllers\Frontend\ProductViewControll
 
 Auth::routes();
 Route::middleware('auth')->group(function () {
+    Route::get('/administrator', [App\Http\Controllers\Backend\AdministratorController::class, 'index'])->name('administrator.index');
+
     Route::get('/keranjang/jumlah', [App\Http\Controllers\Frontend\CartController::class, 'getCartItemCount'])->name('cart.count');
     Route::get('/keranjang/{id}', [App\Http\Controllers\Frontend\CartController::class, 'index'])->name('cart.index');
     Route::post('/keranjang/tambah/{id}', [App\Http\Controllers\Frontend\CartController::class, 'addCart'])->name('cart.addCart');
@@ -128,10 +130,6 @@ Route::middleware(['auth', 'user-access:Administrator'])->group(function () {
 
     Route::get('/penilaian', [App\Http\Controllers\Backend\RatingController::class, 'index'])->name('rating.index');
     Route::delete('/penilaian/{id}', [App\Http\Controllers\Backend\RatingController::class, 'destroy'])->name('rating.destroy');
-});
-
-Route::middleware(['auth', 'user-access:Pelanggan'])->group(function () {
-    Route::get('/administrator', [App\Http\Controllers\Backend\AdministratorController::class, 'index'])->name('administrator.index');
 });
 
 Route::middleware(['auth', 'user-access:Pemilik'])->group(function () {

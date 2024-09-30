@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+
+    // Menampilakan Data Keranjang
     public function index()
     {
         $userId = auth()->id();
@@ -23,6 +25,7 @@ class CartController extends Controller
         return view('frontend.cart.index', compact(['items']));
     }
 
+    // Menambahkan produk ke keranjang
     public function addCart($id, Request $request)
     {
         $product = Product::findOrFail($id);
@@ -35,6 +38,8 @@ class CartController extends Controller
             $cartItem->quantity += $request->qty;
             $cartItem->save();
         } else {
+
+            // Menyimpan ke database
             $cart->items()->create([
                 'product_id' => $product->id,
                 'quantity' => $request->qty,
@@ -45,6 +50,7 @@ class CartController extends Controller
         return response()->json(['message' => 'Produk berhasil disimpan']);
     }
 
+    // Menampilkan jumlah data (count) keranjang
     public function getCartItemCount()
     {
         $userId = auth()->id();
@@ -58,8 +64,10 @@ class CartController extends Controller
         return response()->json(['count' => $itemCount]);
     }
 
+    // Update jumlah produk di keranjang
     public function updateCartItem(Request $request, $id)
     {
+         // Menyimpan ke database
         $cartItem = CartItem::findOrFail($id);
         $cartItem->quantity = $request->input('quantity');
         $cartItem->save();
@@ -67,8 +75,10 @@ class CartController extends Controller
         return response()->json(['message' => 'Keranjang berhasil diperbarui']);
     }
 
+    // hapus produk dalam keranjang
     public function deleteCartItem($id)
     {
+         // Menyimpan ke database
         $cartItem = CartItem::findOrFail($id);
         $cartItem->delete();
 
