@@ -52,7 +52,7 @@ class ShopController extends Controller
                 ->join('transactions', 'transaction_details.transaction_id', '=', 'transactions.id')
                 ->where('transaction_details.product_id', $product->id)
                 ->where('transactions.user_id', $userId)
-                ->where('transactions.status', 'completed')
+                ->whereIn('transactions.status', ['completed', 'refund'])
                 ->exists();
 
             $hasRated = DB::table('ratings')
