@@ -87,18 +87,20 @@
                                 <h5 class="fw-bold mb-0">
                                     <span class="d-block mb-2">Bukti Foto :</span>
                                 </h5>
-                                <div class="d-flex">
-                                    @if ($refund->status == 'pending')
-                                        <a href="javascript:void(0);" id="btnFailed" data-id="{{ $refund->id }}"
-                                            class="btn btn-sm btn-danger me-2">Tolak</a>
-                                        <a href="javascript:void(0);" id="btnProcess" data-id="{{ $refund->id }}"
-                                            class="btn btn-sm btn-warning me-2">Proses</a>
-                                    @endif
-                                    @if ($refund->status == 'process')
-                                        <a href="javascript:void(0);" id="btnCompleted" data-id="{{ $refund->id }}"
-                                            class="btn btn-sm btn-success">Selesai</a>
-                                    @endif
-                                </div>
+                                @if (auth()->user()->type == 'Administrator')
+                                    <div class="d-flex">
+                                        @if ($refund->status == 'pending')
+                                            <a href="javascript:void(0);" id="btnFailed" data-id="{{ $refund->id }}"
+                                                class="btn btn-sm btn-danger me-2">Tolak</a>
+                                            <a href="javascript:void(0);" id="btnProcess" data-id="{{ $refund->id }}"
+                                                class="btn btn-sm btn-warning me-2">Proses</a>
+                                        @endif
+                                        @if ($refund->status == 'process')
+                                            <a href="javascript:void(0);" id="btnCompleted" data-id="{{ $refund->id }}"
+                                                class="btn btn-sm btn-success">Selesai</a>
+                                        @endif
+                                    </div>
+                                @endif
                             </div>
                             <div class="col-lg-12">
                                 <div class="row">
@@ -116,66 +118,6 @@
                             </div>
                         </div>
 
-                    </div>
-                    <div class="tab-pane fade" id="proposalTab" role="tabpanel">
-                        <div class="card card-body">
-                            <div class="d-flex align-items-center justify-content-center"
-                                style="height: calc(100vh - 315px)">
-                                <div class="text-center">
-                                    <h2 class="fs-16 fw-semibold">No proposals yet!</h2>
-                                    <p class="fs-12 text-muted">There is no proposals create yet.</p>
-                                    <a href="javascript:void(0);" class="avatar-text bg-soft-primary text-primary mx-auto"
-                                        data-bs-toggle="tooltip" title="Create Proposals">
-                                        <i class="feather-plus"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tasksTab" role="tabpanel">
-                        <div class="card card-body">
-                            <div class="d-flex align-items-center justify-content-center"
-                                style="height: calc(100vh - 315px)">
-                                <div class="text-center">
-                                    <h2 class="fs-16 fw-semibold">No tasks yet!</h2>
-                                    <p class="fs-12 text-muted">There is no tasks create yet.</p>
-                                    <a href="javascript:void(0);" class="avatar-text bg-soft-primary text-primary mx-auto"
-                                        data-bs-toggle="tooltip" title="Create Tasks">
-                                        <i class="feather-plus"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="notesTab" role="tabpanel">
-                        <div class="card card-body">
-                            <div class="d-flex align-items-center justify-content-center"
-                                style="height: calc(100vh - 315px)">
-                                <div class="text-center">
-                                    <h2 class="fs-16 fw-semibold">No notes yet!</h2>
-                                    <p class="fs-12 text-muted">There is no notes create yet.</p>
-                                    <a href="javascript:void(0);" class="avatar-text bg-soft-primary text-primary mx-auto"
-                                        data-bs-toggle="tooltip" title="Create Notes">
-                                        <i class="feather-plus"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="commentTab" role="tabpanel">
-                        <div class="card card-body">
-                            <div class="d-flex align-items-center justify-content-center"
-                                style="height: calc(100vh - 315px)">
-                                <div class="text-center">
-                                    <h2 class="fs-16 fw-semibold">No comments yet!</h2>
-                                    <p class="fs-12 text-muted">There is no comments posted yet.</p>
-                                    <a href="javascript:void(0);" class="avatar-text bg-soft-primary text-primary mx-auto"
-                                        data-bs-toggle="tooltip" title="Add Comments">
-                                        <i class="feather-plus"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -64,11 +64,13 @@
                                         @endif
                                     @endif
                                     @if ($transaction->status == 'process' && $transaction->resi != null)
-                                        <a href="javascript:void(0)" class="d-flex me-1">
-                                            <div class="avatar-text avatar-md" data-bs-toggle="tooltip"
-                                                data-bs-trigger="hover" id="btnRefund" data-id="{{ $transaction->id }}"
-                                                title="Pengembalian"><i class="feather feather-refresh-ccw"></i></div>
-                                        </a>
+                                        @if (auth()->user()->type == 'Pelanggan')
+                                            <a href="javascript:void(0)" class="d-flex me-1">
+                                                <div class="avatar-text avatar-md" data-bs-toggle="tooltip"
+                                                    data-bs-trigger="hover" id="btnRefund" data-id="{{ $transaction->id }}"
+                                                    title="Pengembalian"><i class="feather feather-refresh-ccw"></i></div>
+                                            </a>
+                                        @endif
                                         <a href="javascript:void(0)" class="d-flex me-1">
                                             <div class="avatar-text avatar-md" data-bs-toggle="tooltip"
                                                 data-bs-trigger="hover" id="btnCompleted" data-id="{{ $transaction->id }}"

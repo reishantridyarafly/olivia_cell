@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Refund;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
@@ -14,6 +15,12 @@ class RefundController extends Controller
     {
         if ($request->ajax()) {
             $refund = Refund::with('transaction')->orderBy('created_at', 'asc')->get();
+
+            if (auth()->user()->type == 'Pelanggan') {
+                $refund = Refund::with('transaction')->where('user_id', auth()->user()->id)->orderBy('created_at', 'asc')->get();
+            } else {
+                $refund = Refund::with('transaction')->orderBy('created_at', 'asc')->get();
+            }
             return DataTables::of($refund)
                 ->addIndexColumn()
                 ->addColumn('invoice', function ($data) {
@@ -32,7 +39,7 @@ class RefundController extends Controller
                     } elseif ($data->status == 'completed') {
                         $status = '<span class="fw-bold text-success">Selesai</span>';
                     } else {
-                        $status = '<span class="fw-bold text-danger">Gagal</span>';
+                        $status = '<span class="fw-bold text-danger">Ditolak</span>';
                     }
                     return $status;
                 })
@@ -87,6 +94,10 @@ class RefundController extends Controller
         $refund->status = 'failed';
         $refund->save();
 
+        $transaction = Transaction::find($refund->transaction_id);
+        $transaction->status = 'completed';
+        $transaction->save();
+
         return response()->json(['message' => 'Pengembalian ditolak!']);
     }
 
@@ -113,20 +124,15 @@ class RefundController extends Controller
     {
         $refund = Refund::findOrFail($request->id);
 
-        // Ambil semua file_refund
-        $fileNames = $refund->refundProofs()->pluck('file_refund'); // Pastikan relasi refundProofs ada di model Refund
+        $fileNames = $refund->refundProofs()->pluck('file_refund');
 
-        // Hapus semua file menggunakan array dan memastikan disk 'public'
         foreach ($fileNames as $fileName) {
             if (Storage::disk('public')->exists('uploads/refunds/' . $fileName)) {
                 Storage::disk('public')->delete('uploads/refunds/' . $fileName);
             }
         }
 
-        // Hapus record refundProofs sekaligus
         $refund->refundProofs()->delete();
-
-        // Hapus refund
         $refund->delete();
 
         return response()->json(['message' => 'Data berhasil dihapus']);
