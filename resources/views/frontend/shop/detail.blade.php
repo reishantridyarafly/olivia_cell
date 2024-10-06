@@ -314,7 +314,8 @@
                                                                 <span
                                                                     class="review-o__name">{{ $row->user->first_name . ' ' . $row->user->last_name }}</span>
 
-                                                                <span class="review-o__date">{{ \Carbon\Carbon::parse($row->created_at)->translatedFormat('d M Y H:i:s') }}</span>
+                                                                <span
+                                                                    class="review-o__date">{{ \Carbon\Carbon::parse($row->created_at)->translatedFormat('d M Y H:i:s') }}</span>
                                                             </div>
                                                             <div class="review-o__rating gl-rating-style u-s-m-b-8">
                                                                 @for ($i = 1; $i <= 5; $i++)

@@ -125,7 +125,7 @@
                     </a>
                 </li>
 
-                @if (auth()->user()->type != 'Owner')
+                @if (auth()->user()->type != 'Pemilik')
                     <li class="nxl-item {{ request()->routeIs(['refund.*']) ? 'active' : '' }}">
                         <a href="{{ route('refund.index') }}" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-refresh-ccw"></i></span>
