@@ -225,7 +225,7 @@
                                     </div>
                                     <div class="o-summary__section u-s-m-b-30">
                                         <div class="o-summary__box">
-                                            <h1 class="checkout-f__h1">BUKTI PEMBAYARAN</h1>
+                                            <h1 class="checkout-f__h1">BUKTI PEMBAYARAN (<small class="text-muted">Format: JPG, JPEG, PNG, WEBP, SVG</small>)</h1>
                                             <div class="ship-b">
                                                 <div class="u-s-m-b-15">
                                                     <!--====== Select Box ======-->

@@ -33,6 +33,8 @@
                             <div class="card-header">
                                 <div>
                                     <h2 class="fs-16 fw-700 text-truncate-1-line mb-0 mb-sm-1">@yield('title')</h2>
+                                    <small>Pelanggan dapat mengembalikan produk maksimal 5 (Lima) hari setelah barang di
+                                        terima.</small>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center">
                                     <a href="javascript:void(0)" class="d-flex me-1 printBTN" id="printInvoice">
@@ -63,14 +65,19 @@
                                             </a>
                                         @endif
                                     @endif
-                                    @if ($transaction->status == 'process' && $transaction->resi != null)
-                                        @if (auth()->user()->type == 'Pelanggan')
+                                    @if ($transaction->status == 'completed' && $transaction->resi != null)
+                                        @if (
+                                            $transaction->updated_at->between(\Carbon\Carbon::now()->subDays(5), \Carbon\Carbon::now()) &&
+                                                auth()->user()->type == 'Pelanggan')
                                             <a href="javascript:void(0)" class="d-flex me-1">
                                                 <div class="avatar-text avatar-md" data-bs-toggle="tooltip"
                                                     data-bs-trigger="hover" id="btnRefund" data-id="{{ $transaction->id }}"
                                                     title="Pengembalian"><i class="feather feather-refresh-ccw"></i></div>
                                             </a>
                                         @endif
+                                    @endif
+
+                                    @if ($transaction->status == 'process' && $transaction->resi != null)
                                         <a href="javascript:void(0)" class="d-flex me-1">
                                             <div class="avatar-text avatar-md" data-bs-toggle="tooltip"
                                                 data-bs-trigger="hover" id="btnCompleted" data-id="{{ $transaction->id }}"
