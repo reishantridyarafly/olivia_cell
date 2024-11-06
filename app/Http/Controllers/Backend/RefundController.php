@@ -14,8 +14,6 @@ class RefundController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $refund = Refund::with('transaction')->orderBy('created_at', 'asc')->get();
-
             if (auth()->user()->type == 'Pelanggan') {
                 $refund = Refund::with('transaction')->where('user_id', auth()->user()->id)->orderBy('created_at', 'asc')->get();
             } else {

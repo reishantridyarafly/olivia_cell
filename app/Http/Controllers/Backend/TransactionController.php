@@ -351,9 +351,6 @@ class TransactionController extends Controller
                     $refundProof->save();
                 }
             }
-            
-            
-
             return response()->json(['message' => 'Permintaan berhasil dikirim']);
         }
     }

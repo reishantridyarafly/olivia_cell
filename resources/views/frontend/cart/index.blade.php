@@ -144,7 +144,6 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
-
                                 <div class="row justify-content-end">
                                     <div class="col-lg-8 col-md-8"></div>
                                     <div class="col-lg-4 col-md-4 u-s-m-b-30">
