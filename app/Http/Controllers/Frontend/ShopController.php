@@ -15,7 +15,7 @@ class ShopController extends Controller
     {
         $products = Product::with('catalog')->where('status', 0)
             ->where('stock', '>', 0)
-            ->orderBy('created_at', 'asc')
+            ->orderBy('created_at', 'desc')
             ->paginate(12);
 
         $products->transform(function ($product) {

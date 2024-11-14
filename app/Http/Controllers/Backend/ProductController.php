@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Catalog;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -150,20 +151,42 @@ class ProductController extends Controller
 
         if ($request->hasFile('cover_photo')) {
             $coverPhoto = $request->file('cover_photo');
+            if (!$coverPhoto->isValid()) {
+                return response()->json(['error' => 'File tidak valid.']);
+            }
+
             $coverPhotoName = time() . '_cover_' . $coverPhoto->getClientOriginalName();
-            Storage::putFileAs('uploads/cover', $coverPhoto, $coverPhotoName);
-            $product->cover_photo = $coverPhotoName;
+            if (Storage::disk('public')->putFileAs('uploads/cover', $coverPhoto, $coverPhotoName)) {
+                $product->cover_photo = $coverPhotoName;
+            } else {
+                return response()->json(['error' => 'Gagal menyimpan cover photo']);
+            }
         }
+
 
         $product->save();
 
         if ($request->hasFile('photo')) {
             foreach ($request->file('photo') as $image) {
+                if (!$image->isValid()) {
+                    return response()->json(['error' => 'File foto tidak valid.']);
+                }
                 $imageName = time() . '_' . $image->getClientOriginalName();
-                Storage::putFileAs('uploads/products', $image, $imageName);
-                $product->photos()->create(['photo_name' => $imageName]);
+
+                try {
+                    $directory = 'uploads/products';
+                    if (!Storage::disk('public')->exists($directory)) {
+                        Storage::disk('public')->makeDirectory($directory);
+                    }
+
+                    Storage::disk('public')->putFileAs($directory, $image, $imageName);
+                    $product->photos()->create(['photo_name' => $imageName]);
+                } catch (\Exception $e) {
+                    return response()->json(['error' => 'Gagal menyimpan foto produk: ' . $e->getMessage()]);
+                }
             }
         }
+
 
         return response()->json(['success' => 'Data berhasil disimpan']);
     }
@@ -252,11 +275,21 @@ class ProductController extends Controller
 
             if ($request->hasFile('cover_photo')) {
                 if ($product->cover_photo) {
-                    Storage::delete('uploads/cover/' . $product->cover_photo);
+                    Storage::disk('public')->delete('uploads/cover/' . $product->cover_photo);
                 }
+
                 $coverPhoto = $request->file('cover_photo');
+                if (!$coverPhoto->isValid()) {
+                    return response()->json(['error' => 'Cover photo tidak valid.']);
+                }
+
                 $coverPhotoName = time() . '_cover_' . $coverPhoto->getClientOriginalName();
-                Storage::putFileAs('uploads/cover', $coverPhoto, $coverPhotoName);
+
+                if (!Storage::disk('public')->exists('uploads/cover')) {
+                    Storage::disk('public')->makeDirectory('uploads/cover');
+                }
+
+                Storage::disk('public')->putFileAs('uploads/cover', $coverPhoto, $coverPhotoName);
                 $product->cover_photo = $coverPhotoName;
             }
 
@@ -264,12 +297,23 @@ class ProductController extends Controller
 
             if ($request->hasFile('photo')) {
                 $this->deleteProductImages($product);
+
                 foreach ($request->file('photo') as $image) {
+                    if (!$image->isValid()) {
+                        return response()->json(['error' => 'Beberapa gambar produk tidak valid.']);
+                    }
+
                     $imageName = time() . '_' . $image->getClientOriginalName();
-                    Storage::putFileAs('uploads/products', $image, $imageName);
+
+                    if (!Storage::disk('public')->exists('uploads/products')) {
+                        Storage::disk('public')->makeDirectory('uploads/products');
+                    }
+
+                    Storage::disk('public')->putFileAs('uploads/products', $image, $imageName);
                     $product->photos()->create(['photo_name' => $imageName]);
                 }
             }
+
 
             return response()->json(['success' => 'Data berhasil disimpan']);
         }
